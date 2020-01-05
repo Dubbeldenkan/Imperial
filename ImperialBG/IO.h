@@ -8,7 +8,7 @@
 
 class IO
 {
-#define SCREENXSIZE 1200
+#define SCREENXSIZE 1500
 #define SCREENYSIZE 800
 
 public:

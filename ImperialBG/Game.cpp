@@ -65,21 +65,22 @@ void Game::SetLoadGame()
 
 void Game::InitGame()
 {
-	_players.push_back(Player(static_cast<int>(_players.size())));
-	_players.push_back(Player(static_cast<int>(_players.size())));
-	_players.push_back(Player(static_cast<int>(_players.size())));
-	_players.push_back(Player(static_cast<int>(_players.size())));
-	_players.push_back(Player(static_cast<int>(_players.size())));
-	_players.push_back(Player(static_cast<int>(_players.size())));
+	NodeParserNS::ListNode* playerData = NodeParserNS::NodeParser::ReadDataFile(Player::_playerSettingsFilePath);
+	playerData->GetChild(&playerData);
+	do{
+		_players.push_back(Player(static_cast<int>(_players.size()), playerData));
 
-	_nations.push_back(Nation(static_cast<int>(_nations.size())));
-	_nations.push_back(Nation(static_cast<int>(_nations.size())));
-	_nations.push_back(Nation(static_cast<int>(_nations.size())));
-	_nations.push_back(Nation(static_cast<int>(_nations.size())));
-	_nations.push_back(Nation(static_cast<int>(_nations.size())));
-	_nations.push_back(Nation(static_cast<int>(_nations.size())));
+	} while (!playerData->GetNext(&playerData));
+	
+	for (int playerCounter = 0; playerCounter < _players.size(); playerCounter++)
+	{
+		_players[playerCounter].SetStartMoney(_players.size());
+	}
 
-
+	for (int nationCounter = 0; nationCounter < _numberOfNations; nationCounter++)
+	{
+		_nations.push_back(Nation(static_cast<int>(nationCounter)));
+	}
 }
 
 void Game::MouseClicked(TupleInt mouseClickedPos)
