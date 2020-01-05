@@ -2,15 +2,19 @@
 
 const GameBoardObject::LayerEnum Bond::_layerValue = GameBoardObject::BondLayer;
 
+Bond::Bond()
+{}
+
 Bond::Bond(int id, Bond::BondNation bondNation, std::string nation, TupleInt graphicalPos) :
-	_id(id), GameBoardObject()
+	GameBoardObject()
 {
+	_id = id;
 	_interestPercentage = _interestPercentageConverter[_id - 1];
 	_value = _valueConverter[_id - 1];
 	_nation = bondNation;
 
 	std::string imagePath = "Flags\\" + nation + ".png";
-	SetImage(imagePath, imageSize);
+	SetImage(imagePath, _imageSize);
 	
 	TupleInt posDiff = TupleInt(50, 25);
 	TupleInt BondPos;
@@ -33,16 +37,19 @@ Bond& Bond::operator=(const Bond& bond)
 }
 
 Bond::Bond(const Bond &bond) :
-	_id(bond._id), GameBoardObject(bond._graphicalPos, bond._image, _layerValue)
+	GameBoardObject(bond._graphicalPos, bond._image, _layerValue)
 {
 	CopyBond(bond);
 }
 
 void Bond::CopyBond(const Bond& bond)
 {
+	_graphicalPos = bond._graphicalPos;
+	_id = bond._id;
 	_interestPercentage = bond._interestPercentage;
 	_value = bond._value;
 	_nation = bond._nation;
+	_image = bond._image;
 	//TODO
 }
 
@@ -68,4 +75,24 @@ void Bond::DrawObject() const
 {
 	_g->Draw(_image, _graphicalPos.GetX(), _graphicalPos.GetY(), _scale);
 	_g->PrintText15(_id, _graphicalPos.GetX(), _graphicalPos.GetY(), GraphicsNS::Graphics::BLACK);
+}
+
+void Bond::SetToOwnedByPlayer()
+{
+	_ownedByPlayer = true;
+}
+
+void Bond::SetToNotOwnedBuPlayer()
+{
+	_ownedByPlayer = false;
+}
+
+bool Bond::GetOwnedByPlayer() const
+{
+	return _ownedByPlayer;
+}
+
+TupleInt Bond::GetImageSize() const
+{
+	return _imageSize;
 }

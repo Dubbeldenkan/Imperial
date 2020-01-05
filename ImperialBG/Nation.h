@@ -9,7 +9,7 @@
 class Nation : public GameBoardObject
 {
 private:
-	std::vector<Bond> _bondVector;
+	std::map<int, Bond> _bonds;
 	std::string _name;
 	const int _id;
 	std::vector<Region> regions;
@@ -26,6 +26,8 @@ public:
 	Nation(Nation const&);
 	void CopyNation(const Nation&);
 	~Nation();
+
+	Bond* SellBond(int);
 
 private:
 	void DrawObject() const;

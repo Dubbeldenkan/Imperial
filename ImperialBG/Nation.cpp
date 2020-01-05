@@ -52,9 +52,9 @@ Nation::Nation(int nationId) :
 		}
 	} while (!nationData->GetNext(&nationData));
 
-	for (int bondInterestValue = 0; bondInterestValue < _numberOfStartBonds; bondInterestValue++)
+	for (int id = 0; id < _numberOfStartBonds; id++)
 	{
-		_bondVector.push_back(Bond(bondInterestValue + 1, static_cast<Bond::BondNation>(nationId), _name, _graphicalPos));
+		_bonds[id + 1] = Bond(id + 1, static_cast<Bond::BondNation>(nationId), _name, _graphicalPos);
 	}
 }
 
@@ -72,7 +72,7 @@ Nation::Nation(const Nation &nation) :
 
 void Nation::CopyNation(const Nation& nation)
 {
-	_bondVector = nation._bondVector;
+	_bonds = nation._bonds;
 	_name = nation._name;
 	//TODO
 }
@@ -83,4 +83,10 @@ Nation::~Nation()
 void Nation::DrawObject() const
 {
 	_g->PrintText15("Millions: " + std::to_string(_money), _graphicalPos.GetX(), _graphicalPos.GetY(), GraphicsNS::Graphics::BLACK);
+}
+
+Bond* Nation::SellBond(int bondId)
+{
+	_bonds[bondId].SetToOwnedByPlayer();
+	return &_bonds[bondId];
 }

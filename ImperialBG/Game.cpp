@@ -65,6 +65,7 @@ void Game::SetLoadGame()
 
 void Game::InitGame()
 {
+	//Setup players
 	NodeParserNS::ListNode* playerData = NodeParserNS::NodeParser::ReadDataFile(Player::_playerSettingsFilePath);
 	playerData->GetChild(&playerData);
 	do{
@@ -72,14 +73,34 @@ void Game::InitGame()
 
 	} while (!playerData->GetNext(&playerData));
 	
-	for (int playerCounter = 0; playerCounter < _players.size(); playerCounter++)
+	
+	for (int playerCounter = 0; playerCounter < static_cast<int>(_players.size()); playerCounter++)
 	{
 		_players[playerCounter].SetStartMoney(_players.size());
 	}
 
+	//Setup nations
 	for (int nationCounter = 0; nationCounter < _numberOfNations; nationCounter++)
 	{
 		_nations.push_back(Nation(static_cast<int>(nationCounter)));
+	}
+
+	//Assign start bonds
+	std::vector<Player*> tempPlayerVector;
+	for (int playerCounter = 0; playerCounter < static_cast<int>(_players.size()); playerCounter++)
+	{
+		tempPlayerVector.push_back(&_players[playerCounter]);
+	}
+
+	int nationCounter = 0;
+	while(!tempPlayerVector.empty()) //TODO fixa så att det är random även vilken nation som väljs först
+	{
+		int startBondLarge = 4; //TODO gör detta snyggare och fixa den lilla startbonden oxå
+		int startBondSmall = 1;
+		int randomPlayer = rand() % tempPlayerVector.size();
+		tempPlayerVector[randomPlayer]->BuyBond(_nations[nationCounter].SellBond(startBondLarge));
+		tempPlayerVector.erase(tempPlayerVector.begin() + randomPlayer);
+		nationCounter++;
 	}
 }
 

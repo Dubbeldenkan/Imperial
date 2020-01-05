@@ -79,6 +79,18 @@ void Player::DrawObject() const
 	_g->PrintText15(_name, _graphicalPos.GetX(), _graphicalPos.GetY(), GraphicsNS::Graphics::WHITE);
 	_g->PrintText15("Millions: " + std::to_string(_money), 
 		_graphicalPos.GetX() + _moneyGraphicalPos.GetX(), _graphicalPos.GetY(), GraphicsNS::Graphics::WHITE);
+
+	UpdateBondsGraphicalPos();
+}
+
+void Player::UpdateBondsGraphicalPos() const
+{
+	for (int bondCounter = 0; bondCounter < static_cast<int>(_bonds.size()); bondCounter++)
+	{
+		int xPos = _graphicalPos.GetX() + static_cast<int>(_bonds[bondCounter]->GetImageSize().GetX()*1.5*bondCounter);
+		int yPos = _graphicalPos.GetY() + static_cast<int>(_bonds[bondCounter]->GetImageSize().GetY()*1.5);
+		_bonds[bondCounter]->SetGraphicalPos(TupleInt(xPos, yPos));
+	}
 }
 
 void Player::Save(NodeParserNS::ListNode** playerNode) const
@@ -104,4 +116,10 @@ void Player::SetStartMoney(int numberOfPlayers)
 	{
 		throw "Unvalid number of players";
 	}
+}
+
+void Player::BuyBond(Bond* bond)
+{
+	_money = _money - bond->GetValue();
+	_bonds.push_back(bond);
 }
