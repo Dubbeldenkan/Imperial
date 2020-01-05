@@ -54,7 +54,7 @@ Nation::Nation(int nationId) :
 
 	for (int bondInterestValue = 0; bondInterestValue < _numberOfStartBonds; bondInterestValue++)
 	{
-		_bondVector.push_back(Bond(bondInterestValue + 1, static_cast<Bond::BondNation>(nationId), _name));
+		_bondVector.push_back(Bond(bondInterestValue + 1, static_cast<Bond::BondNation>(nationId), _name, _graphicalPos));
 	}
 }
 
@@ -72,13 +72,15 @@ Nation::Nation(const Nation &nation) :
 
 void Nation::CopyNation(const Nation& nation)
 {
+	_bondVector = nation._bondVector;
+	_name = nation._name;
 	//TODO
 }
 
 Nation::~Nation()
 {}
 
-void Nation::DrawObject()
+void Nation::DrawObject() const
 {
 	_g->PrintText15("Millions: " + std::to_string(_money), _graphicalPos.GetX(), _graphicalPos.GetY(), GraphicsNS::Graphics::BLACK);
 }

@@ -34,7 +34,7 @@ GameBoardObject::~GameBoardObject()
 	_gameBoardObjects.erase(_objectId);
 }
 
-void GameBoardObject::DrawObject()
+void GameBoardObject::DrawObject() const
 {
 	_g->Draw(_image, _graphicalPos.GetX(), _graphicalPos.GetY(), _scale);
 }

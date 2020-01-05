@@ -23,7 +23,7 @@ public:
 private:
 	void CopyPlayer(Player const&);
 	
-	void DrawObject();
+	void DrawObject() const;
 };
 
 #endif // !PLAYER_H

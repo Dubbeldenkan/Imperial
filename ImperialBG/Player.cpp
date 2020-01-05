@@ -26,13 +26,14 @@ Player::Player(const Player &player) :
 
 void Player::CopyPlayer(const Player& player)
 {
+	_playerPos = player._playerPos;
 	//TODO
 }
 
 Player::~Player()
 {}
 
-void Player::DrawObject()
+void Player::DrawObject() const
 {
 
 }

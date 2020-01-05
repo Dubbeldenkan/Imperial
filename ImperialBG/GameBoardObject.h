@@ -54,7 +54,7 @@ protected:
 	virtual ~GameBoardObject();
 
 	void SetImage(std::string, TupleInt);
-	virtual void DrawObject();
+	virtual void DrawObject() const;
 
 private:
 	bool PosInObject(TupleInt);

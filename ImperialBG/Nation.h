@@ -28,7 +28,7 @@ public:
 	~Nation();
 
 private:
-	void DrawObject();
+	void DrawObject() const;
 
 };
 
