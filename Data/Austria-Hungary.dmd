@@ -23,6 +23,17 @@ Austria-Hungary
 	{
 		Budapest
 		{
+            ObjectPos
+            {
+                X
+                {
+                    650
+                }
+                Y
+                {
+                    400
+                }
+            }
 			FactoryType
             {
                 Land
@@ -67,6 +78,17 @@ Austria-Hungary
         }
         Vienna
         {
+            ObjectPos
+            {
+                X
+                {
+                    570
+                }
+                Y
+                {
+                    380
+                }
+            }
             FactoryType
             {
                 Land

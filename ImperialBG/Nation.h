@@ -12,7 +12,7 @@ private:
 	std::map<int, Bond> _bonds;
 	std::string _name;
 	const int _id;
-	std::vector<Region> regions;
+	std::vector<Region> _regions;
 	std::string _imagePath;
 	int _money = 0;
 	std::string _startBondSmallNationName;

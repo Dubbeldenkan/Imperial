@@ -19,7 +19,7 @@ Nation::Nation(int nationId) :
 		{
 			nationData->GetChild(&tempData);
 			do {
-				regions.push_back(Region(tempData));
+				_regions.push_back(Region(tempData));
 			}while(!tempData->GetNext(&tempData));
 		}
 		else if (nationData->GetData().compare("SecondStartBond") == 0)
@@ -82,6 +82,7 @@ void Nation::CopyNation(const Nation& nation)
 	_name = nation._name;
 	_startBondSmallNationName = nation._startBondSmallNationName;
 	_bondNation = nation._bondNation;
+	_regions = nation._regions;
 	//TODO
 }
 

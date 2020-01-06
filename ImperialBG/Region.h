@@ -1,11 +1,12 @@
 #ifndef REGION_H
 #define REGION_H
 
+#include "GameBoardObject.h"
 #include "NodeParser.h"
 
 #include <string>
 
-class Region
+class Region : public GameBoardObject
 {
 	enum FactoryType { Land, Sea };
 
@@ -14,8 +15,23 @@ private:
 	FactoryType _factoryType;
 	bool _factoryBuilt;
 
+	static GraphicsNS::Image* _landFactoryImage;
+	static GraphicsNS::Image* _seaFactoryImage;
+
+	const std::string _landFactoryImagePath = "LandFactory.png";
+	const std::string _seaFactoryImagePath = "SeaFactory.png";
+	static const GameBoardObject::LayerEnum _layerValue = GameBoardObject::RegionLayer;
+
 public:
 	Region(NodeParserNS::ListNode*);
+
+	Region& operator=(const Region&);
+	Region(Region const&);
+	void CopyRegion(const Region&);
+	~Region();
+
+private:
+	void DrawObject() const;
 };
 
 #endif // !REGION_H

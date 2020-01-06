@@ -1,10 +1,15 @@
 #include "Region.h"
 
-Region::Region(NodeParserNS::ListNode* regionData)
+GraphicsNS::Image* Region::_landFactoryImage = NULL;
+GraphicsNS::Image* Region::_seaFactoryImage = NULL;
+
+Region::Region(NodeParserNS::ListNode* regionData) :
+	GameBoardObject()
 {
 	_name = regionData->GetData();
 	regionData->GetChild(&regionData);
-	do {
+	_image = NULL;
+	do { //TODO för detta borde man göra en separat funktion eftersom att det används i så många klassar
 		NodeParserNS::ListNode* tempData;
 		if (regionData->GetData().compare("FactoryType") == 0)
 		{
@@ -40,9 +45,75 @@ Region::Region(NodeParserNS::ListNode* regionData)
 				throw "Unvalid type in " + _name + ".dmd"; // TODO är detta rätt sätt att göra det på?
 			}
 		}
+		else if (regionData->GetData().compare("ObjectPos") == 0)
+		{
+			int xValue;
+			int yValue;
+			regionData->GetChild(&tempData);
+			NodeParserNS::ListNode* valueData;
+			do {
+				if (tempData->GetData().compare("X") == 0)
+				{
+					tempData->GetChild(&valueData);
+					xValue = stoi(valueData->GetData());
+				}
+				else if (tempData->GetData().compare("Y") == 0)
+				{
+					tempData->GetChild(&valueData);
+					yValue = stoi(valueData->GetData());
+				}
+				else
+				{
+					throw "Unvalid type in " + _name + ".dmd"; // TODO är detta rätt sätt att göra det på?
+				}
+			} while (!tempData->GetNext(&tempData));
+			SetGraphicalPos(TupleInt(xValue, yValue));
+		}
 		else
 		{
 			throw "Unvalid type in " + _name + ".dmd"; // TODO är detta rätt sätt att göra det på?
 		}
 	} while (!regionData->GetNext(&regionData));
+
+	if (_landFactoryImage == NULL)
+	{
+		_landFactoryImage = _g->LoadImageFromFile(_landFactoryImagePath, 30, 20);
+	}
+}
+
+Region& Region::operator=(const Region& region)
+{
+	CopyRegion(region);
+	return *this;
+}
+
+Region::Region(const Region &region) :
+	GameBoardObject(region._graphicalPos, region._image, _layerValue)
+{
+	CopyRegion(region);
+}
+
+void Region::CopyRegion(const Region& region)
+{
+	_name = region._name;
+	_factoryBuilt = region._factoryBuilt;
+	_factoryType = region._factoryType;
+	//TODO
+}
+
+Region::~Region()
+{}
+
+void Region::DrawObject() const
+{
+	//Draw Factory
+	if (_factoryBuilt && (_factoryType == FactoryType::Land))
+	{
+		_g->Draw(_landFactoryImage, _graphicalPos.GetX(), _graphicalPos.GetY(), _scale);
+	}
+	else if ((_factoryBuilt && (_factoryType == FactoryType::Sea)))
+	{
+
+	}
+	//Draw units
 }

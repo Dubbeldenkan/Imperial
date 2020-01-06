@@ -13,7 +13,7 @@ class GameBoardObject
 {
 
 protected:
-	enum LayerEnum { MapLayer, PlayerLayer, NationLayer, BondLayer };
+	enum LayerEnum { MapLayer, PlayerLayer, NationLayer, RegionLayer, BondLayer };
 	TupleInt _graphicalPos;
 	float _scale = 1.0;
 	GraphicsNS::Image* _image;
