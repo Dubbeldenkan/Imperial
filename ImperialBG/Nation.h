@@ -15,6 +15,7 @@ private:
 	std::vector<Region> regions;
 	std::string _imagePath;
 	int _money = 0;
+	std::string _startBondSmallNationName;
 
 	const int _numberOfStartBonds = 9;
 	static const GameBoardObject::LayerEnum _layerValue = GameBoardObject::NationLayer;
@@ -28,6 +29,9 @@ public:
 	~Nation();
 
 	Bond* SellBond(int);
+
+	std::string GetStartBondSmallNationName() const;
+	std::string GetName() const;
 
 private:
 	void DrawObject() const;

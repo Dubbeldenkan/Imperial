@@ -15,6 +15,10 @@ France
 	{
 		Flag/France.png
 	}
+    SecondStartBond
+    {
+        Austria-Hungary
+    }
 	Regions
 	{
 		Bordeaux

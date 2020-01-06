@@ -15,6 +15,10 @@ Russia
 	{
 		Flag/Russia.png
 	}
+    SecondStartBond
+    {
+        France
+    }
 	Regions
 	{
 		Kiev

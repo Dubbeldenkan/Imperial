@@ -7,6 +7,8 @@ class Bond : public GameBoardObject
 {
 public:
 	enum BondNation { Austria_Hungary, Italy, France, Britain, Germany, Russia };
+	static const int startBondValueLarge;
+	static const int startBondValueSmall;
 
 private:
 	int _id;

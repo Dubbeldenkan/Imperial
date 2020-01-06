@@ -15,6 +15,10 @@ Italy
 	{
 		Flag/Italy.png
 	}
+    SecondStartBond
+    {
+        Britain
+    }
 	Regions
 	{
 		Florence

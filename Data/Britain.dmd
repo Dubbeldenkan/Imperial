@@ -15,6 +15,10 @@ Britain
 	{
 		Flag/Britain.png
 	}
+    SecondStartBond
+    {
+        Russia
+    }
 	Regions
 	{
 		Dublin

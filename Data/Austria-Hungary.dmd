@@ -15,6 +15,10 @@ Austria-Hungary
 	{
 		Flag/Astria-Hungary.png
 	}
+    SecondStartBond
+    {
+        Germany
+    }
 	Regions
 	{
 		Budapest

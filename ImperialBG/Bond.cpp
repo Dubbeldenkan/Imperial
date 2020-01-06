@@ -1,6 +1,8 @@
 #include "Bond.h"
 
 const GameBoardObject::LayerEnum Bond::_layerValue = GameBoardObject::BondLayer;
+const int Bond::startBondValueLarge = 4;
+const int Bond::startBondValueSmall = 1;
 
 Bond::Bond()
 {}

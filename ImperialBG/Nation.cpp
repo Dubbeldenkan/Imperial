@@ -22,6 +22,11 @@ Nation::Nation(int nationId) :
 				regions.push_back(Region(tempData));
 			}while(!tempData->GetNext(&tempData));
 		}
+		else if (nationData->GetData().compare("SecondStartBond") == 0)
+		{
+			nationData->GetChild(&tempData);
+			_startBondSmallNationName = tempData->GetData();
+		}
 		else if (nationData->GetData().compare("ObjectPos") == 0)
 		{
 			int xValue;
@@ -74,6 +79,7 @@ void Nation::CopyNation(const Nation& nation)
 {
 	_bonds = nation._bonds;
 	_name = nation._name;
+	_startBondSmallNationName = nation._startBondSmallNationName;
 	//TODO
 }
 
@@ -89,4 +95,14 @@ Bond* Nation::SellBond(int bondId)
 {
 	_bonds[bondId].SetToOwnedByPlayer();
 	return &_bonds[bondId];
+}
+
+std::string Nation::GetStartBondSmallNationName() const
+{
+	return _startBondSmallNationName;
+}
+
+std::string Nation::GetName() const
+{
+	return _name;
 }

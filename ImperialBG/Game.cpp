@@ -95,13 +95,29 @@ void Game::InitGame()
 	int nationCounter = 0;
 	while(!tempPlayerVector.empty()) //TODO fixa så att det är random även vilken nation som väljs först
 	{
-		int startBondLarge = 4; //TODO gör detta snyggare och fixa den lilla startbonden oxå
-		int startBondSmall = 1;
 		int randomPlayer = rand() % tempPlayerVector.size();
-		tempPlayerVector[randomPlayer]->BuyBond(_nations[nationCounter].SellBond(startBondLarge));
+		tempPlayerVector[randomPlayer]->BuyBond(_nations[nationCounter].SellBond(Bond::startBondValueLarge));
+		std::string smallBondNationName = _nations[nationCounter].GetStartBondSmallNationName();
+		Nation* smallBondNation = NULL;
+		int smallBondNationCounter = 0;
+		while (smallBondNation == NULL)
+		{
+			std::string smallBondNationName = _nations[smallBondNationCounter].GetName();
+			std::string largeNationSmallBondName = _nations[nationCounter].GetStartBondSmallNationName();
+			int test = _nations[smallBondNationCounter].GetName().compare(_nations[nationCounter].GetStartBondSmallNationName()) == 0;
+			if (_nations[smallBondNationCounter].GetName().compare(_nations[nationCounter].GetStartBondSmallNationName()) == 0)
+			{
+				smallBondNation = &_nations[smallBondNationCounter];
+			}
+			smallBondNationCounter++;
+		}
+		tempPlayerVector[randomPlayer]->BuyBond(smallBondNation->SellBond(Bond::startBondValueSmall));
 		tempPlayerVector.erase(tempPlayerVector.begin() + randomPlayer);
 		nationCounter++;
 	}
+
+	//Set investor start player
+
 }
 
 void Game::MouseClicked(TupleInt mouseClickedPos)
