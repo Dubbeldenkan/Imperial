@@ -76,19 +76,22 @@ Player::~Player()
 
 void Player::DrawObject() const
 {
-	_g->PrintText15(_name, _graphicalPos.GetX(), _graphicalPos.GetY(), GraphicsNS::Graphics::WHITE);
-	_g->PrintText15("Millions: " + std::to_string(_money), 
-		_graphicalPos.GetX() + _moneyGraphicalPos.GetX(), _graphicalPos.GetY(), GraphicsNS::Graphics::WHITE);
-
 	if (_isInvestor)
 	{
-		_g->PrintText15("Investor", _graphicalPos.GetX(), _graphicalPos.GetY(), GraphicsNS::Graphics::WHITE);
+		_g->DrawRectangle(_graphicalPos.GetX(), _graphicalPos.GetY(), 100, 20, GraphicsNS::Graphics::WHITE);
+		_g->PrintText15(_name, _graphicalPos.GetX(), _graphicalPos.GetY(), GraphicsNS::Graphics::BLACK);
 	}
+	else
+	{
+		_g->PrintText15(_name, _graphicalPos.GetX(), _graphicalPos.GetY(), GraphicsNS::Graphics::WHITE);
+	}
+	_g->PrintText15("Millions: " + std::to_string(_money), 
+		_graphicalPos.GetX() + _moneyGraphicalPos.GetX(), _graphicalPos.GetY(), GraphicsNS::Graphics::WHITE);
 
 	UpdateBondsGraphicalPos();
 }
 
-void Player::UpdateBondsGraphicalPos() const
+void Player::UpdateBondsGraphicalPos() const //TODO denna funktion måste uppdateras för att man ska kunna ha flera bonds med samma värde
 {
 	bondMapType::const_iterator nationIterator;
 	std::map<int, Bond*>::const_iterator bondIterator;

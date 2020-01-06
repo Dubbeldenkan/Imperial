@@ -25,10 +25,10 @@ void Game::Run()
 	{
 		LoadGame();
 	}
-
-	//TODO ändra till ett lämpligt villkor
+	//TODO ändra till ett lämpligt villkor tex när något land når 25 i tabellen
 	else if (true)
 	{
+		//Fortsätt här med att göra actions. 
 		//_gameBoard.Run(_currentPlayer); TODO
 		DrawScreen();
 	}
