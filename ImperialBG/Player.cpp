@@ -80,16 +80,28 @@ void Player::DrawObject() const
 	_g->PrintText15("Millions: " + std::to_string(_money), 
 		_graphicalPos.GetX() + _moneyGraphicalPos.GetX(), _graphicalPos.GetY(), GraphicsNS::Graphics::WHITE);
 
+	if (_isInvestor)
+	{
+		_g->PrintText15("Investor", _graphicalPos.GetX(), _graphicalPos.GetY(), GraphicsNS::Graphics::WHITE);
+	}
+
 	UpdateBondsGraphicalPos();
 }
 
 void Player::UpdateBondsGraphicalPos() const
 {
-	for (int bondCounter = 0; bondCounter < static_cast<int>(_bonds.size()); bondCounter++)
+	bondMapType::const_iterator nationIterator;
+	std::map<int, Bond*>::const_iterator bondIterator;
+
+	for (nationIterator = _bonds.begin(); nationIterator != _bonds.end(); nationIterator++)
 	{
-		int xPos = _graphicalPos.GetX() + static_cast<int>(_bonds[bondCounter]->GetImageSize().GetX()*1.5*bondCounter);
-		int yPos = _graphicalPos.GetY() + static_cast<int>(_bonds[bondCounter]->GetImageSize().GetY()*1.5);
-		_bonds[bondCounter]->SetGraphicalPos(TupleInt(xPos, yPos));
+		for (bondIterator = nationIterator->second.begin(); bondIterator != nationIterator->second.end(); bondIterator++)
+		{
+			int xPos = _graphicalPos.GetX() + 
+				static_cast<int>(bondIterator->second->GetImageSize().GetX()*(bondIterator->second->GetId() - 1));
+			int yPos = _graphicalPos.GetY() + static_cast<int>(bondIterator->second->GetImageSize().GetY()*1.5);
+			bondIterator->second->SetGraphicalPos(TupleInt(xPos, yPos));
+		}
 	}
 }
 
@@ -121,5 +133,31 @@ void Player::SetStartMoney(int numberOfPlayers)
 void Player::BuyBond(Bond* bond)
 {
 	_money = _money - bond->GetValue();
-	_bonds.push_back(bond);
+	_bonds[bond->GetBondNation()].insert(std::pair<int, Bond*>(bond->GetId(), bond));
+}
+
+int Player::GetBondNationValue(Bond::BondNation bondNation) const
+{
+	int totalBondValue = 0;
+	if (_bonds.find(bondNation) != _bonds.end())
+	{
+		std::map<int, Bond*>::const_iterator bondIterator;
+		bondIterator = _bonds.find(bondNation)->second.begin();
+		for (bondIterator = _bonds.find(bondNation)->second.begin(); 
+			bondIterator != _bonds.find(bondNation)->second.end(); bondIterator++)
+		{
+			totalBondValue = +bondIterator->second->GetValue();
+		}
+	}
+	return totalBondValue;
+}
+
+int Player::GetPlayerPos() const
+{
+	return _playerPos;
+}
+
+void Player::SetAsInvestor()
+{
+	_isInvestor = true;
 }

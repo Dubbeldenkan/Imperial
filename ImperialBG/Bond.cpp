@@ -98,3 +98,8 @@ TupleInt Bond::GetImageSize() const
 {
 	return _imageSize;
 }
+
+Bond::BondNation Bond::GetBondNation() const
+{
+	return _nation;
+}

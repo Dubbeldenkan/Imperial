@@ -1,6 +1,6 @@
 #include "Game.h"
 
-Player* Game::_currentNation = 0;
+Nation* Game::_currentNation = NULL;
 bool Game::_initNewGame = false;
 bool Game::_saveGame = false;
 bool Game::_loadGame = false;
@@ -85,6 +85,9 @@ void Game::InitGame()
 		_nations.push_back(Nation(static_cast<int>(nationCounter)));
 	}
 
+	//Set current Nation
+	_currentNation = &_nations[0];
+
 	//Assign start bonds
 	std::vector<Player*> tempPlayerVector;
 	for (int playerCounter = 0; playerCounter < static_cast<int>(_players.size()); playerCounter++)
@@ -116,8 +119,31 @@ void Game::InitGame()
 		nationCounter++;
 	}
 
-	//Set investor start player
+	//Define goverments
+	for (int nationCounter = 0; nationCounter < _numberOfNations; nationCounter++)
+	{
+		_govermentMap[&_nations[nationCounter]] = NULL;
+		int bestPlayerValue = 0;
+		for (int playerCounter = 0; playerCounter < _numberOfPlayers; playerCounter++)
+		{
+			if (bestPlayerValue < _players[playerCounter].GetBondNationValue(_nations[nationCounter].GetBondNation()))
+			{
+				_govermentMap[&_nations[nationCounter]] = &_players[playerCounter];
+				bestPlayerValue = _players[playerCounter].GetBondNationValue(_nations[nationCounter].GetBondNation());
+			}
+		}
+	}
 
+	//Set investor start player
+	int firstInvestorPlayer = (_govermentMap[_currentNation]->GetPlayerPos() + 1) % _numberOfPlayers;
+
+	for (int playerCounter = 0; playerCounter < _numberOfPlayers; playerCounter++)
+	{
+		if (_players[playerCounter].GetPlayerPos() == firstInvestorPlayer)
+		{
+			_players[playerCounter].SetAsInvestor();
+		}
+	}
 }
 
 void Game::MouseClicked(TupleInt mouseClickedPos)

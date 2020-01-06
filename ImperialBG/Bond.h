@@ -36,6 +36,7 @@ public:
 	int GetInterestPercentage() const;
 	int GetId() const;
 	TupleInt GetImageSize() const;
+	Bond::BondNation GetBondNation() const;
 
 	void SetToOwnedByPlayer();
 	void SetToNotOwnedBuPlayer();

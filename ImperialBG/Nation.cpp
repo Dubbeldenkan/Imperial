@@ -57,9 +57,10 @@ Nation::Nation(int nationId) :
 		}
 	} while (!nationData->GetNext(&nationData));
 
+	_bondNation = static_cast<Bond::BondNation>(nationId);
 	for (int id = 0; id < _numberOfStartBonds; id++)
 	{
-		_bonds[id + 1] = Bond(id + 1, static_cast<Bond::BondNation>(nationId), _name, _graphicalPos);
+		_bonds[id + 1] = Bond(id + 1, _bondNation, _name, _graphicalPos);
 	}
 }
 
@@ -80,6 +81,7 @@ void Nation::CopyNation(const Nation& nation)
 	_bonds = nation._bonds;
 	_name = nation._name;
 	_startBondSmallNationName = nation._startBondSmallNationName;
+	_bondNation = nation._bondNation;
 	//TODO
 }
 
@@ -105,4 +107,9 @@ std::string Nation::GetStartBondSmallNationName() const
 std::string Nation::GetName() const
 {
 	return _name;
+}
+
+Bond::BondNation Nation::GetBondNation() const
+{
+	return _bondNation;
 }

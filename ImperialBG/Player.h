@@ -14,7 +14,10 @@ private:
 	int _playerPos;
 	std::string _name;
 	int _money;
-	std::vector<Bond*> _bonds;
+	bool _isInvestor = false;
+
+	typedef std::map<Bond::BondNation, std::map<int, Bond*>> bondMapType;
+	bondMapType _bonds;
 
 	TupleInt _moneyGraphicalPos = TupleInt(200, 0);
 	static const GameBoardObject::LayerEnum _layerValue = GameBoardObject::PlayerLayer;
@@ -30,6 +33,10 @@ public:
 	void Save(NodeParserNS::ListNode**) const;
 	void SetStartMoney(int);
 	void BuyBond(Bond*);
+	void SetAsInvestor();
+
+	int GetBondNationValue(Bond::BondNation) const;
+	int GetPlayerPos() const;
 
 private:
 	void CopyPlayer(Player const&);

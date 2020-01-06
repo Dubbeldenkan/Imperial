@@ -16,6 +16,7 @@ private:
 	std::string _imagePath;
 	int _money = 0;
 	std::string _startBondSmallNationName;
+	Bond::BondNation _bondNation;
 
 	const int _numberOfStartBonds = 9;
 	static const GameBoardObject::LayerEnum _layerValue = GameBoardObject::NationLayer;
@@ -32,6 +33,7 @@ public:
 
 	std::string GetStartBondSmallNationName() const;
 	std::string GetName() const;
+	Bond::BondNation GetBondNation() const;
 
 private:
 	void DrawObject() const;

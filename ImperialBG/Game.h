@@ -19,7 +19,8 @@ private:
 
 	bool _gameOver = false;
 
-	static Player* _currentNation;
+	static Nation* _currentNation;
+	std::map<Nation*, Player*> _govermentMap;
 
 	static bool _initNewGame;
 	static bool _saveGame;
