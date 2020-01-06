@@ -23,6 +23,17 @@ Italy
 	{
 		Florence
 		{
+            ObjectPos
+            {
+                X
+                {
+                    523
+                }
+                Y
+                {
+                    490
+                }
+            }
 			FactoryType
             {
                 Land
@@ -34,6 +45,17 @@ Italy
         }
         Genoa
         {
+            ObjectPos
+            {
+                X
+                {
+                    475
+                }
+                Y
+                {
+                    441
+                }
+            }
             FactoryType
             {
                 Sea
@@ -45,6 +67,17 @@ Italy
         }
         Naples
         {
+            ObjectPos
+            {
+                X
+                {
+                    603
+                }
+                Y
+                {
+                    558
+                }
+            }
             FactoryType
             {
                 Sea
@@ -56,6 +89,17 @@ Italy
         }
         Rome
         {
+            ObjectPos
+            {
+                X
+                {
+                    560
+                }
+                Y
+                {
+                    508
+                }
+            }
             FactoryType
             {
                 Land
@@ -67,6 +111,17 @@ Italy
         }
         Venice
         {
+            ObjectPos
+            {
+                X
+                {
+                    533
+                }
+                Y
+                {
+                    446
+                }
+            }
             FactoryType
             {
                 Sea

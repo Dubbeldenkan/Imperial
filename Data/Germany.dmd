@@ -23,6 +23,17 @@ Germany
 	{
 		Berlin
 		{
+            ObjectPos
+            {
+                X
+                {
+                    545
+                }
+                Y
+                {
+                    294
+                }
+            }
 			FactoryType
             {
                 Land
@@ -34,6 +45,17 @@ Germany
         }
         Cologne
         {
+            ObjectPos
+            {
+                X
+                {
+                    489
+                }
+                Y
+                {
+                    311
+                }
+            }
             FactoryType
             {
                 Land
@@ -45,6 +67,17 @@ Germany
         }
         Danzig
         {
+            ObjectPos
+            {
+                X
+                {
+                    600
+                }
+                Y
+                {
+                    254
+                }
+            }
             FactoryType
             {
                 Sea
@@ -56,6 +89,17 @@ Germany
         }
         Hamburg
         {
+            ObjectPos
+            {
+                X
+                {
+                    500
+                }
+                Y
+                {
+                    264
+                }
+            }
             FactoryType
             {
                 Sea
@@ -67,6 +111,17 @@ Germany
         }
         Munich
         {
+            ObjectPos
+            {
+                X
+                {
+                    502
+                }
+                Y
+                {
+                    357
+                }
+            }
             FactoryType
             {
                 Land

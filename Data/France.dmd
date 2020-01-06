@@ -23,6 +23,17 @@ France
 	{
 		Bordeaux
 		{
+            ObjectPos
+            {
+                X
+                {
+                    360
+                }
+                Y
+                {
+                    417
+                }
+            }
 			FactoryType
             {
                 Sea
@@ -34,6 +45,17 @@ France
         }
         Brest
         {
+            ObjectPos
+            {
+                X
+                {
+                    350
+                }
+                Y
+                {
+                    360
+                }
+            }
             FactoryType
             {
                 Sea
@@ -45,6 +67,17 @@ France
         }
         Dijon
         {
+            ObjectPos
+            {
+                X
+                {
+                    421
+                }
+                Y
+                {
+                    374
+                }
+            }
             FactoryType
             {
                 Land
@@ -56,6 +89,17 @@ France
         }
         Marseille
         {
+            ObjectPos
+            {
+                X
+                {
+                    418
+                }
+                Y
+                {
+                    449
+                }
+            }
             FactoryType
             {
                 Sea
@@ -67,6 +111,17 @@ France
         }
         Paris
         {
+            ObjectPos
+            {
+                X
+                {
+                    394
+                }
+                Y
+                {
+                    330
+                }
+            }
             FactoryType
             {
                 Land

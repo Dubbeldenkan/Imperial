@@ -23,6 +23,17 @@ Britain
 	{
 		Dublin
 		{
+            ObjectPos
+            {
+                X
+                {
+                    276
+                }
+                Y
+                {
+                    205
+                }
+            }
 			FactoryType
             {
                 Sea
@@ -34,6 +45,17 @@ Britain
         }
         EdinBurgh
         {
+            ObjectPos
+            {
+                X
+                {
+                    347
+                }
+                Y
+                {
+                    142
+                }
+            }
             FactoryType
             {
                 Sea
@@ -45,6 +67,17 @@ Britain
         }
         Liverpool
         {
+            ObjectPos
+            {
+                X
+                {
+                    288
+                }
+                Y
+                {
+                    215
+                }
+            }
             FactoryType
             {
                 Sea
@@ -56,6 +89,17 @@ Britain
         }
         Sheffield
         {
+            ObjectPos
+            {
+                X
+                {
+                    381
+                }
+                Y
+                {
+                    220
+                }
+            }
             FactoryType
             {
                 Land
@@ -67,6 +111,17 @@ Britain
         }
         London
         {
+            ObjectPos
+            {
+                X
+                {
+                    366
+                }
+                Y
+                {
+                    268
+                }
+            }
             FactoryType
             {
                 Sea

@@ -45,6 +45,17 @@ Austria-Hungary
         }
         Lemberg
         {
+            ObjectPos
+            {
+                X
+                {
+                    714
+                }
+                Y
+                {
+                    358
+                }
+            }
             FactoryType
             {
                 Land
@@ -56,6 +67,17 @@ Austria-Hungary
         }
         Prauge
         {
+            ObjectPos
+            {
+                X
+                {
+                    582
+                }
+                Y
+                {
+                    341
+                }
+            }
             FactoryType
             {
                 Land
@@ -67,6 +89,17 @@ Austria-Hungary
         }
         Trieste
         {
+            ObjectPos
+            {
+                X
+                {
+                    604
+                }
+                Y
+                {
+                    440
+                }
+            }
             FactoryType
             {
                 Sea

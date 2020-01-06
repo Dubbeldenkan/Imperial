@@ -23,6 +23,17 @@ Russia
 	{
 		Kiev
 		{
+            ObjectPos
+            {
+                X
+                {
+                    747
+                }
+                Y
+                {
+                    284
+                }
+            }
 			FactoryType
             {
                 Land
@@ -34,6 +45,17 @@ Russia
         }
         Moscow
         {
+            ObjectPos
+            {
+                X
+                {
+                    777
+                }
+                Y
+                {
+                    196
+                }
+            }
             FactoryType
             {
                 Land
@@ -45,6 +67,17 @@ Russia
         }
         Odessa
         {
+            ObjectPos
+            {
+                X
+                {
+                    810
+                }
+                Y
+                {
+                    384
+                }
+            }
             FactoryType
             {
                 Sea
@@ -56,6 +89,17 @@ Russia
         }
         St:Petersburg
         {
+            ObjectPos
+            {
+                X
+                {
+                    727
+                }
+                Y
+                {
+                    127
+                }
+            }
             FactoryType
             {
                 Sea
@@ -67,6 +111,17 @@ Russia
         }
         Warsaw
         {
+            ObjectPos
+            {
+                X
+                {
+                    644
+                }
+                Y
+                {
+                    281
+                }
+            }
             FactoryType
             {
                 Land

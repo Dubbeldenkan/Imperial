@@ -77,7 +77,12 @@ Region::Region(NodeParserNS::ListNode* regionData) :
 
 	if (_landFactoryImage == NULL)
 	{
-		_landFactoryImage = _g->LoadImageFromFile(_landFactoryImagePath, 30, 20);
+		_landFactoryImage = _g->LoadImageFromFile(_landFactoryImagePath, _factorySize.GetX(), _factorySize.GetY());
+	}
+
+	if (_seaFactoryImage == NULL)
+	{
+		_seaFactoryImage = _g->LoadImageFromFile(_seaFactoryImagePath, _factorySize.GetX(), _factorySize.GetY());
 	}
 }
 
@@ -113,7 +118,7 @@ void Region::DrawObject() const
 	}
 	else if ((_factoryBuilt && (_factoryType == FactoryType::Sea)))
 	{
-
+		_g->Draw(_seaFactoryImage, _graphicalPos.GetX(), _graphicalPos.GetY(), _scale);
 	}
 	//Draw units
 }
