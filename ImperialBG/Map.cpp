@@ -1,6 +1,5 @@
 #include "Map.h"
 
-const GameBoardObject::LayerEnum Map::_layerValue = GameBoardObject::MapLayer;
 const std::string Map::_imagePath = "Map.png";
 const TupleInt Map::_imageSize = TupleInt(1200, 900);
 const TupleInt Map::_imagePos = TupleInt(0, 0);

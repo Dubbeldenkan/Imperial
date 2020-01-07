@@ -4,7 +4,6 @@ int GameBoardObject::_latestObjectId = 0;
 std::map<int, GameBoardObject*> GameBoardObject::_gameBoardObjects;
 GraphicsNS::Graphics* GameBoardObject::_g = NULL;
 GameBoardObject* GameBoardObject::_selectedObject = NULL;
-const int GameBoardObject::_numberOfLayers = 6; //TODO uppdatera beroende på hur många layers det är 
 
 //Objects graphical position
 
@@ -105,9 +104,9 @@ void GameBoardObject::SetImage(std::string imagePath, TupleInt imageSize)
 
 bool GameBoardObject::PosInObject(TupleInt pos)
 {
-	bool withInX = ((_graphicalPos.GetX() <= pos.GetX()) &&
+	const bool withInX = ((_graphicalPos.GetX() <= pos.GetX()) &&
 		(pos.GetX() <= (_graphicalPos.GetX() + _image->GetXSize())));
-	bool withInY = ((_graphicalPos.GetY() <= pos.GetY()) &&
+	const bool withInY = ((_graphicalPos.GetY() <= pos.GetY()) &&
 		(pos.GetY() <= (_graphicalPos.GetY() + _image->GetYSize())));
 	return (withInX && withInY);
 }
@@ -116,9 +115,9 @@ void GameBoardObject::DrawSelectedObject()
 {
 	// TODO, ändra pekare till vector av pekare för att kunna markera flera
 	//flytta x till vänster skillnaden mellan skalad storlek och normal storlek delat på 2
-	int xPos = _graphicalPos.GetX() - 
+	const int xPos = _graphicalPos.GetX() - 
 		static_cast<int>(((_image->GetXSize() * _selectecObjectScalingFactor) - (_image->GetXSize())) / 2);
-	int yPos = _graphicalPos.GetY() - 
+	const int yPos = _graphicalPos.GetY() - 
 		static_cast<int>(((_image->GetYSize() * _selectecObjectScalingFactor) - (_image->GetYSize())) / 2);
 	_g->DrawWithColor(_image, xPos, yPos, GraphicsNS::Graphics::BLUE, _selectecObjectScalingFactor);
 	DrawObject();

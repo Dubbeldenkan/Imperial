@@ -98,16 +98,15 @@ void Game::InitGame()
 	int nationCounter = 0;
 	while(!tempPlayerVector.empty()) //TODO fixa så att det är random även vilken nation som väljs först
 	{
-		int randomPlayer = rand() % tempPlayerVector.size();
+		const int randomPlayer = rand() % tempPlayerVector.size();
 		tempPlayerVector[randomPlayer]->BuyBond(_nations[nationCounter].SellBond(Bond::startBondValueLarge));
-		std::string smallBondNationName = _nations[nationCounter].GetStartBondSmallNationName();
+		const std::string smallBondNationName = _nations[nationCounter].GetStartBondSmallNationName();
 		Nation* smallBondNation = NULL;
 		int smallBondNationCounter = 0;
 		while (smallBondNation == NULL)
 		{
-			std::string smallBondNationName = _nations[smallBondNationCounter].GetName();
-			std::string largeNationSmallBondName = _nations[nationCounter].GetStartBondSmallNationName();
-			int test = _nations[smallBondNationCounter].GetName().compare(_nations[nationCounter].GetStartBondSmallNationName()) == 0;
+			const std::string smallBondNationName = _nations[smallBondNationCounter].GetName();
+			const std::string largeNationSmallBondName = _nations[nationCounter].GetStartBondSmallNationName();
 			if (_nations[smallBondNationCounter].GetName().compare(_nations[nationCounter].GetStartBondSmallNationName()) == 0)
 			{
 				smallBondNation = &_nations[smallBondNationCounter];
@@ -148,7 +147,7 @@ void Game::InitGame()
 
 void Game::MouseClicked(TupleInt mouseClickedPos)
 {
-	std::vector<GameBoardObject*> clickedObjects = GameBoard::GetGameBoardObjectByPosition(mouseClickedPos);
+	const std::vector<GameBoardObject*> clickedObjects = GameBoard::GetGameBoardObjectByPosition(mouseClickedPos);
 	for (int vectorCount = 0; vectorCount < static_cast<int>(clickedObjects.size()); vectorCount++)
 	{
 		GameBoardObject* object = clickedObjects[vectorCount];

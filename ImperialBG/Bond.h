@@ -17,11 +17,11 @@ private:
 	BondNation _nation;
 	bool _ownedByPlayer = false;
 
-	const int _valueConverter[9] = { 2, 4, 6, 9, 12, 16, 20, 25, 30 };
-	const int _interestPercentageConverter[9] = { 50, 50, 50, 44, 42, 38, 35, 32, 30 };
+	static constexpr int _valueConverter[9] = { 2, 4, 6, 9, 12, 16, 20, 25, 30 };
+	static constexpr int _interestPercentageConverter[9] = { 50, 50, 50, 44, 42, 38, 35, 32, 30 };
 	const TupleInt _imageSize = TupleInt(40, 20);
 	static const GameBoardObject::LayerEnum _layerValue;
-	const int _bondsInAColumn = 6;
+	static constexpr int _bondsInAColumn = 6;
 
 public:
 	Bond();

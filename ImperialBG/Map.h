@@ -7,7 +7,7 @@
 class Map : public GameBoardObject
 {
 private:
-	static const GameBoardObject::LayerEnum _layerValue;
+	static const GameBoardObject::LayerEnum _layerValue = GameBoardObject::MapLayer;
 	static const std::string _imagePath;
 	static const TupleInt _imageSize;
 	static const TupleInt _imagePos;

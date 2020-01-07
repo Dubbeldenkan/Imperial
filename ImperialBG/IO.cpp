@@ -17,7 +17,7 @@ HWND IO::InitWindow(HINSTANCE* hInst, std::string winName, IO* io)
 {
 	InitWinMain(hInst, winName, io);
 
-	DWORD windowStyle = WS_OVERLAPPEDWINDOW;
+	const DWORD windowStyle = WS_OVERLAPPEDWINDOW;
 	RECT windowRect = { 1, 1, SCREENXSIZE, SCREENYSIZE};
 	AdjustWindowRect(&windowRect, windowStyle, false);
 	HWND hWnd = CreateWindow(
@@ -55,21 +55,21 @@ LRESULT CALLBACK IO::MsgProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 	}
 	case WM_MOUSEMOVE:
 	{
-		int xPos = LOWORD(lParam);
-		int yPos = HIWORD(lParam);
+		const int xPos = LOWORD(lParam);
+		const int yPos = HIWORD(lParam);
 		MouseMove(xPos, yPos);
 		break;
 	}
 	case WM_LBUTTONDOWN:
 	{
-		int xPos = LOWORD(lParam);
-		int yPos = HIWORD(lParam);
+		const int xPos = LOWORD(lParam);
+		const int yPos = HIWORD(lParam);
 		MouseClick(xPos, yPos);
 		break;
 	}
 	case WM_COMMAND:
 	{
-		int menuId = LOWORD(wParam);
+		const int menuId = LOWORD(wParam);
 		MenuOption(menuId);
 		break;
 	}
@@ -105,9 +105,9 @@ HMENU IO::CreateMainMenu()
 
 void IO::EndGame()
 {
-	std::string text = "Spelet är slut." 
+	const std::string text = "Spelet är slut." 
 		"\nVill du spela en ny omgång?";
-	int result = MessageBox(NULL, text.c_str(),
+	const int result = MessageBox(NULL, text.c_str(),
 		"Spelet Slut", MB_YESNO);
 	if (result == IDYES)
 	{
@@ -121,13 +121,13 @@ void IO::EndGame()
 
 void IO::MouseClick(int xPos, int yPos)
 {
-	TupleInt clickPos = TupleInt(xPos, yPos);
+	const TupleInt clickPos = TupleInt(xPos, yPos);
 	Game::MouseClicked(clickPos);
 }
 
 void IO::MouseMove(int xPos, int yPos)
 {
-	TupleInt movePos = TupleInt(xPos, yPos);
+	const TupleInt movePos = TupleInt(xPos, yPos);
 	Game::MouseMoved(movePos);
 }
 
@@ -137,7 +137,7 @@ void IO::MenuOption(int menuId)
 	{
 	case ID_NEW_GAME:
 	{
-		int result = MessageBox(NULL, "Säker att du vill starta ett nytt spel och avsluta nuvarande?",
+		const int result = MessageBox(NULL, "Säker att du vill starta ett nytt spel och avsluta nuvarande?",
 			"Nytt Spel", MB_YESNO);
 		if (result == IDYES)
 		{

@@ -18,8 +18,8 @@ private:
 	std::string _startBondSmallNationName;
 	Bond::BondNation _bondNation;
 
-	const int _numberOfStartBonds = 9;
-	static const GameBoardObject::LayerEnum _layerValue = GameBoardObject::NationLayer;
+	static constexpr int _numberOfStartBonds = 9;
+	static constexpr GameBoardObject::LayerEnum _layerValue = GameBoardObject::NationLayer;
 
 public:
 	Nation(int);

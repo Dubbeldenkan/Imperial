@@ -19,17 +19,17 @@ protected:
 	GraphicsNS::Image* _image;
 	const int _objectId;
 	static GraphicsNS::Graphics* _g;
-
-	static GameBoardObject* _selectedObject;
-	static const int _numberOfLayers; //TODO sätt denna beroende på antalet i LayerEnum
+	
 	const LayerEnum _layer;
+	static GameBoardObject* _selectedObject;
+	static constexpr int _numberOfLayers = 6; //TODO sätt denna beroende på antalet i LayerEnum
 
 	//Objects graphical position TODO
 
 private:
 	static int _latestObjectId;
 	static std::map<int, GameBoardObject*> _gameBoardObjects;
-	const float _selectecObjectScalingFactor = 1.15f;
+	static constexpr float _selectecObjectScalingFactor = 1.15f;
 
 public:
 	static void DrawAllObjects();

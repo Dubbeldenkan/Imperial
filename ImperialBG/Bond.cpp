@@ -15,10 +15,10 @@ Bond::Bond(int id, Bond::BondNation bondNation, std::string nation, TupleInt gra
 	_value = _valueConverter[_id - 1];
 	_nation = bondNation;
 
-	std::string imagePath = "Flags\\" + nation + ".png";
+	const std::string imagePath = "Flags\\" + nation + ".png";
 	SetImage(imagePath, _imageSize);
 	
-	TupleInt posDiff = TupleInt(50, 25);
+	const TupleInt posDiff = TupleInt(50, 25);
 	TupleInt BondPos;
 	if (_id < _bondsInAColumn)
 	{

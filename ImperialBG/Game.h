@@ -25,8 +25,8 @@ private:
 	static bool _initNewGame;
 	static bool _saveGame;
 	static bool _loadGame;
-	const int _numberOfPlayers = 6;
-	const int _numberOfNations = 6;
+	static constexpr int _numberOfPlayers = 6;
+	static constexpr int _numberOfNations = 6;
 
 public:
 	Game();

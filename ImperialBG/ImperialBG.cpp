@@ -11,9 +11,9 @@ int WINAPI WinMain(HINSTANCE hInstance,
 	//init rand
 	srand((unsigned int)time(NULL));
 
-	const int sleepTime = 20;
+	constexpr int sleepTime = 20;
 	IO* io = new IO();
-	std::string windowName = "Imperial"; //TODO fixa en snyggare lösning
+	const std::string windowName = "Imperial"; //TODO fixa en snyggare lösning
 
 	HWND hWnd = IO::InitWindow(&hInstance, windowName, io);
 

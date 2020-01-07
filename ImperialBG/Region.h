@@ -20,8 +20,8 @@ private:
 
 	const std::string _landFactoryImagePath = "LandFactory.png";
 	const std::string _seaFactoryImagePath = "SeaFactory.png";
-	static const GameBoardObject::LayerEnum _layerValue = GameBoardObject::RegionLayer;
 	const TupleInt _factorySize = TupleInt(30, 20);
+	static constexpr GameBoardObject::LayerEnum _layerValue = GameBoardObject::RegionLayer;
 
 public:
 	Region(NodeParserNS::ListNode*);
