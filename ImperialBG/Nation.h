@@ -19,7 +19,7 @@ private:
 	Bond::BondNation _bondNation;
 
 	static constexpr int _numberOfStartBonds = 9;
-	static constexpr GameBoardObject::LayerEnum _layerValue = GameBoardObject::NationLayer;
+	static constexpr GameBoardObject::ImageLayer _imageLayerValue = GameBoardObject::ImageLayer::Nation;
 
 public:
 	Nation(int);

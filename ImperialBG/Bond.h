@@ -6,7 +6,7 @@
 class Bond : public GameBoardObject
 {
 public:
-	enum BondNation { Austria_Hungary, Italy, France, Britain, Germany, Russia };
+	enum class BondNation { Austria_Hungary, Italy, France, Britain, Germany, Russia };
 	static const int startBondValueLarge;
 	static const int startBondValueSmall;
 
@@ -20,7 +20,7 @@ private:
 	static constexpr int _valueConverter[9] = { 2, 4, 6, 9, 12, 16, 20, 25, 30 };
 	static constexpr int _interestPercentageConverter[9] = { 50, 50, 50, 44, 42, 38, 35, 32, 30 };
 	const TupleInt _imageSize = TupleInt(40, 20);
-	static const GameBoardObject::LayerEnum _layerValue;
+	static const GameBoardObject::ImageLayer _imageLayerValue;
 	static constexpr int _bondsInAColumn = 6;
 
 public:

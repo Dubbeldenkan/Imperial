@@ -1,6 +1,6 @@
 #include "Bond.h"
 
-const GameBoardObject::LayerEnum Bond::_layerValue = GameBoardObject::BondLayer;
+const GameBoardObject::ImageLayer Bond::_imageLayerValue = GameBoardObject::ImageLayer::Bond;
 const int Bond::startBondValueLarge = 4;
 const int Bond::startBondValueSmall = 1;
 
@@ -39,7 +39,7 @@ Bond& Bond::operator=(const Bond& bond)
 }
 
 Bond::Bond(const Bond &bond) :
-	GameBoardObject(bond._graphicalPos, bond._image, _layerValue)
+	GameBoardObject(bond._graphicalPos, bond._image, _imageLayerValue)
 {
 	CopyBond(bond);
 }

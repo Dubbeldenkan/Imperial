@@ -93,7 +93,7 @@ Region& Region::operator=(const Region& region)
 }
 
 Region::Region(const Region &region) :
-	GameBoardObject(region._graphicalPos, region._image, _layerValue)
+	GameBoardObject(region._graphicalPos, region._image, _imageLayerValue)
 {
 	CopyRegion(region);
 }

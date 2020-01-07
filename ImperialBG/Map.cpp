@@ -6,7 +6,7 @@ const TupleInt Map::_imagePos = TupleInt(0, 0);
 const float Map::_scaleValue = 0.85f;
 
 Map::Map() : 
-GameBoardObject(_imagePos, _imageSize, _imagePath, _layerValue)
+GameBoardObject(_imagePos, _imageSize, _imagePath, _imageLayerValue)
 {
 	_scale = _scaleValue;
 }

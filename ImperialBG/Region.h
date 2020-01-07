@@ -21,7 +21,7 @@ private:
 	const std::string _landFactoryImagePath = "LandFactory.png";
 	const std::string _seaFactoryImagePath = "SeaFactory.png";
 	const TupleInt _factorySize = TupleInt(30, 20);
-	static constexpr GameBoardObject::LayerEnum _layerValue = GameBoardObject::RegionLayer;
+	static constexpr GameBoardObject::ImageLayer _imageLayerValue = GameBoardObject::ImageLayer::Region;
 
 public:
 	Region(NodeParserNS::ListNode*);

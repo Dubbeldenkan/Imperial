@@ -71,7 +71,7 @@ Nation& Nation::operator=(const Nation& nation)
 }
 
 Nation::Nation(const Nation &nation) :
-	_id(nation._id), GameBoardObject(nation._graphicalPos, nation._image, _layerValue)
+	_id(nation._id), GameBoardObject(nation._graphicalPos, nation._image, _imageLayerValue)
 {
 	CopyNation(nation);
 }

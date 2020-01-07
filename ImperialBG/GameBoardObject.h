@@ -11,16 +11,17 @@
 
 class GameBoardObject
 {
+public:
+	enum class ImageLayer { Map, Player, Nation, Region, Bond };
 
 protected:
-	enum LayerEnum { MapLayer, PlayerLayer, NationLayer, RegionLayer, BondLayer };
 	TupleInt _graphicalPos;
 	float _scale = 1.0;
 	GraphicsNS::Image* _image;
 	const int _objectId;
 	static GraphicsNS::Graphics* _g;
 	
-	const LayerEnum _layer;
+	const ImageLayer _layer;
 	static GameBoardObject* _selectedObject;
 	static constexpr int _numberOfLayers = 6; //TODO sätt denna beroende på antalet i LayerEnum
 
@@ -49,8 +50,8 @@ public:
 
 protected:
 	GameBoardObject();
-	GameBoardObject(TupleInt, GraphicsNS::Image*, LayerEnum);
-	GameBoardObject(TupleInt, TupleInt, std::string, LayerEnum);
+	GameBoardObject(TupleInt, GraphicsNS::Image*, ImageLayer);
+	GameBoardObject(TupleInt, TupleInt, std::string, ImageLayer);
 	virtual ~GameBoardObject();
 
 	void SetImage(std::string, TupleInt);

@@ -7,12 +7,12 @@ GameBoardObject* GameBoardObject::_selectedObject = NULL;
 
 //Objects graphical position
 
-GameBoardObject::GameBoardObject() : _layer(LayerEnum::MapLayer), _objectId(++_latestObjectId)
+GameBoardObject::GameBoardObject() : _layer(ImageLayer::Map), _objectId(++_latestObjectId)
 {
 	_gameBoardObjects[_objectId] = this;
 }
 
-GameBoardObject::GameBoardObject(TupleInt graphicalPos, GraphicsNS::Image* image, LayerEnum layer) :
+GameBoardObject::GameBoardObject(TupleInt graphicalPos, GraphicsNS::Image* image, ImageLayer layer) :
 	_layer(layer), _objectId(++_latestObjectId)
 {
 	_graphicalPos = graphicalPos;
@@ -20,7 +20,7 @@ GameBoardObject::GameBoardObject(TupleInt graphicalPos, GraphicsNS::Image* image
 	_gameBoardObjects[_objectId] = this;
 }
 
-GameBoardObject::GameBoardObject(TupleInt graphicalPos, TupleInt imageSize, std::string imagePath, LayerEnum layer) :
+GameBoardObject::GameBoardObject(TupleInt graphicalPos, TupleInt imageSize, std::string imagePath, ImageLayer layer) :
 	_layer(layer), _objectId(++_latestObjectId)
 {
 	_graphicalPos = graphicalPos;

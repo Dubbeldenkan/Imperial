@@ -20,7 +20,7 @@ private:
 	bondMapType _bonds;
 
 	TupleInt _moneyGraphicalPos = TupleInt(200, 0);
-	static constexpr GameBoardObject::LayerEnum _layerValue = GameBoardObject::PlayerLayer;
+	static constexpr GameBoardObject::ImageLayer _imageLayerValue = GameBoardObject::ImageLayer::Player;
 	
 public:
 	Player(int, NodeParserNS::ListNode*);

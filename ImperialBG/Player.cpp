@@ -59,7 +59,7 @@ Player& Player::operator=(const Player& player)
 }
 
 Player::Player(const Player &player) :
-	GameBoardObject(player._graphicalPos, player._image, _layerValue)
+	GameBoardObject(player._graphicalPos, player._image, _imageLayerValue)
 {
 	CopyPlayer(player);
 }
