@@ -18,7 +18,7 @@ namespace GraphicsNS
 		_imageMap[filePath] = *this;
 	}
 
-	int Image::GetXSize()
+	int Image::GetXSize() const
 	{
 		if (_xSize == 0)
 		{
@@ -29,7 +29,7 @@ namespace GraphicsNS
 		return _xSize;
 	}
 
-	int Image::GetYSize()
+	int Image::GetYSize() const
 	{
 		if (_ySize == 0)
 		{
@@ -55,12 +55,12 @@ namespace GraphicsNS
 		return &_texture;
 	}
 
-	bool Image::ImageExist(std::string key)
+	bool Image::ImageExist(const std::string key)
 	{
 		return !(_imageMap.find(key) == _imageMap.end());
 	}
 
-	Image* Image::GetImage(std::string key)
+	Image* Image::GetImage(const std::string key)
 	{
 		return &_imageMap[key];
 	}

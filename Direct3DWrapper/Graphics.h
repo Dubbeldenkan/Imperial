@@ -30,17 +30,17 @@ namespace GraphicsNS
 	public:
 		enum Color { WHITE, BLACK, RED, BLUE, GREEN, YELLOW, PURPLE };
 
-		const static int FONT_SIZE_SMALL = 8;
-		const static int FONT_SIZE_BIG = 15;
+		constexpr static int FONT_SIZE_SMALL = 8;
+		constexpr static int FONT_SIZE_BIG = 15;
 
 	private:
-		const static D3DCOLOR D3DWHITE = D3DCOLOR_XRGB(255, 255, 255);
-		const static D3DCOLOR D3DBLACK = D3DCOLOR_XRGB(0, 0, 0);
-		const static D3DCOLOR D3DRED = D3DCOLOR_XRGB(255, 0, 0);
-		const static D3DCOLOR D3DBLUE = D3DCOLOR_XRGB(0, 0, 255);
-		const static D3DCOLOR D3DGREEN = D3DCOLOR_XRGB(0, 255, 0);
-		const static D3DCOLOR D3DYELLOW = D3DCOLOR_XRGB(255, 255, 0);
-		const static D3DCOLOR D3DPURPLE = D3DCOLOR_XRGB(255, 0, 255);
+		constexpr static D3DCOLOR D3DWHITE = D3DCOLOR_XRGB(255, 255, 255);
+		constexpr static D3DCOLOR D3DBLACK = D3DCOLOR_XRGB(0, 0, 0);
+		constexpr static D3DCOLOR D3DRED = D3DCOLOR_XRGB(255, 0, 0);
+		constexpr static D3DCOLOR D3DBLUE = D3DCOLOR_XRGB(0, 0, 255);
+		constexpr static D3DCOLOR D3DGREEN = D3DCOLOR_XRGB(0, 255, 0);
+		constexpr static D3DCOLOR D3DYELLOW = D3DCOLOR_XRGB(255, 255, 0);
+		constexpr static D3DCOLOR D3DPURPLE = D3DCOLOR_XRGB(255, 0, 255);
 
 		LPDIRECT3D9 _d3d;
 		LPDIRECT3DDEVICE9 _d3dDevice;

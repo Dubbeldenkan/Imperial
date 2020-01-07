@@ -2,6 +2,17 @@
 
 namespace GraphicsNS
 {
+	const static int FONT_SIZE_SMALL = 8;
+	const static int FONT_SIZE_BIG = 15;
+
+	const static D3DCOLOR D3DWHITE = D3DCOLOR_XRGB(255, 255, 255);
+	const static D3DCOLOR D3DBLACK = D3DCOLOR_XRGB(0, 0, 0);
+	const static D3DCOLOR D3DRED = D3DCOLOR_XRGB(255, 0, 0);
+	const static D3DCOLOR D3DBLUE = D3DCOLOR_XRGB(0, 0, 255);
+	const static D3DCOLOR D3DGREEN = D3DCOLOR_XRGB(0, 255, 0);
+	const static D3DCOLOR D3DYELLOW = D3DCOLOR_XRGB(255, 255, 0);
+	const static D3DCOLOR D3DPURPLE = D3DCOLOR_XRGB(255, 0, 255);
+
 	DrawStruct::DrawStruct()
 	{
 		D3DXMatrixScaling(&transformMatrix, scale, scale, 0.0f);

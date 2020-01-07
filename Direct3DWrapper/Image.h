@@ -19,8 +19,8 @@ namespace GraphicsNS
 
 		static Image* CreateImage(std::string);
 
-		int GetXSize();
-		int GetYSize();
+		int GetXSize() const;
+		int GetYSize() const;
 
 		void SetXSize(int);
 		void SetYSize(int);
