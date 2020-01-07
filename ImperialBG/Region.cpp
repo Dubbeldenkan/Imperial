@@ -122,3 +122,5 @@ void Region::DrawObject() const
 	}
 	//Draw units
 }
+
+//Rita ut vilken nation som står på tur. och lägg till figurer till rondelln. 

@@ -2,7 +2,6 @@
 #define IMAGE_H
 
 #include <d3dx9.h>
-
 #include <map>
 
 namespace GraphicsNS

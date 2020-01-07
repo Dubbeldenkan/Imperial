@@ -6,8 +6,8 @@
 #include "NodeParser.h"
 #include "UtilityClasses.h"
 
-#include <string>
 #include <map>
+#include <string>
 
 class GameBoardObject
 {

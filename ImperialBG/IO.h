@@ -1,10 +1,10 @@
 #ifndef IO_H
 #define IO_H
 
-#include <Windows.h>
-
 #include "Game.h"
 #include "UtilityClasses.h"
+
+#include <Windows.h>
 
 class IO
 {

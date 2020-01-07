@@ -2,8 +2,8 @@
 #define PLAYER_H
 
 #include "Bond.h"
-#include "NodeParser.h"
 #include "GameBoardObject.h"
+#include "NodeParser.h"
 
 class Player : public GameBoardObject
 {

@@ -2,8 +2,8 @@
 #define GAME_BOARD_H
 
 #include "GameBoardObject.h"
-#include "Player.h"
 #include "Map.h"
+#include "Player.h"
 
 class GameBoard
 {

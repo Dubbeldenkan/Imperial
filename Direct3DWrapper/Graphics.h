@@ -1,14 +1,15 @@
 #ifndef GRAPHICS_H
 #define GRAPHICS_H
 
-#include <d3d9.h>
-#include <Windows.h>
 #include "Image.h"
-#include <stdio.h>
+
+#include <d3d9.h>
 #include <D3dx9math.h>
-#include <vector>
-#include <string>
 #include <math.h>
+#include <stdio.h>
+#include <string>
+#include <vector>
+#include <Windows.h>
 
 namespace GraphicsNS
 {
