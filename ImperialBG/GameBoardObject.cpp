@@ -119,7 +119,7 @@ void GameBoardObject::DrawSelectedObject()
 		static_cast<int>(((_image->GetXSize() * _selectecObjectScalingFactor) - (_image->GetXSize())) / 2);
 	const int yPos = _graphicalPos.GetY() - 
 		static_cast<int>(((_image->GetYSize() * _selectecObjectScalingFactor) - (_image->GetYSize())) / 2);
-	_g->DrawWithColor(_image, xPos, yPos, GraphicsNS::Graphics::BLUE, _selectecObjectScalingFactor);
+	_g->DrawWithColor(_image, xPos, yPos, GraphicsNS::Graphics::Color::BLUE, _selectecObjectScalingFactor);
 	DrawObject();
 }
 

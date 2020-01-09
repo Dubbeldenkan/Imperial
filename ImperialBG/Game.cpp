@@ -86,7 +86,7 @@ void Game::InitGame()
 	}
 
 	//Set current Nation
-	_currentNation = &_nations[0];
+	SetCurrentNation(&_nations[0]);
 
 	//Assign start bonds
 	std::vector<Player*> tempPlayerVector;
@@ -161,6 +161,12 @@ void Game::MouseClicked(TupleInt mouseClickedPos)
 void Game::MouseMoved(TupleInt mousePos)
 {
 	
+}
+
+void Game::SetCurrentNation(Nation* nation)
+{
+	_currentNation = nation;
+	nation->SetAsCurrentNation();
 }
 
 void Game::SaveGame()

@@ -49,6 +49,8 @@ private:
 	void CreateSaveNode(NodeParserNS::ListNode*);
 	void SaveToFile(NodeParserNS::ListNode*);
 
+	void SetCurrentNation(Nation*);
+
 	void LoadGame();
 	NodeParserNS::ListNode* LoadFromFile(std::string);
 };

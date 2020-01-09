@@ -225,7 +225,7 @@ namespace GraphicsNS
 		_d3dDevice->EndScene();
 	}
 
-	void Graphics::Draw(DrawStruct dS, Image* image)
+	void Graphics::Draw(DrawStruct dS, Image* image) const
 	{
 		//TODO lägg in try catch 
 		_sprite->Begin(D3DXSPRITE_ALPHABLEND);
@@ -239,7 +239,7 @@ namespace GraphicsNS
 		_sprite->End();
 	}
 
-	void Graphics::Draw(Image* image, int x, int y, float scale)
+	void Graphics::Draw(Image* image, int x, int y, float scale) const
 	{
 		DrawStruct dS = DrawStruct();
 		dS.scale = scale;
@@ -248,7 +248,7 @@ namespace GraphicsNS
 		Draw(dS, image);
 	}
 
-	void Graphics::DrawWithColor(Image* image, int x, int y, Color color)
+	void Graphics::DrawWithColor(Image* image, int x, int y, Color color) const
 	{
 		DrawStruct dS = DrawStruct();
 		dS.color = ConvertToD3DCOLOR(color);
@@ -256,7 +256,7 @@ namespace GraphicsNS
 		Draw(dS, image);
 	}
 
-	void Graphics::DrawWithColor(Image* image, int x, int y, Color color, float scale)
+	void Graphics::DrawWithColor(Image* image, int x, int y, Color color, float scale) const
 	{
 		DrawStruct dS = DrawStruct();
 		dS.color = ConvertToD3DCOLOR(color);
@@ -266,7 +266,7 @@ namespace GraphicsNS
 		Draw(dS, image);
 	}
 
-	void Graphics::DrawTile(Image* image, int x, int y, int tileIndex, int orientation)
+	void Graphics::DrawTile(Image* image, int x, int y, int tileIndex, int orientation) const
 	{
 		DrawStruct dS = DrawStruct();
 		RECT* rect = new RECT();
@@ -287,7 +287,7 @@ namespace GraphicsNS
 	}
 
 	//if mirros is true the image should be mirrored over the y-axis
-	void Graphics::DrawAnimation(Image* image, int xPos, int yPos, int imageIndex, int mirror)
+	void Graphics::DrawAnimation(Image* image, int xPos, int yPos, int imageIndex, bool mirror) const
 	{
 		DrawStruct dS = DrawStruct();
 		D3DXVECTOR3 position;
@@ -318,7 +318,7 @@ namespace GraphicsNS
 		Draw(dS, image);
 	}
 
-	void Graphics::DrawRotateImage(Image* image, int xPos, int yPos, double angle, int direction)
+	void Graphics::DrawRotateImage(Image* image, int xPos, int yPos, double angle, int direction) const
 	{
 		DrawStruct dS = DrawStruct();
 
@@ -333,11 +333,18 @@ namespace GraphicsNS
 		Draw(dS, image);
 	}
 
-	void Graphics::PrintText8(std::string text, int xPos, int yPos, Color color)
+	void Graphics::PrintText(int number, int xPos, int yPos, Color color, FontSize fontSize) const
+	{
+		PrintText(std::to_string(number), xPos, yPos, color, fontSize);
+	}
+
+	void Graphics::PrintText(std::string text, int xPos, int yPos, Color color, FontSize fontSize) const
 	{
 		D3DCOLOR D3DColor = ConvertToD3DCOLOR(color);
 		RECT rectangle = { xPos, yPos, 0, 0 };
-		_font8->DrawText(
+		LPD3DXFONT font = _font15;
+
+		font->DrawText(
 			0,
 			text.c_str(),
 			-1,
@@ -346,39 +353,7 @@ namespace GraphicsNS
 			D3DColor);
 	}
 
-	void Graphics::PrintText8(int number, int xPos, int yPos, Color color)
-	{
-		std::string str;
-		str = std::to_string(number);
-		const char* buffer = str.c_str();
-		PrintText8((char*)buffer, xPos, yPos, color);
-	}
-
-	void Graphics::PrintText15(std::string text, int xPos, int yPos, Color color)
-	{
-		D3DCOLOR D3DColor = ConvertToD3DCOLOR(color);
-		RECT rectangle = { xPos, yPos, 0, 0 };
-		_font15->DrawText(
-			0,
-			text.c_str(),
-			-1,
-			&rectangle,
-			DT_NOCLIP,
-			D3DColor);
-	}
-
-	void Graphics::PrintText15(int number, int xPos, int yPos, Color color)
-	{
-		std::string str;
-		str = std::to_string(number);
-		const char* buffer = str.c_str();
-		PrintText15((char*)buffer, xPos, yPos, color);
-	}
-
-	///
-	///xPos, yPos, xSize, ySize, Color
-	///
-	void Graphics::DrawRectangle(int xPos, int yPos, int xSize, int ySize, Color color)
+	void Graphics::DrawRectangle(int xPos, int yPos, int xSize, int ySize, Color color) const
 	{
 		D3DCOLOR D3DColor = ConvertToD3DCOLOR(color);
 		Image* image = whitePixel;
@@ -396,35 +371,65 @@ namespace GraphicsNS
 		_sprite->End();
 	}
 
-	D3DCOLOR Graphics::ConvertToD3DCOLOR(Color color)
+	void Graphics::DrawUnfilledRectangle(int xPos, int yPos, int xSize, int ySize, int thickness, Color color) const
+	{
+		//top
+		DrawRectangle(xPos, yPos, xSize, thickness, color);
+		//bottom
+		DrawRectangle(xPos, yPos + ySize - thickness, xSize, thickness, color);
+		//left
+		DrawRectangle(xPos, yPos, thickness, ySize, color);
+		//right
+		DrawRectangle(xPos + xSize - thickness, yPos, thickness, ySize, color);
+	}
+
+	D3DCOLOR Graphics::ConvertToD3DCOLOR(Color color) const
 	{
 		D3DCOLOR resultColor;
 		switch (color)
 		{
-		case GraphicsNS::Graphics::WHITE:
+		case GraphicsNS::Graphics::Color::WHITE:
 			resultColor = D3DWHITE;
 			break;
-		case GraphicsNS::Graphics::BLACK:
+		case GraphicsNS::Graphics::Color::BLACK:
 			resultColor = D3DBLACK;
 			break;
-		case GraphicsNS::Graphics::RED:
+		case GraphicsNS::Graphics::Color::RED:
 			resultColor = D3DRED;
 			break;
-		case GraphicsNS::Graphics::BLUE:
+		case GraphicsNS::Graphics::Color::BLUE:
 			resultColor = D3DBLUE;
 			break;
-		case GraphicsNS::Graphics::GREEN:
+		case GraphicsNS::Graphics::Color::GREEN:
 			resultColor = D3DGREEN;
 			break;
-		case GraphicsNS::Graphics::YELLOW:
+		case GraphicsNS::Graphics::Color::YELLOW:
 			resultColor = D3DYELLOW;
 			break;
-		case GraphicsNS::Graphics::PURPLE:
+		case GraphicsNS::Graphics::Color::PURPLE:
 			resultColor = D3DPURPLE;
 			break;
 		default:
 			break;
 		}
 		return resultColor;
+	}
+
+	LPD3DXFONT Graphics::ConvertToLPD3DXFONT(FontSize fontSize) const
+	{
+		LPD3DXFONT resultFont;
+		switch (fontSize)
+		{
+		case GraphicsNS::Graphics::FontSize::font8:
+			resultFont = _font8;
+			break;
+		case GraphicsNS::Graphics::FontSize::font15:
+			resultFont = _font15;
+			break;
+		default:
+			resultFont = _font15;
+			break;
+		}
+		return resultFont;
 	}
 }

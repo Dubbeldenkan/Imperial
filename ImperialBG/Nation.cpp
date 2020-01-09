@@ -1,5 +1,7 @@
 #include "Nation.h"
 
+int Nation::_currentNation = 0;
+
 Nation::Nation(int nationId) :
 	_id(nationId), GameBoardObject()
 {
@@ -91,7 +93,12 @@ Nation::~Nation()
 
 void Nation::DrawObject() const
 {
-	_g->PrintText15("Millions: " + std::to_string(_money), _graphicalPos.GetX(), _graphicalPos.GetY(), GraphicsNS::Graphics::BLACK);
+	if (_currentNation == _id)
+	{
+		_g->DrawUnfilledRectangle(_graphicalPos.GetX() - 5, _graphicalPos.GetY() - 145, 100, 175, 10, GraphicsNS::Graphics::Color::WHITE);
+	}
+	_g->PrintText("Millions: " + std::to_string(_money), _graphicalPos.GetX(), _graphicalPos.GetY(), 
+		GraphicsNS::Graphics::Color::BLACK, GraphicsNS::Graphics::FontSize::font15);
 }
 
 Bond* Nation::SellBond(int bondId)
@@ -113,4 +120,9 @@ std::string Nation::GetName() const
 Bond::BondNation Nation::GetBondNation() const
 {
 	return _bondNation;
+}
+
+void Nation::SetAsCurrentNation()
+{
+	_currentNation = _id;
 }

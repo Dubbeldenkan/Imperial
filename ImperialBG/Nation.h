@@ -18,6 +18,8 @@ private:
 	std::string _startBondSmallNationName;
 	Bond::BondNation _bondNation;
 
+	static int _currentNation;
+
 	static constexpr int _numberOfStartBonds = 9;
 	static constexpr GameBoardObject::ImageLayer _imageLayerValue = GameBoardObject::ImageLayer::Nation;
 
@@ -34,6 +36,8 @@ public:
 	std::string GetStartBondSmallNationName() const;
 	std::string GetName() const;
 	Bond::BondNation GetBondNation() const;
+
+	void SetAsCurrentNation();
 
 private:
 	void DrawObject() const;

@@ -78,15 +78,17 @@ void Player::DrawObject() const
 {
 	if (_isInvestor)
 	{
-		_g->DrawRectangle(_graphicalPos.GetX(), _graphicalPos.GetY(), 100, 20, GraphicsNS::Graphics::WHITE);
-		_g->PrintText15(_name, _graphicalPos.GetX(), _graphicalPos.GetY(), GraphicsNS::Graphics::BLACK);
+		_g->DrawRectangle(_graphicalPos.GetX(), _graphicalPos.GetY(), 100, 20, GraphicsNS::Graphics::Color::WHITE);
+		_g->PrintText(_name, _graphicalPos.GetX(), _graphicalPos.GetY(), 
+			GraphicsNS::Graphics::Color::BLACK, GraphicsNS::Graphics::FontSize::font15);
 	}
 	else
 	{
-		_g->PrintText15(_name, _graphicalPos.GetX(), _graphicalPos.GetY(), GraphicsNS::Graphics::WHITE);
+		_g->PrintText(_name, _graphicalPos.GetX(), _graphicalPos.GetY(), 
+			GraphicsNS::Graphics::Color::WHITE, GraphicsNS::Graphics::FontSize::font15);
 	}
-	_g->PrintText15("Millions: " + std::to_string(_money), 
-		_graphicalPos.GetX() + _moneyGraphicalPos.GetX(), _graphicalPos.GetY(), GraphicsNS::Graphics::WHITE);
+	_g->PrintText("Millions: " + std::to_string(_money), _graphicalPos.GetX() + _moneyGraphicalPos.GetX(), 
+		_graphicalPos.GetY(), GraphicsNS::Graphics::Color::WHITE, GraphicsNS::Graphics::FontSize::font15);
 
 	UpdateBondsGraphicalPos();
 }

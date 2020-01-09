@@ -76,7 +76,7 @@ int Bond::GetId() const
 void Bond::DrawObject() const
 {
 	_g->Draw(_image, _graphicalPos.GetX(), _graphicalPos.GetY(), _scale);
-	_g->PrintText15(_id, _graphicalPos.GetX(), _graphicalPos.GetY(), GraphicsNS::Graphics::BLACK);
+	_g->PrintText(_id, _graphicalPos.GetX(), _graphicalPos.GetY(), GraphicsNS::Graphics::Color::BLACK, GraphicsNS::Graphics::FontSize::font15);
 }
 
 void Bond::SetToOwnedByPlayer()
