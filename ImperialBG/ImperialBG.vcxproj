@@ -173,6 +173,7 @@
     <ClCompile Include="Nation.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Region.cpp" />
+    <ClCompile Include="RondelIndicator.cpp" />
     <ClCompile Include="UtilityClasses.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -187,6 +188,7 @@
     <ClInclude Include="Nation.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Region.h" />
+    <ClInclude Include="RondelIndicator.h" />
     <ClInclude Include="UtilityClasses.h" />
   </ItemGroup>
   <ItemGroup>

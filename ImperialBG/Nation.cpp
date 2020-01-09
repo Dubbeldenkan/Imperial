@@ -10,6 +10,7 @@ Nation::Nation(int nationId) :
 	_name = nationName[nationId];
 	NodeParserNS::ListNode* nationData = NodeParserNS::NodeParser::ReadDataFile(_name);
 	nationData->GetChild(&nationData);
+	_bondNation = static_cast<Bond::BondNation>(nationId);
 	do {
 		NodeParserNS::ListNode* tempData;
 		if (nationData->GetData().compare("ImagePath") == 0)
@@ -28,6 +29,39 @@ Nation::Nation(int nationId) :
 		{
 			nationData->GetChild(&tempData);
 			_startBondSmallNationName = tempData->GetData();
+		}
+		else if (nationData->GetData().compare("Color") == 0)
+		{
+			nationData->GetChild(&tempData);
+			const std::string colorName = tempData->GetData();
+			if (colorName.compare("Black") == 0)
+			{
+				_color = GraphicsNS::Graphics::Color::BLACK;
+			}
+			else if (colorName.compare("Blue") == 0)
+			{
+				_color = GraphicsNS::Graphics::Color::BLUE;
+			}
+			else if (colorName.compare("Green") == 0)
+			{
+				_color = GraphicsNS::Graphics::Color::GREEN;
+			}
+			else if (colorName.compare("Red") == 0)
+			{
+				_color = GraphicsNS::Graphics::Color::RED;
+			}
+			else if (colorName.compare("Yellow") == 0)
+			{
+				_color = GraphicsNS::Graphics::Color::YELLOW;
+			}
+			else if (colorName.compare("Purple") == 0)
+			{
+				_color = GraphicsNS::Graphics::Color::PURPLE;
+			}
+			else 
+			{
+				throw "Unvalid type in " + _name + ".dmd"; // TODO är detta rätt sätt att göra det på?
+			}
 		}
 		else if (nationData->GetData().compare("ObjectPos") == 0)
 		{
@@ -59,11 +93,12 @@ Nation::Nation(int nationId) :
 		}
 	} while (!nationData->GetNext(&nationData));
 
-	_bondNation = static_cast<Bond::BondNation>(nationId);
 	for (int id = 0; id < _numberOfStartBonds; id++)
 	{
 		_bonds[id + 1] = Bond(id + 1, _bondNation, _name, _graphicalPos);
 	}
+
+	_rondelIndicator = RondelIndicator(_color);
 }
 
 Nation& Nation::operator=(const Nation& nation)
@@ -85,6 +120,8 @@ void Nation::CopyNation(const Nation& nation)
 	_startBondSmallNationName = nation._startBondSmallNationName;
 	_bondNation = nation._bondNation;
 	_regions = nation._regions;
+	_color = nation._color;
+	_rondelIndicator = nation._rondelIndicator;
 	//TODO
 }
 
@@ -95,7 +132,11 @@ void Nation::DrawObject() const
 {
 	if (_currentNation == _id)
 	{
-		_g->DrawUnfilledRectangle(_graphicalPos.GetX() - 5, _graphicalPos.GetY() - 145, 100, 175, 10, GraphicsNS::Graphics::Color::WHITE);
+		const TupleInt rectPosModification = TupleInt(-5, -145);
+		const TupleInt rectSize = TupleInt(100, 175);
+		constexpr int rectWidth = 10;
+		_g->DrawUnfilledRectangle(_graphicalPos.GetX() + rectPosModification.GetX(), _graphicalPos.GetY() + rectPosModification.GetY(), 
+			rectSize.GetX(), rectSize.GetY(), rectWidth, GraphicsNS::Graphics::Color::WHITE);
 	}
 	_g->PrintText("Millions: " + std::to_string(_money), _graphicalPos.GetX(), _graphicalPos.GetY(), 
 		GraphicsNS::Graphics::Color::BLACK, GraphicsNS::Graphics::FontSize::font15);

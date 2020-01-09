@@ -5,6 +5,7 @@
 #include "GameBoardObject.h"
 #include "NodeParser.h"
 #include "Region.h"
+#include "RondelIndicator.h"
 
 class Nation : public GameBoardObject
 {
@@ -17,6 +18,8 @@ private:
 	int _money = 0;
 	std::string _startBondSmallNationName;
 	Bond::BondNation _bondNation;
+	GraphicsNS::Graphics::Color _color; //TODO gör denna const och inkludera i initieringslistan
+	RondelIndicator _rondelIndicator;
 
 	static int _currentNation;
 

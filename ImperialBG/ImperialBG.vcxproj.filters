@@ -54,6 +54,9 @@
     <ClCompile Include="Nation.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="RondelIndicator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AIPlayer.h">
@@ -90,6 +93,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Region.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RondelIndicator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
