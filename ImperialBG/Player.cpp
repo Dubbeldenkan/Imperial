@@ -34,7 +34,6 @@ void Player::CopyPlayer(const Player& player)
 	_playerPos = player._playerPos;
 	_name = player._name;
 	_money = player._money;
-	//TODO
 }
 
 Player::~Player()
@@ -59,7 +58,7 @@ void Player::DrawObject() const
 	UpdateBondsGraphicalPos();
 }
 
-void Player::UpdateBondsGraphicalPos() const //TODO denna funktion måste uppdateras för att man ska kunna ha flera bonds med samma värde
+void Player::UpdateBondsGraphicalPos() const //TODO denna funktion måste uppdateras för att man ska kunna ha flera bonds med samma värde, annars kommer de att rites ut över varandra 
 {
 	bondMapType::const_iterator nationIterator;
 	std::map<int, Bond*>::const_iterator bondIterator;
@@ -166,4 +165,9 @@ bool Player::ExtractPlayerData(NodeParserNS::ListNode* playerData, std::string &
 	} while (!playerData->GetNext(&playerData));
 
 	return humanPlayer;
+}
+
+bool Player::IsHuman()
+{
+	return false;
 }

@@ -11,6 +11,8 @@ public:
 	AIPlayer(int playerPos, std::string name, TupleInt objectPos);
 
 	~AIPlayer();
+
+	bool IsHuman();
 };
 
 #endif // !AI_PLAYER_H

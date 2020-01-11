@@ -25,8 +25,6 @@ protected:
 	static GameBoardObject* _selectedObject;
 	static constexpr int _numberOfLayers = 6; //TODO sätt denna beroende på antalet i LayerEnum
 
-	//Objects graphical position TODO
-
 private:
 	static int _latestObjectId;
 	static std::map<int, GameBoardObject*> _gameBoardObjects;

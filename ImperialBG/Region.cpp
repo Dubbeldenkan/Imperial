@@ -80,10 +80,10 @@ Region::Region(const Region &region) :
 
 void Region::CopyRegion(const Region& region)
 {
+	CopyGameBoardObject(region);
 	_name = region._name;
 	_factoryBuilt = region._factoryBuilt;
 	_factoryType = region._factoryType;
-	//TODO
 }
 
 Region::~Region()

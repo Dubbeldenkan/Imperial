@@ -51,7 +51,6 @@ void Bond::CopyBond(const Bond& bond)
 	_interestPercentage = bond._interestPercentage;
 	_value = bond._value;
 	_nation = bond._nation;
-	//TODO
 }
 
 Bond::~Bond()

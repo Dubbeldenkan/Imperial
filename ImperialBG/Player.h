@@ -38,6 +38,7 @@ public:
 
 	int GetBondNationValue(Bond::BondNation) const;
 	int GetPlayerPos() const;
+	virtual bool IsHuman();
 
 	static bool ExtractPlayerData(NodeParserNS::ListNode* playerData, std::string& name, TupleInt& objectPos);
 

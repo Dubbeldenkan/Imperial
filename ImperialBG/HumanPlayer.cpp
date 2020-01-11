@@ -23,9 +23,13 @@ HumanPlayer::HumanPlayer(const HumanPlayer &humanPlayer) :
 void HumanPlayer::CopyHumanPlayer(const HumanPlayer& humanPlayer)
 {
 	CopyPlayer(humanPlayer);
-	//TODO
 }
 
 HumanPlayer::~HumanPlayer()
 {
+}
+
+bool HumanPlayer::IsHuman()
+{
+	return true;
 }

@@ -32,7 +32,7 @@ int TupleInt::GetY() const
 	return second;
 }
 
-TupleInt TupleInt::operator+(TupleInt tupleIntInput) const //TODO kolla igenom vilka funktioner som ska vara const
+TupleInt TupleInt::operator+(TupleInt tupleIntInput) const
 {
 	TupleInt tupleIntRes;
 	tupleIntRes.first = first + tupleIntInput.first;

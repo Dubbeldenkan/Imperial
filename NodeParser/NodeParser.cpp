@@ -82,7 +82,6 @@ namespace NodeParserNS
 			}
 			else
 			{
-				//line.erase(std::remove(line.begin(), line.end(), ' '), line.end()); //TODO gör så att man tar bort alla mellanslag före och efter texten men inte mellan 
 				ListNode* tempNode = new ListNode(line);
 				currentNode->SetNext(tempNode);
 				currentNode = tempNode;

@@ -27,6 +27,8 @@ public:
 	RondelIndicator(RondelIndicator const& rondelIndicator);
 	~RondelIndicator();
 
+	RondelIndicator::RondelPos GetRondelPos() const;
+
 private:
 	void CopyRondelIndicator(RondelIndicator const&);
 

@@ -24,9 +24,9 @@ RondelIndicator::RondelIndicator(RondelIndicator const& rondelIndicator) :
 
 void RondelIndicator::CopyRondelIndicator(RondelIndicator const& rondelIndicator)
 {
+	CopyGameBoardObject(rondelIndicator);
 	_rondelPos = rondelIndicator._rondelPos;
 	_color = rondelIndicator._color;
-	_graphicalPos = rondelIndicator._graphicalPos;
 }
 
 RondelIndicator::~RondelIndicator()
@@ -65,4 +65,9 @@ void RondelIndicator::DrawObject() const
 		break;
 	}
 	_g->DrawRectangle(xPos, yPos, _size.GetX(), _size.GetY(), _color);
+}
+
+RondelIndicator::RondelPos RondelIndicator::GetRondelPos() const
+{
+	return _rondelPos;
 }
