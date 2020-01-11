@@ -13,7 +13,7 @@ public:
 	HumanPlayer(HumanPlayer const& humanPlayer);
 	~HumanPlayer();
 
-	bool IsHuman();
+	bool IsHuman() const;
 
 private:
 	void CopyHumanPlayer(const HumanPlayer& humanPlayer);

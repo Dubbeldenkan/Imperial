@@ -9,10 +9,14 @@ public:
 	enum class RondelPos { StartPos, Taxation, Factory, ProductionRight, ManeuverRight, 
 		Investor, Import, ProductionLeft, ManeuverLeft };
 
+	static constexpr int _rondelStepCost = 2;
+	static constexpr int _rondelMaxExtraSteps = 3;
+
 private:
 	const std::string _imagePath = "TransparentImage.png";
 	const TupleInt _rondelSize = TupleInt(170, 170);
 	RondelPos _indicatorPos = RondelPos::StartPos;
+	RondelPos _proposedIndicatorPos;
 	GraphicsNS::Graphics::Color _color;
 
 	static const TupleInt _rondelImagePos;
@@ -35,6 +39,8 @@ public:
 
 	int GetObjectID() const;
 	void Action(TupleInt mouseclickedPos);
+	int GetNumberOfProposedSteps() const;
+	void RunProposal();
 
 private:
 	void CopyRondelIndicator(RondelIndicator const&);

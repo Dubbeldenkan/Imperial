@@ -14,7 +14,7 @@ AIPlayer::~AIPlayer()
 {
 }
 
-bool AIPlayer::IsHuman()
+bool AIPlayer::IsHuman() const
 {
 	return false;
 }

@@ -117,7 +117,7 @@ void Nation::DrawObject() const
 		const TupleInt rectSize = TupleInt(100, 175);
 		constexpr int rectWidth = 10;
 		_g->DrawUnfilledRectangle(_graphicalPos.GetX() + rectPosModification.GetX(), _graphicalPos.GetY() + rectPosModification.GetY(), 
-			rectSize.GetX(), rectSize.GetY(), rectWidth, GraphicsNS::Graphics::Color::WHITE);
+			rectSize.GetX(), rectSize.GetY(), rectWidth, GraphicsNS::Graphics::Color::BLACK);
 	}
 	_g->PrintText("Millions: " + std::to_string(_money), _graphicalPos.GetX(), _graphicalPos.GetY(), 
 		GraphicsNS::Graphics::Color::BLACK, GraphicsNS::Graphics::FontSize::font15);
@@ -162,4 +162,25 @@ Nation::NationGameState Nation::GetNationState() const
 int Nation::GetRondelIndicatorID() const
 {
 	return _rondelIndicator.GetObjectID();
+}
+
+int Nation::MoveRondelIndicator(int maxNumberExtraSteps)
+{
+	int playerCost = 0;
+	constexpr int numberOfPos = 8;
+	const int numberOfSteps = (_rondelIndicator.GetNumberOfProposedSteps() + numberOfPos) % numberOfPos;
+	if (_rondelIndicator.GetRondelPos() == RondelIndicator::RondelPos::StartPos)
+	{
+		playerCost = 0;
+		_rondelIndicator.RunProposal();
+		_nationGameState = Nation::NationGameState::playingAction;
+	}
+	else if ((numberOfSteps - RondelIndicator::_rondelMaxExtraSteps) <= maxNumberExtraSteps) //TODO fastnar man om man går till samma som man står på?
+	{
+		_rondelIndicator.RunProposal();
+		playerCost = RondelIndicator::_rondelStepCost*max(numberOfSteps - RondelIndicator::_rondelMaxExtraSteps, 0);
+		_nationGameState = Nation::NationGameState::playingAction;
+	}
+
+	return playerCost;
 }

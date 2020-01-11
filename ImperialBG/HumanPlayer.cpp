@@ -29,7 +29,7 @@ HumanPlayer::~HumanPlayer()
 {
 }
 
-bool HumanPlayer::IsHuman()
+bool HumanPlayer::IsHuman() const
 {
 	return true;
 }

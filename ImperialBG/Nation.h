@@ -49,6 +49,8 @@ public:
 	NationGameState GetNationState() const;
 	int GetRondelIndicatorID() const;
 
+	int MoveRondelIndicator(int maxNumberExtraSteps);
+
 private:
 	void DrawObject() const;
 

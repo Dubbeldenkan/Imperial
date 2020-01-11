@@ -5,6 +5,8 @@ bool Game::_initNewGame = false;
 bool Game::_saveGame = false;
 bool Game::_loadGame = false;
 
+std::map<Nation*, Player*> Game::_govermentMap;
+
 Game::Game()
 {
 	InitGame();
@@ -176,6 +178,9 @@ void Game::MouseClicked(TupleInt mouseClickedPos)
 			if (_currentNation->GetRondelIndicatorID() == object->GetObjectID())
 			{
 				object->Action(mouseClickedPos);
+				int maxNumberExtraSteps = _govermentMap[_currentNation]->GetMaxNumberOfRondelSteps();
+				const int playerCost = _currentNation->MoveRondelIndicator(maxNumberExtraSteps);
+				_govermentMap[_currentNation]->ChangeMoney(-playerCost);
 			}
 		}
 		case Nation::NationGameState::playingAction:

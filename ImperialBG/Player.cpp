@@ -1,5 +1,7 @@
 #include "Player.h"
 
+#include "RondelIndicator.h"
+
 const std::string Player::_playerSettingsFilePath = "PlayerSettings";
 
 Player::Player()
@@ -167,7 +169,17 @@ bool Player::ExtractPlayerData(NodeParserNS::ListNode* playerData, std::string &
 	return humanPlayer;
 }
 
-bool Player::IsHuman()
+bool Player::IsHuman() const
 {
 	return false;
+}
+
+int Player::GetMaxNumberOfRondelSteps() const
+{
+	return min(_money / RondelIndicator::_rondelStepCost, RondelIndicator::_rondelMaxExtraSteps);
+}
+
+void Player::ChangeMoney(int moneyChange)
+{
+	_money += moneyChange;
 }

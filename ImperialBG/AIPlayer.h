@@ -12,7 +12,7 @@ public:
 
 	~AIPlayer();
 
-	bool IsHuman();
+	bool IsHuman() const;
 };
 
 #endif // !AI_PLAYER_H

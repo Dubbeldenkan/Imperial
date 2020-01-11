@@ -124,34 +124,45 @@ void RondelIndicator::Action(TupleInt mouseClickedPos)
 	bool aboveXEqMinusY = adjustedPos.GetY() > -adjustedPos.GetX();
 	if (top && right && aboveXEqY && aboveXEqMinusY)
 	{
-		_indicatorPos = RondelPos::Taxation;
+		_proposedIndicatorPos = RondelPos::Taxation;
 	}
 	else if (top && right && !aboveXEqY && aboveXEqMinusY)
 	{
-		_indicatorPos = RondelPos::Factory;
+		_proposedIndicatorPos = RondelPos::Factory;
 	}
 	else if (!top && right && !aboveXEqY && aboveXEqMinusY)
 	{
-		_indicatorPos = RondelPos::ProductionRight;
+		_proposedIndicatorPos = RondelPos::ProductionRight;
 	}
 	else if (!top && right && !aboveXEqY && !aboveXEqMinusY)
 	{
-		_indicatorPos = RondelPos::ManeuverRight;
+		_proposedIndicatorPos = RondelPos::ManeuverRight;
 	}
 	else if (!top && !right && !aboveXEqY && !aboveXEqMinusY)
 	{
-		_indicatorPos = RondelPos::Investor;
+		_proposedIndicatorPos = RondelPos::Investor;
 	}
 	else if (!top && !right && aboveXEqY && !aboveXEqMinusY)
 	{
-		_indicatorPos = RondelPos::Import;
+		_proposedIndicatorPos = RondelPos::Import;
 	}
 	else if (top && !right && aboveXEqY && !aboveXEqMinusY)
 	{
-		_indicatorPos = RondelPos::ProductionLeft;
+		_proposedIndicatorPos = RondelPos::ProductionLeft;
 	}
 	else if (top && !right && aboveXEqY && aboveXEqMinusY)
 	{
-		_indicatorPos = RondelPos::ManeuverLeft;
+		_proposedIndicatorPos = RondelPos::ManeuverLeft;
 	}
+}
+
+int RondelIndicator::GetNumberOfProposedSteps() const
+{
+	int numberOfSteps = static_cast<int>(_proposedIndicatorPos) - static_cast<int>(_indicatorPos);
+	return numberOfSteps;
+}
+
+void RondelIndicator::RunProposal()
+{
+	_indicatorPos = _proposedIndicatorPos;
 }
