@@ -148,3 +148,18 @@ void Nation::SetAsCurrentNation()
 {
 	_currentNation = _id;
 }
+
+RondelIndicator::RondelPos Nation::GetRondelState() const
+{
+	return _rondelIndicator.GetRondelPos();
+}
+
+Nation::NationGameState Nation::GetNationState() const
+{
+	return _nationGameState;
+}
+
+int Nation::GetRondelIndicatorID() const
+{
+	return _rondelIndicator.GetObjectID();
+}

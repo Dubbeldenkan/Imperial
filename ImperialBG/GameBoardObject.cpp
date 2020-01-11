@@ -83,6 +83,9 @@ int GameBoardObject::GetObjectID() const
 	return _objectId;
 }
 
+void GameBoardObject::Action(TupleInt mouseClickedPos)
+{}
+
 void GameBoardObject::Save(NodeParserNS::ListNode** savedGame) const
 {}
 

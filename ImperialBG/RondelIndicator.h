@@ -10,14 +10,18 @@ public:
 		Investor, Import, ProductionLeft, ManeuverLeft };
 
 private:
-	RondelPos _rondelPos = RondelPos::StartPos;
+	const std::string _imagePath = "TransparentImage.png";
+	const TupleInt _rondelSize = TupleInt(170, 170);
+	RondelPos _indicatorPos = RondelPos::StartPos;
 	GraphicsNS::Graphics::Color _color;
 
-	static const TupleInt _startPos;
+	static const TupleInt _rondelImagePos;
+
 	const TupleInt _size = TupleInt(10, 10);
 	const GameBoardObject::ImageLayer _imageLayerValue = GameBoardObject::ImageLayer::Nation;
 
 	const TupleInt _modificationPos = TupleInt(5, 10);
+	const TupleInt _rondelMidPos = TupleInt(200, 130);
 
 public:
 	RondelIndicator();
@@ -28,6 +32,9 @@ public:
 	~RondelIndicator();
 
 	RondelIndicator::RondelPos GetRondelPos() const;
+
+	int GetObjectID() const;
+	void Action(TupleInt mouseclickedPos);
 
 private:
 	void CopyRondelIndicator(RondelIndicator const&);

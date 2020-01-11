@@ -43,6 +43,8 @@ public:
 	void SetImageScale(float);
 	void Save(NodeParserNS::ListNode**) const;
 
+	virtual void Action(TupleInt);
+
 	//TODO ska denna funktion vara så lätt att nå? Behövs funktionen?
 	//static void CleanUpGameObjectMap(); 
 

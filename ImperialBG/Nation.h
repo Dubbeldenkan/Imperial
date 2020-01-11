@@ -9,6 +9,8 @@
 
 class Nation : public GameBoardObject
 {
+public:
+	enum class NationGameState { placingRondelIndicator, playingAction , done};
 private:
 	std::map<int, Bond> _bonds;
 	std::string _name;
@@ -20,6 +22,7 @@ private:
 	Bond::BondNation _bondNation;
 	GraphicsNS::Graphics::Color _color; //TODO gör denna const och inkludera i initieringslistan
 	RondelIndicator _rondelIndicator;
+	NationGameState _nationGameState = NationGameState::placingRondelIndicator;
 
 	static int _currentNation;
 
@@ -41,6 +44,10 @@ public:
 	Bond::BondNation GetBondNation() const;
 
 	void SetAsCurrentNation();
+
+	RondelIndicator::RondelPos GetRondelState() const;
+	NationGameState GetNationState() const;
+	int GetRondelIndicatorID() const;
 
 private:
 	void DrawObject() const;

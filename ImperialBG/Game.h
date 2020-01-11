@@ -21,6 +21,8 @@ private:
 	std::vector<Nation> _nations;
 	GameBoard _gameBoard = GameBoard();
 
+	bool _humanPlayerPlaying = false;
+
 	bool _gameOver = false;
 
 	static Nation* _currentNation;
@@ -49,11 +51,11 @@ private:
 	void DrawScreen();
 	void InitGame();
 
+	void SetCurrentNation(Nation* nation);
+
 	void SaveGame();
 	void CreateSaveNode(NodeParserNS::ListNode*);
 	void SaveToFile(NodeParserNS::ListNode*);
-
-	void SetCurrentNation(Nation*);
 
 	void LoadGame();
 	NodeParserNS::ListNode* LoadFromFile(std::string);

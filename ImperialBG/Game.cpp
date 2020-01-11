@@ -28,8 +28,14 @@ void Game::Run()
 	//TODO ändra till ett lämpligt villkor tex när något land når 25 i tabellen
 	else if (true)
 	{
-		//Fortsätt här med att göra actions. 
-		//_gameBoard.Run(_currentPlayer); TODO
+		if (_govermentMap[_currentNation]->IsHuman())
+		{
+
+		}
+		else
+		{
+			//TODO AI
+		}
 		DrawScreen();
 	}
 	else
@@ -163,10 +169,20 @@ void Game::MouseClicked(TupleInt mouseClickedPos)
 	for (int vectorCount = 0; vectorCount < static_cast<int>(clickedObjects.size()); vectorCount++)
 	{
 		GameBoardObject* object = clickedObjects[vectorCount];
-		/*if (_currentPlayer->Action(object, mouseClickedPos))
+		switch (_currentNation->GetNationState()) //TODO
 		{
-			break;
-		}*/
+		case Nation::NationGameState::placingRondelIndicator:
+		{
+			if (_currentNation->GetRondelIndicatorID() == object->GetObjectID())
+			{
+				object->Action(mouseClickedPos);
+			}
+		}
+		case Nation::NationGameState::playingAction:
+		{
+
+		}
+		}
 	}
 }
 
