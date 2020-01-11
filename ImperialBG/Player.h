@@ -10,20 +10,21 @@ class Player : public GameBoardObject
 public:
 	static const std::string _playerSettingsFilePath;
 
-private:
+protected:
 	int _playerPos;
 	std::string _name;
 	int _money;
 	bool _isInvestor = false;
-
 	typedef std::map<Bond::BondNation, std::map<int, Bond*>> bondMapType;
 	bondMapType _bonds;
 
+private:
 	TupleInt _moneyGraphicalPos = TupleInt(200, 0);
 	static constexpr GameBoardObject::ImageLayer _imageLayerValue = GameBoardObject::ImageLayer::Player;
 	
 public:
-	Player(int, NodeParserNS::ListNode*);
+	Player();
+	Player(int playerPos, std::string name, TupleInt objectPos);
 	Player(NodeParserNS::ListNode*);
 
 	Player& operator=(const Player&);
@@ -38,9 +39,12 @@ public:
 	int GetBondNationValue(Bond::BondNation) const;
 	int GetPlayerPos() const;
 
-private:
+	static bool ExtractPlayerData(NodeParserNS::ListNode* playerData, std::string& name, TupleInt& objectPos);
+
+protected:
 	void CopyPlayer(Player const&);
-	
+
+private:
 	void DrawObject() const;
 	void UpdateBondsGraphicalPos() const;
 };

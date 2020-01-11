@@ -2,11 +2,19 @@
 #define HUMAN_PLAYER_H
 
 #include "Player.h"
-class HumanPlayer //:	public Player TODO lägg till arvet från Player
+
+class HumanPlayer : public Player
 {
 public:
 	HumanPlayer();
+	HumanPlayer(int playerPos, std::string name, TupleInt objectPos);
+
+	HumanPlayer& operator=(const HumanPlayer& humanPlayer);
+	HumanPlayer(HumanPlayer const& humanPlayer);
 	~HumanPlayer();
+
+private:
+	void CopyHumanPlayer(const HumanPlayer& humanPlayer);
 };
 
 #endif // !HUMAN_PLAYER_H

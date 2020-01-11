@@ -3,10 +3,13 @@
 
 #include "Player.h"
 
-class AIPlayer //: public Player //TODO fixa så att AIPlayer ärver från Player
+class AIPlayer : public Player
 {
 public:
+	//TODO lägg till copyconstruktorer
 	AIPlayer();
+	AIPlayer(int playerPos, std::string name, TupleInt objectPos);
+
 	~AIPlayer();
 };
 

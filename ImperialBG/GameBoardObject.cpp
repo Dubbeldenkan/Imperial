@@ -104,11 +104,16 @@ void GameBoardObject::SetImage(std::string imagePath, TupleInt imageSize)
 
 bool GameBoardObject::PosInObject(TupleInt pos)
 {
-	const bool withInX = ((_graphicalPos.GetX() <= pos.GetX()) &&
-		(pos.GetX() <= (_graphicalPos.GetX() + _image->GetXSize())));
-	const bool withInY = ((_graphicalPos.GetY() <= pos.GetY()) &&
-		(pos.GetY() <= (_graphicalPos.GetY() + _image->GetYSize())));
-	return (withInX && withInY);
+	bool result = false;
+	if (_image != NULL)
+	{
+		const bool withInX = ((_graphicalPos.GetX() <= pos.GetX()) &&
+			(pos.GetX() <= (_graphicalPos.GetX() + _image->GetXSize())));
+		const bool withInY = ((_graphicalPos.GetY() <= pos.GetY()) &&
+			(pos.GetY() <= (_graphicalPos.GetY() + _image->GetYSize())));
+		result = withInX && withInY;
+	}
+	return (result);
 }
 
 void GameBoardObject::DrawSelectedObject()
@@ -121,6 +126,32 @@ void GameBoardObject::DrawSelectedObject()
 		static_cast<int>(((_image->GetYSize() * _selectecObjectScalingFactor) - (_image->GetYSize())) / 2);
 	_g->DrawWithColor(_image, xPos, yPos, GraphicsNS::Graphics::Color::BLUE, _selectecObjectScalingFactor);
 	DrawObject();
+}
+
+TupleInt GameBoardObject::ExtractPos(NodeParserNS::ListNode* &nodeData)
+{
+	NodeParserNS::ListNode* tempData;
+	int xValue;
+	int yValue;
+	nodeData->GetChild(&tempData);
+	NodeParserNS::ListNode* valueData;
+	do {
+		if (tempData->GetData().compare("X") == 0)
+		{
+			tempData->GetChild(&valueData);
+			xValue = stoi(valueData->GetData());
+		}
+		else if (tempData->GetData().compare("Y") == 0)
+		{
+			tempData->GetChild(&valueData);
+			yValue = stoi(valueData->GetData());
+		}
+		else
+		{
+			throw "Unvalid type in a dmd-file"; // TODO är detta rätt sätt att göra det på?
+		}
+	} while (!tempData->GetNext(&tempData));
+	return TupleInt(xValue, yValue);
 }
 
 /*void GameBoardObject::CleanUpGameObjectMap()

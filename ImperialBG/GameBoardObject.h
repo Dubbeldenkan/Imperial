@@ -56,6 +56,7 @@ protected:
 
 	void SetImage(std::string, TupleInt);
 	virtual void DrawObject() const;
+	static TupleInt ExtractPos(NodeParserNS::ListNode* &nodeData);
 
 private:
 	bool PosInObject(TupleInt);

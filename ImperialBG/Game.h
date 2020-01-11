@@ -1,9 +1,11 @@
 #ifndef GAME_H
 #define GAME_H
 
-#include "GameBoard.h"
-#include "Nation.h"
 #include "Player.h"
+#include "AIPlayer.h"
+#include "GameBoard.h"
+#include "HumanPlayer.h"
+#include "Nation.h"
 
 #include <algorithm>
 #include <stdlib.h>
@@ -13,7 +15,9 @@
 class Game
 {
 private:
-	std::vector<Player> _players;
+	std::vector<Player*> _players;
+	std::map<int, HumanPlayer> _humanPlayers;
+	std::map<int, AIPlayer> _aiPlayers;
 	std::vector<Nation> _nations;
 	GameBoard _gameBoard = GameBoard();
 

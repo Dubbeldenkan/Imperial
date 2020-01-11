@@ -3,7 +3,7 @@
 int Nation::_currentNation = 0;
 
 Nation::Nation(int nationId) :
-	_id(nationId), GameBoardObject()
+	_id(nationId), GameBoardObject(TupleInt(), NULL, _imageLayerValue)
 {
 	std::string nationName[6] = { "Austria-Hungary", "Italy", "France", "Britain", "Germany", "Russia" };
 
@@ -65,27 +65,7 @@ Nation::Nation(int nationId) :
 		}
 		else if (nationData->GetData().compare("ObjectPos") == 0)
 		{
-			int xValue;
-			int yValue;
-			nationData->GetChild(&tempData);
-			NodeParserNS::ListNode* valueData;
-			do {
-				if (tempData->GetData().compare("X") == 0)
-				{
-					tempData->GetChild(&valueData);
-					xValue = stoi(valueData->GetData());
-				}
-				else if (tempData->GetData().compare("Y") == 0)
-				{
-					tempData->GetChild(&valueData);
-					yValue = stoi(valueData->GetData());
-				}
-				else
-				{
-					throw "Unvalid type in " + _name + ".dmd"; // TODO är detta rätt sätt att göra det på?
-				}
-			}while (!tempData->GetNext(&tempData));
-			SetGraphicalPos(TupleInt(xValue, yValue));
+			SetGraphicalPos(ExtractPos(nationData));
 		}
 		else
 		{
@@ -122,6 +102,8 @@ void Nation::CopyNation(const Nation& nation)
 	_regions = nation._regions;
 	_color = nation._color;
 	_rondelIndicator = nation._rondelIndicator;
+	_image = _image;
+	//TODO flytta image och graphicsPos till gameboardObject
 	//TODO
 }
 

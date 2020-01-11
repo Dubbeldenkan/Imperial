@@ -69,14 +69,26 @@ void Game::InitGame()
 	NodeParserNS::ListNode* playerData = NodeParserNS::NodeParser::ReadDataFile(Player::_playerSettingsFilePath);
 	playerData->GetChild(&playerData);
 	do{
-		_players.push_back(Player(static_cast<int>(_players.size()), playerData));
-
+		std::string name;
+		TupleInt objectPos;
+		const bool humanPlayer = Player::ExtractPlayerData(playerData, name, objectPos);
+		int playerPos = static_cast<int>(_players.size());
+		if (humanPlayer)
+		{
+			_humanPlayers.insert(std::pair<int, HumanPlayer>(playerPos, HumanPlayer(playerPos, name, objectPos)));
+			_players.push_back(&_humanPlayers[playerPos]);
+		}
+		else
+		{
+			_aiPlayers.insert(std::pair<int, AIPlayer>(playerPos, AIPlayer(playerPos, name, objectPos)));
+			_players.push_back(&_aiPlayers[playerPos]);
+		}
 	} while (!playerData->GetNext(&playerData));
 	
 	
 	for (int playerCounter = 0; playerCounter < static_cast<int>(_players.size()); playerCounter++)
 	{
-		_players[playerCounter].SetStartMoney(_players.size());
+		_players[playerCounter]->SetStartMoney(_players.size());
 	}
 
 	//Setup nations
@@ -92,7 +104,7 @@ void Game::InitGame()
 	std::vector<Player*> tempPlayerVector;
 	for (int playerCounter = 0; playerCounter < static_cast<int>(_players.size()); playerCounter++)
 	{
-		tempPlayerVector.push_back(&_players[playerCounter]);
+		tempPlayerVector.push_back(_players[playerCounter]);
 	}
 
 	int nationCounter = 0;
@@ -125,10 +137,10 @@ void Game::InitGame()
 		int bestPlayerValue = 0;
 		for (int playerCounter = 0; playerCounter < _numberOfPlayers; playerCounter++)
 		{
-			if (bestPlayerValue < _players[playerCounter].GetBondNationValue(_nations[nationCounter].GetBondNation()))
+			if (bestPlayerValue < _players[playerCounter]->GetBondNationValue(_nations[nationCounter].GetBondNation()))
 			{
-				_govermentMap[&_nations[nationCounter]] = &_players[playerCounter];
-				bestPlayerValue = _players[playerCounter].GetBondNationValue(_nations[nationCounter].GetBondNation());
+				_govermentMap[&_nations[nationCounter]] = _players[playerCounter];
+				bestPlayerValue = _players[playerCounter]->GetBondNationValue(_nations[nationCounter].GetBondNation());
 			}
 		}
 	}
@@ -138,9 +150,9 @@ void Game::InitGame()
 
 	for (int playerCounter = 0; playerCounter < _numberOfPlayers; playerCounter++)
 	{
-		if (_players[playerCounter].GetPlayerPos() == firstInvestorPlayer)
+		if (_players[playerCounter]->GetPlayerPos() == firstInvestorPlayer)
 		{
-			_players[playerCounter].SetAsInvestor();
+			_players[playerCounter]->SetAsInvestor();
 		}
 	}
 }
@@ -190,7 +202,7 @@ void Game::CreateSaveNode(NodeParserNS::ListNode* gameNode)
 	NodeParserNS::ListNode* oldNode = NULL;
 	for (int playerCount = 0; playerCount < static_cast<int>(_players.size()); playerCount++)
 	{
-		_players[playerCount].Save(&currentNode);
+		_players[playerCount]->Save(&currentNode);
 		if (oldNode == NULL) //TODO kan man göra detta på ett snyggare sätt?
 		{
 			playersNode->SetChild(currentNode);
@@ -242,7 +254,7 @@ void Game::LoadGame()
 	int playerCounter = 0;
 	do
 	{
-		_players.push_back(Player(player));
+		//_players.push_back(Player(player)); //TODO fixa för human och AI players
 		//_players[playerCounter++].Load(player, _gameBoard.GetGameMap());
 	} while (!player->GetNext(&player));
 }

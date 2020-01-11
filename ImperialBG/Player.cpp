@@ -2,48 +2,12 @@
 
 const std::string Player::_playerSettingsFilePath = "PlayerSettings";
 
-Player::Player(int playerPos, NodeParserNS::ListNode* playerNode) :
-	GameBoardObject()
-{
-	_playerPos = playerPos;
-	NodeParserNS::ListNode* tempData;
-	playerNode->GetChild(&playerNode);
+Player::Player()
+{}
 
-	do {
-		if (playerNode->GetData().compare("Name") == 0)
-		{
-			playerNode->GetChild(&tempData);
-			_name = tempData->GetData();
-		}
-		else if (playerNode->GetData().compare("ObjectPos") == 0)
-		{
-			int xValue;
-			int yValue;
-			playerNode->GetChild(&tempData);
-			NodeParserNS::ListNode* valueData;
-			do {
-				if (tempData->GetData().compare("X") == 0)
-				{
-					tempData->GetChild(&valueData);
-					xValue = stoi(valueData->GetData());
-				}
-				else if (tempData->GetData().compare("Y") == 0)
-				{
-					tempData->GetChild(&valueData);
-					yValue = stoi(valueData->GetData());
-				}
-				else
-				{
-					throw "Unvalid type in " + _name + ".dmd"; // TODO är detta rätt sätt att göra det på?
-				}
-			} while (!tempData->GetNext(&tempData));
-			SetGraphicalPos(TupleInt(xValue, yValue));
-		}
-		else
-		{
-			throw "Unvalid type in " + _name + ".dmd"; // TODO är detta rätt sätt att göra det på?
-		}
-	} while (!playerNode->GetNext(&playerNode));
+Player::Player(int playerPos, std::string name, TupleInt objectPos) :
+	_playerPos(playerPos), _name(name), GameBoardObject(objectPos, NULL, _imageLayerValue)
+{	
 }
 
 Player::Player(NodeParserNS::ListNode* playerToLoad) :
@@ -68,6 +32,8 @@ void Player::CopyPlayer(const Player& player)
 {
 	_playerPos = player._playerPos;
 	_name = player._name;
+	_image = player._image;
+	_money = player._money;
 	//TODO
 }
 
@@ -165,4 +131,39 @@ int Player::GetPlayerPos() const
 void Player::SetAsInvestor()
 {
 	_isInvestor = true;
+}
+
+bool Player::ExtractPlayerData(NodeParserNS::ListNode* playerData, std::string &name, TupleInt& objectPos)
+{
+	bool humanPlayer = false;
+	
+	NodeParserNS::ListNode* tempData;
+	playerData->GetChild(&playerData);
+
+	do {
+		if (playerData->GetData().compare("Name") == 0)
+		{
+			playerData->GetChild(&tempData);
+			name = tempData->GetData();
+		}
+		else if (playerData->GetData().compare("PlayerType") == 0)
+		{
+			playerData->GetChild(&tempData);
+			const std::string playerTypeStr = tempData->GetData();
+			if (playerTypeStr.compare("Human") == 0)
+			{
+				humanPlayer = true;
+			}
+		}
+		else if (playerData->GetData().compare("ObjectPos") == 0)
+		{
+			objectPos = ExtractPos(playerData);
+		}
+		else
+		{
+			throw "Unvalid type in " + name + ".dmd"; // TODO är detta rätt sätt att göra det på?
+		}
+	} while (!playerData->GetNext(&playerData));
+
+	return humanPlayer;
 }

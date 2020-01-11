@@ -47,27 +47,7 @@ Region::Region(NodeParserNS::ListNode* regionData) :
 		}
 		else if (regionData->GetData().compare("ObjectPos") == 0)
 		{
-			int xValue;
-			int yValue;
-			regionData->GetChild(&tempData);
-			NodeParserNS::ListNode* valueData;
-			do {
-				if (tempData->GetData().compare("X") == 0)
-				{
-					tempData->GetChild(&valueData);
-					xValue = stoi(valueData->GetData());
-				}
-				else if (tempData->GetData().compare("Y") == 0)
-				{
-					tempData->GetChild(&valueData);
-					yValue = stoi(valueData->GetData());
-				}
-				else
-				{
-					throw "Unvalid type in " + _name + ".dmd"; // TODO är detta rätt sätt att göra det på?
-				}
-			} while (!tempData->GetNext(&tempData));
-			SetGraphicalPos(TupleInt(xValue, yValue));
+			SetGraphicalPos(ExtractPos(regionData));
 		}
 		else
 		{

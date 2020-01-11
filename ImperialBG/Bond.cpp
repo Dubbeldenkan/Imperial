@@ -8,7 +8,7 @@ Bond::Bond()
 {}
 
 Bond::Bond(int id, Bond::BondNation bondNation, std::string nation, TupleInt graphicalPos) :
-	GameBoardObject()
+	GameBoardObject(TupleInt(), NULL, _imageLayerValue)
 {
 	_id = id;
 	_interestPercentage = _interestPercentageConverter[_id - 1];
