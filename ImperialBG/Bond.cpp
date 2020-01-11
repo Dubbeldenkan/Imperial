@@ -46,12 +46,11 @@ Bond::Bond(const Bond &bond) :
 
 void Bond::CopyBond(const Bond& bond)
 {
-	_graphicalPos = bond._graphicalPos;
+	CopyGameBoardObject(bond);
 	_id = bond._id;
 	_interestPercentage = bond._interestPercentage;
 	_value = bond._value;
 	_nation = bond._nation;
-	_image = bond._image;
 	//TODO
 }
 

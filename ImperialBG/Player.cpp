@@ -30,9 +30,9 @@ Player::Player(const Player &player) :
 
 void Player::CopyPlayer(const Player& player)
 {
+	CopyGameBoardObject(player);
 	_playerPos = player._playerPos;
 	_name = player._name;
-	_image = player._image;
 	_money = player._money;
 	//TODO
 }

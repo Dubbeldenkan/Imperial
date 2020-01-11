@@ -154,6 +154,13 @@ TupleInt GameBoardObject::ExtractPos(NodeParserNS::ListNode* &nodeData)
 	return TupleInt(xValue, yValue);
 }
 
+void GameBoardObject::CopyGameBoardObject(const GameBoardObject& gameBoardObject)
+{
+	_graphicalPos = gameBoardObject._graphicalPos;
+	_scale = gameBoardObject._scale;
+	_image = gameBoardObject._image;
+}
+
 /*void GameBoardObject::CleanUpGameObjectMap()
 {
 	//TODO ta bort funktionen, den ska inte användas. 

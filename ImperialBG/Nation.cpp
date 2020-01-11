@@ -95,6 +95,7 @@ Nation::Nation(const Nation &nation) :
 
 void Nation::CopyNation(const Nation& nation)
 {
+	CopyGameBoardObject(nation);
 	_bonds = nation._bonds;
 	_name = nation._name;
 	_startBondSmallNationName = nation._startBondSmallNationName;
@@ -102,8 +103,6 @@ void Nation::CopyNation(const Nation& nation)
 	_regions = nation._regions;
 	_color = nation._color;
 	_rondelIndicator = nation._rondelIndicator;
-	_image = _image;
-	//TODO flytta image och graphicsPos till gameboardObject
 	//TODO
 }
 

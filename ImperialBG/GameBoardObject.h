@@ -57,6 +57,7 @@ protected:
 	void SetImage(std::string, TupleInt);
 	virtual void DrawObject() const;
 	static TupleInt ExtractPos(NodeParserNS::ListNode* &nodeData);
+	void CopyGameBoardObject(const GameBoardObject& gameboardObject);
 
 private:
 	bool PosInObject(TupleInt);
