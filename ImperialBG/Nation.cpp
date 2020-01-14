@@ -5,7 +5,7 @@ int Nation::_currentNation = 0;
 Nation::Nation(int nationId) :
 	_id(nationId), GameBoardObject(TupleInt(), NULL, _imageLayerValue)
 {
-	std::string nationName[6] = { "Austria-Hungary", "Italy", "France", "Britain", "Germany", "Russia" };
+	std::string nationName[6] = { "Austria-Hungary", "Italy", "France", "Britain", "Russia", "Germany" };
 
 	_name = nationName[nationId];
 	NodeParserNS::ListNode* nationData = NodeParserNS::NodeParser::ReadDataFile(_name);
@@ -147,6 +147,7 @@ Bond::BondNation Nation::GetBondNation() const
 void Nation::SetAsCurrentNation()
 {
 	_currentNation = _id;
+	_nationGameState = Nation::NationGameState::placingRondelIndicator;
 }
 
 RondelIndicator::RondelPos Nation::GetRondelState() const

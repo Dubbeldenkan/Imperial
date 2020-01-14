@@ -34,14 +34,11 @@ void Game::Run()
 		{
 			PlayingPassiveAction();
 		}
-		if (_govermentMap[_currentNation]->IsHuman())
+		else if(_currentNation->GetNationState() == Nation::NationGameState::done)
 		{
-
+			SetNextNation();
 		}
-		else
-		{
-			//TODO AI
-		}
+		
 		DrawScreen();
 	}
 	else
@@ -231,6 +228,27 @@ void Game::SetCurrentNation(Nation* nation)
 {
 	_currentNation = nation;
 	nation->SetAsCurrentNation();
+}
+
+void Game::SetNextNation()
+{
+	for (int index = 0; index < static_cast<int>(_nations.size()); index++) 
+	{
+		if (_nations[index].GetObjectID() == _currentNation->GetObjectID())
+		{
+			if (index == (_numberOfNations - 1))
+			{
+				_currentNation = &_nations[0];
+				break;
+			}
+			else
+			{
+				_currentNation = &_nations[index + 1];
+				break;
+			}
+		}
+	}
+	SetCurrentNation(_currentNation);
 }
 
 void Game::SaveGame()

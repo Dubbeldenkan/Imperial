@@ -54,6 +54,7 @@ private:
 	static void PlayingActiveAction(GameBoardObject* gbo);
 
 	void SetCurrentNation(Nation* nation);
+	void SetNextNation();
 
 	void SaveGame();
 	void CreateSaveNode(NodeParserNS::ListNode*);
