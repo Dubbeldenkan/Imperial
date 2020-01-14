@@ -30,6 +30,10 @@ void Game::Run()
 	//TODO ändra till ett lämpligt villkor tex när något land når 25 i tabellen
 	else if (true)
 	{
+		if (_currentNation->GetNationState() == Nation::NationGameState::playingAction)
+		{
+			PlayingPassiveAction();
+		}
 		if (_govermentMap[_currentNation]->IsHuman())
 		{
 
@@ -167,11 +171,16 @@ void Game::InitGame()
 
 void Game::MouseClicked(TupleInt mouseClickedPos)
 {
+	// Om spelaren är en AI ska man inte fortsätta i denna funktion
+	if (!_govermentMap[_currentNation]->IsHuman())
+	{
+		return;
+	}
 	const std::vector<GameBoardObject*> clickedObjects = GameBoard::GetGameBoardObjectByPosition(mouseClickedPos);
 	for (int vectorCount = 0; vectorCount < static_cast<int>(clickedObjects.size()); vectorCount++)
 	{
 		GameBoardObject* object = clickedObjects[vectorCount];
-		switch (_currentNation->GetNationState()) //TODO
+		switch (_currentNation->GetNationState())
 		{
 		case Nation::NationGameState::placingRondelIndicator:
 		{
@@ -181,14 +190,36 @@ void Game::MouseClicked(TupleInt mouseClickedPos)
 				int maxNumberExtraSteps = _govermentMap[_currentNation]->GetMaxNumberOfRondelSteps();
 				const int playerCost = _currentNation->MoveRondelIndicator(maxNumberExtraSteps);
 				_govermentMap[_currentNation]->ChangeMoney(-playerCost);
+				return; //TODO ska man ha en return såhär?
 			}
+			break;
 		}
 		case Nation::NationGameState::playingAction:
 		{
-
+			PlayingActiveAction(object);
 		}
 		}
 	}
+}
+
+void Game::PlayingPassiveAction()
+{
+	switch (_currentNation->GetRondelState())
+	{
+	case RondelIndicator::RondelPos::ProductionLeft:
+	case RondelIndicator::RondelPos::ProductionRight:
+	{
+		_currentNation->ProductionAction();
+		break;
+	}
+	default:
+		break;
+	}
+}
+
+void Game::PlayingActiveAction(GameBoardObject* gbo)
+{
+
 }
 
 void Game::MouseMoved(TupleInt mousePos)

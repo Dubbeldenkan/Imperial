@@ -3,17 +3,22 @@
 
 #include "GameBoardObject.h"
 #include "NodeParser.h"
+#include "Unit.h"
 
 #include <string>
 
 class Region : public GameBoardObject
 {
-	enum FactoryType { Land, Sea };
+public:
+	enum class FactoryType { Land, Sea };
 
 private:
 	std::string _name;
 	FactoryType _factoryType;
 	bool _factoryBuilt;
+	std::vector<Unit> _units;
+	TupleInt _unitLandPos = TupleInt();
+	TupleInt _unitSeaPos = TupleInt();
 
 	static GraphicsNS::Image* _landFactoryImage;
 	static GraphicsNS::Image* _seaFactoryImage;
@@ -30,6 +35,10 @@ public:
 	Region(Region const&);
 	void CopyRegion(const Region&);
 	~Region();
+
+	void AddUnit(Unit &unit);
+	bool GetFactoryBuilt() const;
+	FactoryType GetFactoryType() const;
 
 private:
 	void DrawObject() const;

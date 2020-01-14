@@ -12,7 +12,7 @@
 class GameBoardObject
 {
 public:
-	enum class ImageLayer { Map, Player, Nation, Region, Bond };
+	enum class ImageLayer { Map, Player, Nation, Region, Unit, Bond };
 
 protected:
 	TupleInt _graphicalPos;
@@ -39,7 +39,7 @@ public:
 	TupleInt GetGraphicalPos() const;
 	int GetObjectID() const;
 
-	void SetGraphicalPos(TupleInt);
+	void SetGraphicalPos(TupleInt pos);
 	void SetImageScale(float);
 	void Save(NodeParserNS::ListNode**) const;
 

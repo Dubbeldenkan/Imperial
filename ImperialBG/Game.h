@@ -50,6 +50,8 @@ public:
 private:
 	void DrawScreen();
 	void InitGame();
+	void PlayingPassiveAction();
+	static void PlayingActiveAction(GameBoardObject* gbo);
 
 	void SetCurrentNation(Nation* nation);
 

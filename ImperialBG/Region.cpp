@@ -49,6 +49,10 @@ Region::Region(NodeParserNS::ListNode* regionData) :
 		{
 			SetGraphicalPos(ExtractPos(regionData));
 		}
+		else if (regionData->GetData().compare("LandUnitPos") == 0)
+		{
+			_unitLandPos = ExtractPos(regionData);
+		}
 		else
 		{
 			throw "Unvalid type in " + _name + ".dmd"; // TODO är detta rätt sätt att göra det på?
@@ -84,6 +88,7 @@ void Region::CopyRegion(const Region& region)
 	_name = region._name;
 	_factoryBuilt = region._factoryBuilt;
 	_factoryType = region._factoryType;
+	_unitLandPos = region._unitLandPos;
 }
 
 Region::~Region()
@@ -101,4 +106,20 @@ void Region::DrawObject() const
 		_g->Draw(_seaFactoryImage, _graphicalPos.GetX(), _graphicalPos.GetY(), _scale);
 	}
 	//Draw units
+}
+
+void Region::AddUnit(Unit& unit)
+{
+	unit.SetPos(_unitLandPos);
+	_units.push_back(unit);
+}
+
+bool Region::GetFactoryBuilt() const
+{
+	return _factoryBuilt;
+}
+
+Region::FactoryType Region::GetFactoryType() const
+{
+	return _factoryType;
 }

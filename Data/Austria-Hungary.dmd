@@ -38,6 +38,17 @@ Austria-Hungary
                     400
                 }
             }
+            LandUnitPos
+            {
+                X
+                {
+                    690
+                }
+                Y
+                {
+                    400
+                }
+            }
 			FactoryType
             {
                 Land
@@ -58,6 +69,17 @@ Austria-Hungary
                 Y
                 {
                     358
+                }
+            }
+            LandUnitPos
+            {
+                X
+                {
+                    700
+                }
+                Y
+                {
+                    370
                 }
             }
             FactoryType
@@ -82,6 +104,17 @@ Austria-Hungary
                     341
                 }
             }
+            LandUnitPos
+            {
+                X
+                {
+                    600
+                }
+                Y
+                {
+                    360
+                }
+            }
             FactoryType
             {
                 Land
@@ -104,6 +137,17 @@ Austria-Hungary
                     440
                 }
             }
+            LandUnitPos
+            {
+                X
+                {
+                    600
+                }
+                Y
+                {
+                    460
+                }
+            }
             FactoryType
             {
                 Sea
@@ -124,6 +168,17 @@ Austria-Hungary
                 Y
                 {
                     380
+                }
+            }
+            LandUnitPos
+            {
+                X
+                {
+                    590
+                }
+                Y
+                {
+                    395
                 }
             }
             FactoryType

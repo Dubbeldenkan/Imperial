@@ -184,3 +184,26 @@ int Nation::MoveRondelIndicator(int maxNumberExtraSteps)
 
 	return playerCost;
 }
+
+void Nation::ProductionAction()
+{
+	for (int vectorIndex = 0; vectorIndex < static_cast<int>(_regions.size()); vectorIndex++)
+	{
+		//TODO gör så att man inte kan bygga för många gubbar
+		Region* region = &_regions[vectorIndex];
+		if (!region->GetFactoryBuilt())
+		{
+			//gör inget
+		}
+		else if (region->GetFactoryType() == Region::FactoryType::Land)
+		{
+			_units.push_back(Unit(TupleInt(), Unit::UnitType::Land, static_cast<Unit::UnitNation>(_bondNation), _color));
+			_regions[vectorIndex].AddUnit(_units[_units.size() - 1]);
+		}
+		else
+		{
+			//TODO lägg till bygge av båtar
+		}
+	}
+	_nationGameState = Nation::NationGameState::done;
+}

@@ -6,6 +6,7 @@
 #include "NodeParser.h"
 #include "Region.h"
 #include "RondelIndicator.h"
+#include "Unit.h"
 
 class Nation : public GameBoardObject
 {
@@ -16,6 +17,7 @@ private:
 	std::string _name;
 	const int _id;
 	std::vector<Region> _regions;
+	std::vector<Unit> _units;
 	std::string _imagePath;
 	int _money = 0;
 	std::string _startBondSmallNationName;
@@ -50,6 +52,7 @@ public:
 	int GetRondelIndicatorID() const;
 
 	int MoveRondelIndicator(int maxNumberExtraSteps);
+	void ProductionAction();
 
 private:
 	void DrawObject() const;
