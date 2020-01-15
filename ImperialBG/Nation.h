@@ -28,6 +28,7 @@ private:
 
 	static int _currentNation;
 
+	static constexpr int _factoryCost = 5;
 	static constexpr int _numberOfStartBonds = 9;
 	static constexpr GameBoardObject::ImageLayer _imageLayerValue = GameBoardObject::ImageLayer::Nation;
 
@@ -53,6 +54,12 @@ public:
 
 	int MoveRondelIndicator(int maxNumberExtraSteps);
 	void ProductionAction();
+	void SetDrawFactorySites();
+
+	int GetNumberOfRegions() const;
+	const Region* GetRegion(int regionIndex) const;
+
+	void BuildFactory(GameBoardObject* factoryRegion);
 
 private:
 	void DrawObject() const;

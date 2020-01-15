@@ -209,6 +209,10 @@ void Game::PlayingPassiveAction()
 		_currentNation->ProductionAction();
 		break;
 	}
+	case RondelIndicator::RondelPos::Factory:
+	{
+		_currentNation->SetDrawFactorySites();
+	}
 	default:
 		break;
 	}
@@ -216,7 +220,23 @@ void Game::PlayingPassiveAction()
 
 void Game::PlayingActiveAction(GameBoardObject* gbo)
 {
-
+	switch (_currentNation->GetRondelState())
+	{
+	case RondelIndicator::RondelPos::Factory:
+	{
+		for (int regionIndex = 0; regionIndex < _currentNation->GetNumberOfRegions(); regionIndex++)
+		{
+			if (_currentNation->GetRegion(regionIndex)->GetObjectID() == gbo->GetObjectID())
+			{
+				_currentNation->BuildFactory(gbo);
+				break;
+			}
+		}
+		break;
+	}
+	default:
+		break;
+	}
 }
 
 void Game::MouseMoved(TupleInt mousePos)

@@ -16,6 +16,7 @@ private:
 	std::string _name;
 	FactoryType _factoryType;
 	bool _factoryBuilt;
+	bool _drawFactorySite = false;
 	std::vector<Unit> _landUnits;
 	std::vector<Unit> _seaUnits;
 	TupleInt _unitLandPos = TupleInt();
@@ -41,6 +42,9 @@ public:
 	void AddSeaUnit(Unit &unit);
 	bool GetFactoryBuilt() const;
 	FactoryType GetFactoryType() const;
+
+	void SetDrawFactorySite(bool drawFactorySite);
+	void BuildFactory();
 
 private:
 	void DrawObject() const;

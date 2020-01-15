@@ -8,7 +8,7 @@ Region::Region(NodeParserNS::ListNode* regionData) :
 {
 	_name = regionData->GetData();
 	regionData->GetChild(&regionData);
-	_image = NULL;
+	SetImage("TransparentImage.png", _factorySize);
 	do { //TODO för detta borde man göra en separat funktion eftersom att det används i så många klassar
 		NodeParserNS::ListNode* tempData;
 		if (regionData->GetData().compare("FactoryType") == 0)
@@ -102,7 +102,12 @@ Region::~Region()
 void Region::DrawObject() const
 {
 	//Draw Factory
-	if (_factoryBuilt && (_factoryType == FactoryType::Land))
+	if (!_factoryBuilt && _drawFactorySite)
+	{
+		_g->DrawRectangle(_graphicalPos.GetX(), _graphicalPos.GetY(), 
+			_factorySize.GetX(), _factorySize.GetY(), GraphicsNS::Graphics::Color::BLACK);
+	}
+	else if (_factoryBuilt && (_factoryType == FactoryType::Land))
 	{
 		_g->Draw(_landFactoryImage, _graphicalPos.GetX(), _graphicalPos.GetY(), _scale);
 	}
@@ -142,4 +147,14 @@ bool Region::GetFactoryBuilt() const
 Region::FactoryType Region::GetFactoryType() const
 {
 	return _factoryType;
+}
+
+void Region::SetDrawFactorySite(bool drawFactorySite)
+{
+	_drawFactorySite = drawFactorySite;
+}
+
+void Region::BuildFactory()
+{
+	_factoryBuilt = true;
 }

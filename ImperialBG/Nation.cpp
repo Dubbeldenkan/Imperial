@@ -120,11 +120,12 @@ void Nation::DrawObject() const
 			rectSize.GetX(), rectSize.GetY(), rectWidth, GraphicsNS::Graphics::Color::BLACK);
 	}
 	_g->PrintText("Millions: " + std::to_string(_money), _graphicalPos.GetX(), _graphicalPos.GetY(), 
-		GraphicsNS::Graphics::Color::BLACK, GraphicsNS::Graphics::FontSize::font15);
+		GraphicsNS::Graphics::Color::WHITE, GraphicsNS::Graphics::FontSize::font15);
 }
 
 Bond* Nation::SellBond(int bondId)
 {
+	_money += _bonds[bondId].GetValue();
 	_bonds[bondId].SetToOwnedByPlayer();
 	return &_bonds[bondId];
 }
@@ -208,4 +209,44 @@ void Nation::ProductionAction()
 		}
 	}
 	_nationGameState = Nation::NationGameState::done;
+}
+
+void Nation::SetDrawFactorySites()
+{
+	for (int vectorIndex = 0; vectorIndex < static_cast<int>(_regions.size()); vectorIndex++)
+	{
+		_regions[vectorIndex].SetDrawFactorySite(true);
+	}
+}
+
+int Nation::GetNumberOfRegions() const
+{
+	return _regions.size();
+}
+
+const Region* Nation::GetRegion(int nationIndex) const
+{
+	return &_regions[nationIndex];
+}
+
+void Nation::BuildFactory(GameBoardObject* factoryRegion)
+{
+	for (int regionIndex = 0; regionIndex < static_cast<int>(_regions.size()); regionIndex++)
+	{
+		if (_regions[regionIndex].GetObjectID() == factoryRegion->GetObjectID())
+		{
+			Region* region = &_regions[regionIndex];
+			if (!region->GetFactoryBuilt() && _money >= _factoryCost)
+			{
+				region->BuildFactory();
+				_money += -_factoryCost;
+				_nationGameState = Nation::NationGameState::done;
+				for (int regionBuildIndex = 0; regionBuildIndex < static_cast<int>(_regions.size()); regionBuildIndex++)
+				{
+					_regions[regionBuildIndex].SetDrawFactorySite(false);
+				}
+			}
+			break;
+		}
+	}
 }
