@@ -16,7 +16,8 @@ private:
 	std::string _name;
 	FactoryType _factoryType;
 	bool _factoryBuilt;
-	std::vector<Unit> _units;
+	std::vector<Unit> _landUnits;
+	std::vector<Unit> _seaUnits;
 	TupleInt _unitLandPos = TupleInt();
 	TupleInt _unitSeaPos = TupleInt();
 
@@ -36,7 +37,8 @@ public:
 	void CopyRegion(const Region&);
 	~Region();
 
-	void AddUnit(Unit &unit);
+	void AddLandUnit(Unit &unit);
+	void AddSeaUnit(Unit &unit);
 	bool GetFactoryBuilt() const;
 	FactoryType GetFactoryType() const;
 

@@ -38,6 +38,17 @@ Russia
                     284
                 }
             }
+            LandUnitPos
+            {
+                X
+                {
+                    760
+                }
+                Y
+                {
+                    300
+                }
+            }
 			FactoryType
             {
                 Land
@@ -58,6 +69,28 @@ Russia
                 Y
                 {
                     196
+                }
+            }
+            LandUnitPos
+            {
+                X
+                {
+                    770
+                }
+                Y
+                {
+                    220
+                }
+            }
+            SeaUnitPos
+            {
+                X
+                {
+                    780
+                }
+                Y
+                {
+                    230
                 }
             }
             FactoryType
@@ -82,6 +115,28 @@ Russia
                     384
                 }
             }
+            LandUnitPos
+            {
+                X
+                {
+                    830
+                }
+                Y
+                {
+                    400
+                }
+            }
+            SeaUnitPos
+            {
+                X
+                {
+                    840
+                }
+                Y
+                {
+                    410
+                }
+            }
             FactoryType
             {
                 Sea
@@ -104,6 +159,28 @@ Russia
                     127
                 }
             }
+            LandUnitPos
+            {
+                X
+                {
+                    740
+                }
+                Y
+                {
+                    140
+                }
+            }
+            SeaUnitPos
+            {
+                X
+                {
+                    760
+                }
+                Y
+                {
+                    150
+                }
+            }
             FactoryType
             {
                 Sea
@@ -124,6 +201,17 @@ Russia
                 Y
                 {
                     281
+                }
+            }
+            LandUnitPos
+            {
+                X
+                {
+                    660
+                }
+                Y
+                {
+                    300
                 }
             }
             FactoryType

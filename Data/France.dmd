@@ -38,6 +38,28 @@ France
                     417
                 }
             }
+            LandUnitPos
+            {
+                X
+                {
+                    370
+                }
+                Y
+                {
+                    420
+                }
+            }
+            SeaUnitPos
+            {
+                X
+                {
+                    380
+                }
+                Y
+                {
+                    420
+                }
+            }
 			FactoryType
             {
                 Sea
@@ -54,6 +76,28 @@ France
                 X
                 {
                     350
+                }
+                Y
+                {
+                    360
+                }
+            }
+            LandUnitPos
+            {
+                X
+                {
+                    360
+                }
+                Y
+                {
+                    360
+                }
+            }
+            SeaUnitPos
+            {
+                X
+                {
+                    370
                 }
                 Y
                 {
@@ -82,6 +126,17 @@ France
                     374
                 }
             }
+            LandUnitPos
+            {
+                X
+                {
+                    440
+                }
+                Y
+                {
+                    375
+                }
+            }
             FactoryType
             {
                 Land
@@ -104,6 +159,28 @@ France
                     449
                 }
             }
+            LandUnitPos
+            {
+                X
+                {
+                    418
+                }
+                Y
+                {
+                    470
+                }
+            }
+            SeaUnitPos
+            {
+                X
+                {
+                    418
+                }
+                Y
+                {
+                    480
+                }
+            }
             FactoryType
             {
                 Sea
@@ -124,6 +201,17 @@ France
                 Y
                 {
                     330
+                }
+            }
+            LandUnitPos
+            {
+                X
+                {
+                    394
+                }
+                Y
+                {
+                    350
                 }
             }
             FactoryType

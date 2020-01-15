@@ -53,6 +53,10 @@ Region::Region(NodeParserNS::ListNode* regionData) :
 		{
 			_unitLandPos = ExtractPos(regionData);
 		}
+		else if (regionData->GetData().compare("SeaUnitPos") == 0)
+		{
+			_unitSeaPos = ExtractPos(regionData);
+		}
 		else
 		{
 			throw "Unvalid type in " + _name + ".dmd"; // TODO är detta rätt sätt att göra det på?
@@ -89,6 +93,7 @@ void Region::CopyRegion(const Region& region)
 	_factoryBuilt = region._factoryBuilt;
 	_factoryType = region._factoryType;
 	_unitLandPos = region._unitLandPos;
+	_unitSeaPos = region._unitSeaPos;
 }
 
 Region::~Region()
@@ -104,14 +109,29 @@ void Region::DrawObject() const
 	else if ((_factoryBuilt && (_factoryType == FactoryType::Sea)))
 	{
 		_g->Draw(_seaFactoryImage, _graphicalPos.GetX(), _graphicalPos.GetY(), _scale);
+		if (_seaUnits.size() > 0)
+		{
+			_g->PrintText(_seaUnits.size(), _unitSeaPos.GetX() + 20, _unitSeaPos.GetY(),
+				GraphicsNS::Graphics::Color::BLACK, GraphicsNS::Graphics::FontSize::font15);
+		}
 	}
-	//Draw units
+	if (_landUnits.size() > 0)
+	{
+		_g->PrintText(_landUnits.size(), _unitLandPos.GetX() + 20, _unitLandPos.GetY(),
+			GraphicsNS::Graphics::Color::BLACK, GraphicsNS::Graphics::FontSize::font15);
+	}
 }
 
-void Region::AddUnit(Unit& unit)
+void Region::AddLandUnit(Unit& unit)
 {
 	unit.SetPos(_unitLandPos);
-	_units.push_back(unit);
+	_landUnits.push_back(unit);
+}
+
+void Region::AddSeaUnit(Unit& unit)
+{
+	unit.SetPos(_unitSeaPos);
+	_seaUnits.push_back(unit);
 }
 
 bool Region::GetFactoryBuilt() const

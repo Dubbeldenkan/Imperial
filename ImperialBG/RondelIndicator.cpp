@@ -91,7 +91,7 @@ void RondelIndicator::DrawObject() const
 	}
 	switch (_color)
 	{
-	case GraphicsNS::Graphics::Color::PURPLE:
+	case GraphicsNS::Graphics::Color::BLACK:
 	case GraphicsNS::Graphics::Color::RED:
 		yPos -= _modificationPos.GetY();
 		break;

@@ -38,6 +38,17 @@ Italy
                     490
                 }
             }
+            LandUnitPos
+            {
+                X
+                {
+                    530
+                }
+                Y
+                {
+                    500
+                }
+            }
 			FactoryType
             {
                 Land
@@ -58,6 +69,28 @@ Italy
                 Y
                 {
                     441
+                }
+            }
+            LandUnitPos
+            {
+                X
+                {
+                    480
+                }
+                Y
+                {
+                    450
+                }
+            }
+            SeaUnitPos
+            {
+                X
+                {
+                    500
+                }
+                Y
+                {
+                    470
                 }
             }
             FactoryType
@@ -82,6 +115,28 @@ Italy
                     558
                 }
             }
+            LandUnitPos
+            {
+                X
+                {
+                    610
+                }
+                Y
+                {
+                    570
+                }
+            }
+            SeaUnitPos
+            {
+                X
+                {
+                    620
+                }
+                Y
+                {
+                    580
+                }
+            }
             FactoryType
             {
                 Sea
@@ -104,6 +159,17 @@ Italy
                     508
                 }
             }
+            LandUnitPos
+            {
+                X
+                {
+                    580
+                }
+                Y
+                {
+                    520
+                }
+            }
             FactoryType
             {
                 Land
@@ -124,6 +190,28 @@ Italy
                 Y
                 {
                     446
+                }
+            }
+            LandUnitPos
+            {
+                X
+                {
+                    540
+                }
+                Y
+                {
+                    450
+                }
+            }
+            SeaUnitPos
+            {
+                X
+                {
+                    545
+                }
+                Y
+                {
+                    460
                 }
             }
             FactoryType

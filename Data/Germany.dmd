@@ -38,6 +38,17 @@ Germany
                     294
                 }
             }
+            LandUnitPos
+            {
+                X
+                {
+                    540
+                }
+                Y
+                {
+                    310
+                }
+            }
 			FactoryType
             {
                 Land
@@ -58,6 +69,17 @@ Germany
                 Y
                 {
                     311
+                }
+            }
+            LandUnitPos
+            {
+                X
+                {
+                    510
+                }
+                Y
+                {
+                    320
                 }
             }
             FactoryType
@@ -82,6 +104,28 @@ Germany
                     254
                 }
             }
+            LandUnitPos
+            {
+                X
+                {
+                    620
+                }
+                Y
+                {
+                    260
+                }
+            }
+            SeaUnitPos
+            {
+                X
+                {
+                    630
+                }
+                Y
+                {
+                    265
+                }
+            }
             FactoryType
             {
                 Sea
@@ -104,6 +148,28 @@ Germany
                     264
                 }
             }
+            LandUnitPos
+            {
+                X
+                {
+                    520
+                }
+                Y
+                {
+                    270
+                }
+            }
+            SeaUnitPos
+            {
+                X
+                {
+                    530
+                }
+                Y
+                {
+                    280
+                }
+            }
             FactoryType
             {
                 Sea
@@ -124,6 +190,17 @@ Germany
                 Y
                 {
                     357
+                }
+            }
+            LandUnitPos
+            {
+                X
+                {
+                    520
+                }
+                Y
+                {
+                    370
                 }
             }
             FactoryType

@@ -38,6 +38,28 @@ Britain
                     205
                 }
             }
+            LandUnitPos
+            {
+                X
+                {
+                    276
+                }
+                Y
+                {
+                    225
+                }
+            }
+            SeaUnitPos
+            {
+                X
+                {
+                    275
+                }
+                Y
+                {
+                    235
+                }
+            }
 			FactoryType
             {
                 Sea
@@ -58,6 +80,28 @@ Britain
                 Y
                 {
                     142
+                }
+            }
+            LandUnitPos
+            {
+                X
+                {
+                    367
+                }
+                Y
+                {
+                    142
+                }
+            }
+            SeaUnitPos
+            {
+                X
+                {
+                    347
+                }
+                Y
+                {
+                    152
                 }
             }
             FactoryType
@@ -82,6 +126,28 @@ Britain
                     215
                 }
             }
+            LandUnitPos
+            {
+                X
+                {
+                    288
+                }
+                Y
+                {
+                    245
+                }
+            }
+            SeaUnitPos
+            {
+                X
+                {
+                    298
+                }
+                Y
+                {
+                    245
+                }
+            }
             FactoryType
             {
                 Sea
@@ -104,6 +170,17 @@ Britain
                     220
                 }
             }
+            LandUnitPos
+            {
+                X
+                {
+                    381
+                }
+                Y
+                {
+                    240
+                }
+            }
             FactoryType
             {
                 Land
@@ -124,6 +201,28 @@ Britain
                 Y
                 {
                     268
+                }
+            }
+            LandUnitPos
+            {
+                X
+                {
+                    366
+                }
+                Y
+                {
+                    286
+                }
+            }
+            SeaUnitPos
+            {
+                X
+                {
+                    366
+                }
+                Y
+                {
+                    296
                 }
             }
             FactoryType

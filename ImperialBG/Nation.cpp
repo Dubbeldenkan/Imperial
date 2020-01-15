@@ -5,7 +5,7 @@ int Nation::_currentNation = 0;
 Nation::Nation(int nationId) :
 	_id(nationId), GameBoardObject(TupleInt(), NULL, _imageLayerValue)
 {
-	std::string nationName[6] = { "Austria-Hungary", "Italy", "France", "Britain", "Russia", "Germany" };
+	std::string nationName[6] = { "Austria-Hungary", "Italy", "France", "Britain", "Germany", "Russia" };
 
 	_name = nationName[nationId];
 	NodeParserNS::ListNode* nationData = NodeParserNS::NodeParser::ReadDataFile(_name);
@@ -176,7 +176,7 @@ int Nation::MoveRondelIndicator(int maxNumberExtraSteps)
 		_rondelIndicator.RunProposal();
 		_nationGameState = Nation::NationGameState::playingAction;
 	}
-	else if ((numberOfSteps - RondelIndicator::_rondelMaxExtraSteps) <= maxNumberExtraSteps) //TODO fastnar man om man går till samma som man står på?
+	else if ((numberOfSteps - RondelIndicator::_rondelMaxExtraSteps) <= maxNumberExtraSteps && numberOfSteps > 0) //TODO fastnar man om man går till samma som man står på?
 	{
 		_rondelIndicator.RunProposal();
 		playerCost = RondelIndicator::_rondelStepCost*max(numberOfSteps - RondelIndicator::_rondelMaxExtraSteps, 0);
@@ -199,11 +199,12 @@ void Nation::ProductionAction()
 		else if (region->GetFactoryType() == Region::FactoryType::Land)
 		{
 			_units.push_back(Unit(TupleInt(), Unit::UnitType::Land, static_cast<Unit::UnitNation>(_bondNation), _color));
-			_regions[vectorIndex].AddUnit(_units[_units.size() - 1]);
+			_regions[vectorIndex].AddLandUnit(_units[_units.size() - 1]);
 		}
 		else
 		{
-			//TODO lägg till bygge av båtar
+			_units.push_back(Unit(TupleInt(), Unit::UnitType::Sea, static_cast<Unit::UnitNation>(_bondNation), _color));
+			_regions[vectorIndex].AddSeaUnit(_units[_units.size() - 1]);
 		}
 	}
 	_nationGameState = Nation::NationGameState::done;
