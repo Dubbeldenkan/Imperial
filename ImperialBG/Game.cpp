@@ -5,7 +5,9 @@ bool Game::_initNewGame = false;
 bool Game::_saveGame = false;
 bool Game::_loadGame = false;
 
+std::vector<GameBoardObject*> Game::_selectedObjects;
 std::map<Nation*, Player*> Game::_govermentMap;
+Player* Game::_investorPlayer;
 
 Game::Game()
 {
@@ -30,11 +32,11 @@ void Game::Run()
 	//TODO ändra till ett lämpligt villkor tex när något land når 25 i tabellen
 	else if (true)
 	{
-		if (_currentNation->GetNationState() == Nation::NationGameState::playingAction)
+		if (_currentNation->GetNationState() == Nation::NationGameState::PlayingAction)
 		{
 			PlayingPassiveAction();
 		}
-		else if(_currentNation->GetNationState() == Nation::NationGameState::done)
+		else if(_currentNation->GetNationState() == Nation::NationGameState::Done)
 		{
 			SetNextNation();
 		}
@@ -161,7 +163,8 @@ void Game::InitGame()
 	{
 		if (_players[playerCounter]->GetPlayerPos() == firstInvestorPlayer)
 		{
-			_players[playerCounter]->SetAsInvestor();
+			_investorPlayer = _players[playerCounter];
+			_investorPlayer->SetAsInvestor();
 		}
 	}
 }
@@ -179,7 +182,7 @@ void Game::MouseClicked(TupleInt mouseClickedPos)
 		GameBoardObject* object = clickedObjects[vectorCount];
 		switch (_currentNation->GetNationState())
 		{
-		case Nation::NationGameState::placingRondelIndicator:
+		case Nation::NationGameState::PlacingRondelIndicator:
 		{
 			if (_currentNation->GetRondelIndicatorID() == object->GetObjectID())
 			{
@@ -191,7 +194,7 @@ void Game::MouseClicked(TupleInt mouseClickedPos)
 			}
 			break;
 		}
-		case Nation::NationGameState::playingAction:
+		case Nation::NationGameState::PlayingAction:
 		{
 			PlayingActiveAction(object);
 		}
@@ -216,12 +219,26 @@ void Game::PlayingPassiveAction()
 	}
 	case RondelIndicator::RondelPos::Investor:
 	{
-		if (_currentNation->GetInvestorState() == RondelIndicator::InvestorState::InterestPayout)
+		switch (_currentNation->GetInvestorState())
 		{
+		case RondelIndicator::InvestorState::InterestPayout:
+		{
+			constexpr int investorMoney = 2; //TODO kanske flytta den till en member istället
 			InterestPayout();
 			_currentNation->SetInvestorState();
+			_investorPlayer->AddMoney(investorMoney); 
+			break;
 		}
-		break;
+		case RondelIndicator::InvestorState::Investor:
+		{
+			BuyAsInvestor();
+			break;
+		}
+		default:
+		{
+			break;
+		}
+		}
 	}
 	default:
 		break;
@@ -246,6 +263,7 @@ void Game::PlayingActiveAction(GameBoardObject* gbo)
 	}
 	case RondelIndicator::RondelPos::Investor:
 	{
+		_selectedObjects.push_back(gbo);
 		break;
 	}
 	default:
@@ -285,6 +303,27 @@ void Game::SetNextNation()
 	SetCurrentNation(_currentNation);
 }
 
+void Game::SetNextInvestor()
+{
+	for (int index = 0; index < static_cast<int>(_players.size()); index++)
+	{
+		if (_players[index] == _investorPlayer)
+		{
+			if (index == (_numberOfNations - 1))
+			{
+				_investorPlayer	 = _players[0];
+				break;
+			}
+			else
+			{
+				_investorPlayer = _players[index + 1];
+				break;
+			}
+		}
+	}
+	_investorPlayer->SetAsInvestor();
+}
+
 void Game::InterestPayout()
 {
 	for (int playerIndex = 0; playerIndex < static_cast<int>(_players.size()); playerIndex++)
@@ -311,6 +350,31 @@ void Game::InterestPayout()
 			break;
 		}
 	}
+}
+
+void Game::BuyAsInvestor()
+{
+	for (int selectedObjectsIndex = 0; selectedObjectsIndex < static_cast<int>(_selectedObjects.size()); ++selectedObjectsIndex)
+	{
+		Bond* selectedBond = NULL;
+		for (int nationIndex = 0; nationIndex < static_cast<int>(_nations.size()); ++nationIndex)
+		{
+			selectedBond = _nations[nationIndex].GetUnboughtBond(_selectedObjects[selectedObjectsIndex]);
+			if (selectedBond != NULL)
+			{
+				if (_investorPlayer->GetMoney() >= selectedBond->GetValue())
+				{
+					_investorPlayer->BuyBond(_nations[nationIndex].SellBond(selectedBond->GetId()));
+					//TODO gör så att man kan vara swiss bank
+					//TODO gör så att man kan växla in egna bonds
+					SetNextInvestor();
+					_currentNation->SetToDone();
+				}
+				break;
+			}
+		}
+	}
+	_selectedObjects.clear();
 }
 
 void Game::SaveGame()

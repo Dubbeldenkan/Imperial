@@ -3,6 +3,7 @@
 #include "RondelIndicator.h"
 
 const std::string Player::_playerSettingsFilePath = "PlayerSettings";
+int Player::_investorId;
 
 Player::Player()
 {}
@@ -43,7 +44,7 @@ Player::~Player()
 
 void Player::DrawObject() const
 {
-	if (_isInvestor)
+	if (_investorId == _playerPos)
 	{
 		_g->DrawRectangle(_graphicalPos.GetX(), _graphicalPos.GetY(), 100, 20, GraphicsNS::Graphics::Color::WHITE);
 		_g->PrintText(_name, _graphicalPos.GetX(), _graphicalPos.GetY(), 
@@ -131,7 +132,7 @@ int Player::GetPlayerPos() const
 
 void Player::SetAsInvestor()
 {
-	_isInvestor = true;
+	_investorId = _playerPos;
 }
 
 bool Player::ExtractPlayerData(NodeParserNS::ListNode* playerData, std::string &name, TupleInt& objectPos)
@@ -196,4 +197,9 @@ int Player::GetInterestValue(Bond::BondNation nation) const
 		}
 	}
 	return totalBondValue;
+}
+
+int Player::GetMoney() const
+{
+	return _money;
 }

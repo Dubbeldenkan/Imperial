@@ -21,10 +21,13 @@ private:
 	std::vector<Nation> _nations;
 	GameBoard _gameBoard = GameBoard();
 
+	static std::vector<GameBoardObject*> _selectedObjects;
+
 	bool _humanPlayerPlaying = false;
 
 	bool _gameOver = false;
 
+	static Player* _investorPlayer;
 	static Nation* _currentNation;
 	static std::map<Nation*, Player*> _govermentMap;
 
@@ -53,9 +56,11 @@ private:
 	void PlayingPassiveAction();
 	static void PlayingActiveAction(GameBoardObject* gbo);
 	void InterestPayout();
+	void BuyAsInvestor();
 
 	void SetCurrentNation(Nation* nation);
 	void SetNextNation();
+	void SetNextInvestor();
 
 	void SaveGame();
 	void CreateSaveNode(NodeParserNS::ListNode*);

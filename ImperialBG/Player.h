@@ -14,7 +14,7 @@ protected:
 	int _playerPos;
 	std::string _name;
 	int _money;
-	bool _isInvestor = false;
+	static int _investorId;
 	typedef std::map<Bond::BondNation, std::map<int, Bond*>> bondMapType;
 	bondMapType _bonds;
 
@@ -41,6 +41,7 @@ public:
 	virtual bool IsHuman() const;
 	int GetMaxNumberOfRondelSteps() const;
 	void AddMoney(int moneyChange);
+	int GetMoney() const;
 	int GetInterestValue(Bond::BondNation nation) const;
 
 	static bool ExtractPlayerData(NodeParserNS::ListNode* playerData, std::string& name, TupleInt& objectPos);

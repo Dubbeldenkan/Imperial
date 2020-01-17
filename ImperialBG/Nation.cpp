@@ -148,7 +148,7 @@ Bond::BondNation Nation::GetBondNation() const
 void Nation::SetAsCurrentNation()
 {
 	_currentNation = _id;
-	_nationGameState = Nation::NationGameState::placingRondelIndicator;
+	_nationGameState = Nation::NationGameState::PlacingRondelIndicator;
 }
 
 RondelIndicator::RondelPos Nation::GetRondelState() const
@@ -175,13 +175,13 @@ int Nation::MoveRondelIndicator(int maxNumberExtraSteps)
 	{
 		playerCost = 0;
 		_rondelIndicator.RunProposal();
-		_nationGameState = Nation::NationGameState::playingAction;
+		_nationGameState = Nation::NationGameState::PlayingAction;
 	}
 	else if ((numberOfSteps - RondelIndicator::_rondelMaxExtraSteps) <= maxNumberExtraSteps && numberOfSteps > 0) //TODO fastnar man om man går till samma som man står på?
 	{
 		_rondelIndicator.RunProposal();
 		playerCost = RondelIndicator::_rondelStepCost*max(numberOfSteps - RondelIndicator::_rondelMaxExtraSteps, 0);
-		_nationGameState = Nation::NationGameState::playingAction;
+		_nationGameState = Nation::NationGameState::PlayingAction;
 	}
 
 	return playerCost;
@@ -208,7 +208,7 @@ void Nation::ProductionAction()
 			_regions[vectorIndex].AddSeaUnit(_units[_units.size() - 1]);
 		}
 	}
-	_nationGameState = Nation::NationGameState::done;
+	_nationGameState = Nation::NationGameState::Done;
 }
 
 void Nation::SetDrawFactorySites()
@@ -240,7 +240,7 @@ void Nation::BuildFactory(GameBoardObject* factoryRegion)
 			{
 				region->BuildFactory();
 				_money += -_factoryCost;
-				_nationGameState = Nation::NationGameState::done;
+				_nationGameState = Nation::NationGameState::Done;
 				for (int regionBuildIndex = 0; regionBuildIndex < static_cast<int>(_regions.size()); regionBuildIndex++)
 				{
 					_regions[regionBuildIndex].SetDrawFactorySite(false);
@@ -269,4 +269,24 @@ RondelIndicator::InvestorState Nation::GetInvestorState() const
 void Nation::SetInvestorState()
 {
 	_rondelIndicator.SetInvestorState();
+}
+
+Bond* Nation::GetUnboughtBond(GameBoardObject* gbo)
+{
+	Bond* resultBond = NULL;
+	std::map<int, Bond>::iterator it;
+	for (it = _bonds.begin(); it != _bonds.end(); ++it)
+	{
+		if (it->second.GetObjectID() == gbo->GetObjectID())
+		{
+			resultBond = &(it->second);
+			break;
+		}
+	}
+	return resultBond;
+}
+
+void Nation::SetToDone()
+{
+	_nationGameState = Nation::NationGameState::Done;
 }
