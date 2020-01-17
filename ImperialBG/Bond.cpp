@@ -101,3 +101,8 @@ Bond::BondNation Bond::GetBondNation() const
 {
 	return _nation;
 }
+
+GraphicsNS::Image* Bond::GetImage() const
+{
+	return _image;
+}

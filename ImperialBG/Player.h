@@ -17,6 +17,7 @@ protected:
 	static int _investorId;
 	typedef std::map<Bond::BondNation, std::map<int, Bond*>> bondMapType;
 	bondMapType _bonds;
+	std::vector<Bond::BondNation> _goverment;
 
 private:
 	TupleInt _moneyGraphicalPos = TupleInt(200, 0);
@@ -45,6 +46,9 @@ public:
 	int GetInterestValue(Bond::BondNation nation) const;
 
 	static bool ExtractPlayerData(NodeParserNS::ListNode* playerData, std::string& name, TupleInt& objectPos);
+
+	void ClearGoverments();
+	void AddGoverment(Bond::BondNation nation);
 
 protected:
 	void CopyPlayer(Player const&);

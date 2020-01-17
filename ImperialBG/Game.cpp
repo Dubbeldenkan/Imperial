@@ -142,19 +142,7 @@ void Game::InitGame()
 	}
 
 	//Define goverments
-	for (int nationCounter = 0; nationCounter < _numberOfNations; nationCounter++)
-	{
-		_govermentMap[&_nations[nationCounter]] = NULL;
-		int bestPlayerValue = 0;
-		for (int playerCounter = 0; playerCounter < _numberOfPlayers; playerCounter++)
-		{
-			if (bestPlayerValue < _players[playerCounter]->GetBondNationValue(_nations[nationCounter].GetBondNation()))
-			{
-				_govermentMap[&_nations[nationCounter]] = _players[playerCounter];
-				bestPlayerValue = _players[playerCounter]->GetBondNationValue(_nations[nationCounter].GetBondNation());
-			}
-		}
-	}
+	SetGoverment();
 
 	//Set investor start player
 	int firstInvestorPlayer = (_govermentMap[_currentNation]->GetPlayerPos() + 1) % _numberOfPlayers;
@@ -232,6 +220,7 @@ void Game::PlayingPassiveAction()
 		case RondelIndicator::InvestorState::Investor:
 		{
 			BuyAsInvestor();
+			SetGoverment();
 			break;
 		}
 		default:
@@ -375,6 +364,32 @@ void Game::BuyAsInvestor()
 		}
 	}
 	_selectedObjects.clear();
+}
+
+void Game::SetGoverment()
+{
+	for (int playerCounter = 0; playerCounter < static_cast<int>(_players.size()); ++playerCounter)
+	{
+		_players[playerCounter]->ClearGoverments();
+	}
+	for (int nationCounter = 0; nationCounter < _numberOfNations; nationCounter++)
+	{
+		_govermentMap[&_nations[nationCounter]] = NULL;
+		int bestPlayerValue = 0;
+		for (int playerCounter = 0; playerCounter < _numberOfPlayers; playerCounter++)
+		{
+			if (bestPlayerValue < _players[playerCounter]->GetBondNationValue(_nations[nationCounter].GetBondNation()))
+			{
+				_govermentMap[&_nations[nationCounter]] = _players[playerCounter];
+				bestPlayerValue = _players[playerCounter]->GetBondNationValue(_nations[nationCounter].GetBondNation());
+			}
+		}
+	}
+	std::map<Nation*, Player*>::iterator it;
+	for (it = _govermentMap.begin(); it != _govermentMap.end(); ++it)
+	{
+		it->second->AddGoverment(it->first->GetBondNation());
+	}
 }
 
 void Game::SaveGame()

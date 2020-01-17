@@ -42,6 +42,8 @@ public:
 	void SetToNotOwnedBuPlayer();
 	bool GetOwnedByPlayer() const;
 
+	GraphicsNS::Image* GetImage() const;
+
 private:
 	void DrawObject() const;
 };

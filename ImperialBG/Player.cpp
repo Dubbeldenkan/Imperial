@@ -44,6 +44,7 @@ Player::~Player()
 
 void Player::DrawObject() const
 {
+	//Draw bonds
 	if (_investorId == _playerPos)
 	{
 		_g->DrawRectangle(_graphicalPos.GetX(), _graphicalPos.GetY(), 100, 20, GraphicsNS::Graphics::Color::WHITE);
@@ -55,7 +56,19 @@ void Player::DrawObject() const
 		_g->PrintText(_name, _graphicalPos.GetX(), _graphicalPos.GetY(), 
 			GraphicsNS::Graphics::Color::WHITE, GraphicsNS::Graphics::FontSize::font15);
 	}
-	_g->PrintText("Millions: " + std::to_string(_money), _graphicalPos.GetX() + _moneyGraphicalPos.GetX(), 
+	
+	//Draw goverment
+	TupleInt posRelativeToPlayerPos = TupleInt(150, 0);
+	for (int govermentIndex = 0; govermentIndex < static_cast<int>(_goverment.size()); ++govermentIndex)
+	{
+		std::map<int, Bond*> map = _bonds.at(_goverment[govermentIndex]);
+		Bond* bond = &*(map.begin())->second;
+		_g->Draw(bond->GetImage(), _graphicalPos.GetX() + posRelativeToPlayerPos.GetX() + govermentIndex*bond->GetImageSize().GetX(), 
+			_graphicalPos.GetY(), _scale);
+	}
+
+	//Draw money
+	_g->PrintText("Millions: " + std::to_string(_money), _graphicalPos.GetX() + _moneyGraphicalPos.GetX(),
 		_graphicalPos.GetY(), GraphicsNS::Graphics::Color::WHITE, GraphicsNS::Graphics::FontSize::font15);
 
 	UpdateBondsGraphicalPos();
@@ -211,4 +224,14 @@ int Player::GetInterestValue(Bond::BondNation nation) const
 int Player::GetMoney() const
 {
 	return _money;
+}
+
+void Player::ClearGoverments()
+{
+	_goverment.clear();
+}
+
+void Player::AddGoverment(Bond::BondNation nation)
+{
+	_goverment.push_back(nation);
 }

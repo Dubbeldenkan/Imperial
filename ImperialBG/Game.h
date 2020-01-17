@@ -61,6 +61,7 @@ private:
 	void SetCurrentNation(Nation* nation);
 	void SetNextNation();
 	void SetNextInvestor();
+	void SetGoverment();
 
 	void SaveGame();
 	void CreateSaveNode(NodeParserNS::ListNode*);
