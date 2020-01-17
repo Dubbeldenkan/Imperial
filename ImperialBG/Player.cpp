@@ -61,19 +61,28 @@ void Player::DrawObject() const
 	UpdateBondsGraphicalPos();
 }
 
-void Player::UpdateBondsGraphicalPos() const //TODO denna funktion måste uppdateras för att man ska kunna ha flera bonds med samma värde, annars kommer de att rites ut över varandra 
+void Player::UpdateBondsGraphicalPos() const
 {
 	bondMapType::const_iterator nationIterator;
 	std::map<int, Bond*>::const_iterator bondIterator;
 
+	int xPosModifier = 0;
+	int yPosModifier = 1;
+	constexpr int maxBondPerRow = 10;
 	for (nationIterator = _bonds.begin(); nationIterator != _bonds.end(); nationIterator++)
 	{
 		for (bondIterator = nationIterator->second.begin(); bondIterator != nationIterator->second.end(); bondIterator++)
 		{
 			int xPos = _graphicalPos.GetX() + 
-				static_cast<int>(bondIterator->second->GetImageSize().GetX()*(bondIterator->second->GetId() - 1));
-			int yPos = _graphicalPos.GetY() + static_cast<int>(bondIterator->second->GetImageSize().GetY()*1.5);
+				static_cast<int>(bondIterator->second->GetImageSize().GetX()*xPosModifier);
+			int yPos = _graphicalPos.GetY() + static_cast<int>(bondIterator->second->GetImageSize().GetY()*1.5)*yPosModifier;
 			bondIterator->second->SetGraphicalPos(TupleInt(xPos, yPos));
+			xPosModifier++;
+			if (xPosModifier > maxBondPerRow)
+			{
+				xPosModifier = 0;
+				yPosModifier++;
+			}
 		}
 	}
 }
