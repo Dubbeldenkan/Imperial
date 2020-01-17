@@ -52,6 +52,7 @@ private:
 	void InitGame();
 	void PlayingPassiveAction();
 	static void PlayingActiveAction(GameBoardObject* gbo);
+	void InterestPayout();
 
 	void SetCurrentNation(Nation* nation);
 	void SetNextNation();

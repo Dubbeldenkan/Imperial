@@ -60,6 +60,10 @@ public:
 	const Region* GetRegion(int regionIndex) const;
 
 	void BuildFactory(GameBoardObject* factoryRegion);
+	int GetMoney() const;
+	void AddMoney(int addedMoney);
+	RondelIndicator::InvestorState GetInvestorState() const;
+	void SetInvestorState();
 
 private:
 	void DrawObject() const;

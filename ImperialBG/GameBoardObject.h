@@ -59,6 +59,9 @@ protected:
 	static TupleInt ExtractPos(NodeParserNS::ListNode* &nodeData);
 	void CopyGameBoardObject(const GameBoardObject& gameboardObject);
 
+	friend bool operator==(const GameBoardObject& lhs, const GameBoardObject& rhs);
+	friend bool operator!=(const GameBoardObject& lhs, const GameBoardObject& rhs);
+
 private:
 	bool PosInObject(TupleInt);
 

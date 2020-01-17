@@ -40,7 +40,8 @@ public:
 	int GetPlayerPos() const;
 	virtual bool IsHuman() const;
 	int GetMaxNumberOfRondelSteps() const;
-	void ChangeMoney(int moneyChange);
+	void AddMoney(int moneyChange);
+	int GetInterestValue(Bond::BondNation nation) const;
 
 	static bool ExtractPlayerData(NodeParserNS::ListNode* playerData, std::string& name, TupleInt& objectPos);
 

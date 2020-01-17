@@ -33,6 +33,18 @@ GameBoardObject::~GameBoardObject()
 	_gameBoardObjects.erase(_objectId);
 }
 
+//friend functions
+bool operator==(const GameBoardObject& lhs, const GameBoardObject& rhs)
+{
+	return lhs.GetObjectID() == rhs.GetObjectID();
+}
+
+bool operator!=(const GameBoardObject& lhs, const GameBoardObject& rhs)
+{
+	return lhs.GetObjectID() != rhs.GetObjectID();
+}
+
+
 void GameBoardObject::DrawObject() const
 {
 	_g->Draw(_image, _graphicalPos.GetX(), _graphicalPos.GetY(), _scale);
@@ -47,7 +59,7 @@ void GameBoardObject::DrawAllObjects()
 	std::map<int, GameBoardObject*>::iterator it;
 	for (it = _gameBoardObjects.begin(); it != _gameBoardObjects.end(); it++)
 	{
-		if(_selectedObject == NULL || it->second->GetObjectID() != _selectedObject->GetObjectID())
+		if(_selectedObject == NULL || it->second != _selectedObject)
 		{
 			layerVector[static_cast<int>(it->second->_layer)].push_back(it->second);
 		}

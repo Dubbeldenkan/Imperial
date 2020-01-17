@@ -186,7 +186,7 @@ void Game::MouseClicked(TupleInt mouseClickedPos)
 				object->Action(mouseClickedPos);
 				int maxNumberExtraSteps = _govermentMap[_currentNation]->GetMaxNumberOfRondelSteps();
 				const int playerCost = _currentNation->MoveRondelIndicator(maxNumberExtraSteps);
-				_govermentMap[_currentNation]->ChangeMoney(-playerCost);
+				_govermentMap[_currentNation]->AddMoney(-playerCost);
 				return; //TODO ska man ha en return såhär?
 			}
 			break;
@@ -212,6 +212,16 @@ void Game::PlayingPassiveAction()
 	case RondelIndicator::RondelPos::Factory:
 	{
 		_currentNation->SetDrawFactorySites();
+		break;
+	}
+	case RondelIndicator::RondelPos::Investor:
+	{
+		if (_currentNation->GetInvestorState() == RondelIndicator::InvestorState::InterestPayout)
+		{
+			InterestPayout();
+			_currentNation->SetInvestorState();
+		}
+		break;
 	}
 	default:
 		break;
@@ -226,12 +236,16 @@ void Game::PlayingActiveAction(GameBoardObject* gbo)
 	{
 		for (int regionIndex = 0; regionIndex < _currentNation->GetNumberOfRegions(); regionIndex++)
 		{
-			if (_currentNation->GetRegion(regionIndex)->GetObjectID() == gbo->GetObjectID())
+			if (_currentNation->GetRegion(regionIndex) == gbo)
 			{
 				_currentNation->BuildFactory(gbo);
 				break;
 			}
 		}
+		break;
+	}
+	case RondelIndicator::RondelPos::Investor:
+	{
 		break;
 	}
 	default:
@@ -254,7 +268,7 @@ void Game::SetNextNation()
 {
 	for (int index = 0; index < static_cast<int>(_nations.size()); index++) 
 	{
-		if (_nations[index].GetObjectID() == _currentNation->GetObjectID())
+		if (_nations[index] == *_currentNation)
 		{
 			if (index == (_numberOfNations - 1))
 			{
@@ -269,6 +283,34 @@ void Game::SetNextNation()
 		}
 	}
 	SetCurrentNation(_currentNation);
+}
+
+void Game::InterestPayout()
+{
+	for (int playerIndex = 0; playerIndex < static_cast<int>(_players.size()); playerIndex++)
+	{
+		if (_players[playerIndex] == _govermentMap[_currentNation])
+		{
+			do
+			{
+				playerIndex = (playerIndex + 1) % _numberOfPlayers;
+				const int interest = _players[playerIndex]->GetInterestValue(_currentNation->GetBondNation());
+				if (_currentNation->GetMoney() > interest)
+				{
+					_currentNation->AddMoney(-interest);
+					_players[playerIndex]->AddMoney(interest);
+				}
+				else
+				{
+					const int missingMoney = interest - _currentNation->GetMoney();
+					_currentNation->AddMoney(-_currentNation->GetMoney());
+					_govermentMap[_currentNation]->AddMoney(-missingMoney); //TODO lägg in vad som händer om ägaren inte har råd
+					_players[playerIndex]->AddMoney(interest);
+				}
+			} while (_players[playerIndex] != _govermentMap[_currentNation]);
+			break;
+		}
+	}
 }
 
 void Game::SaveGame()

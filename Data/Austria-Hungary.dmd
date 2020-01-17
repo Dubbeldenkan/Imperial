@@ -148,6 +148,17 @@ Austria-Hungary
                     460
                 }
             }
+            SeaUnitPos
+            {
+                X
+                {
+                    620
+                }
+                Y
+                {
+                    460
+                }
+            }
             FactoryType
             {
                 Sea

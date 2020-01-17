@@ -179,7 +179,21 @@ int Player::GetMaxNumberOfRondelSteps() const
 	return min(_money / RondelIndicator::_rondelStepCost, RondelIndicator::_rondelMaxExtraSteps);
 }
 
-void Player::ChangeMoney(int moneyChange)
+void Player::AddMoney(int moneyChange)
 {
 	_money += moneyChange;
+}
+
+int Player::GetInterestValue(Bond::BondNation nation) const
+{
+	int totalBondValue = 0;
+	std::map<int, Bond*>::const_iterator it;
+	if (_bonds.find(nation) != _bonds.end())
+	{
+		for (it = _bonds.at(nation).begin(); it != _bonds.at(nation).end(); ++it)
+		{
+			totalBondValue += it->second->GetId();
+		}
+	}
+	return totalBondValue;
 }

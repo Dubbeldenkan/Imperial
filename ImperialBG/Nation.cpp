@@ -233,7 +233,7 @@ void Nation::BuildFactory(GameBoardObject* factoryRegion)
 {
 	for (int regionIndex = 0; regionIndex < static_cast<int>(_regions.size()); regionIndex++)
 	{
-		if (_regions[regionIndex].GetObjectID() == factoryRegion->GetObjectID())
+		if (_regions[regionIndex] == *factoryRegion)
 		{
 			Region* region = &_regions[regionIndex];
 			if (!region->GetFactoryBuilt() && _money >= _factoryCost)
@@ -249,4 +249,24 @@ void Nation::BuildFactory(GameBoardObject* factoryRegion)
 			break;
 		}
 	}
+}
+
+int Nation::GetMoney() const
+{
+	return _money;
+}
+
+void Nation::AddMoney(int addedMoney)
+{
+	_money += addedMoney;
+}
+
+RondelIndicator::InvestorState Nation::GetInvestorState() const
+{
+	return _rondelIndicator.GetRondelInvestorState();
+}
+
+void Nation::SetInvestorState()
+{
+	_rondelIndicator.SetInvestorState();
 }
