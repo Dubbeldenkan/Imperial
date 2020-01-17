@@ -12,6 +12,8 @@ class Nation : public GameBoardObject
 {
 public:
 	enum class NationGameState { PlacingRondelIndicator, PlayingAction , Done};
+	enum class InvestorState { InterestPayout, Investor, SwissBank };
+
 private:
 	std::map<int, Bond> _bonds;
 	std::string _name;
@@ -25,6 +27,7 @@ private:
 	GraphicsNS::Graphics::Color _color; //TODO gör denna const och inkludera i initieringslistan
 	RondelIndicator _rondelIndicator;
 	NationGameState _nationGameState = NationGameState::PlacingRondelIndicator;
+	InvestorState _investorState = InvestorState::InterestPayout;
 
 	static int _currentNation;
 
@@ -62,7 +65,7 @@ public:
 	void BuildFactory(GameBoardObject* factoryRegion);
 	int GetMoney() const;
 	void AddMoney(int addedMoney);
-	RondelIndicator::InvestorState GetInvestorState() const;
+	InvestorState GetInvestorState() const;
 	void SetInvestorState();
 	Bond* GetUnboughtBond(GameBoardObject* gbo);
 	void SetToDone();

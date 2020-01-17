@@ -261,14 +261,14 @@ void Nation::AddMoney(int addedMoney)
 	_money += addedMoney;
 }
 
-RondelIndicator::InvestorState Nation::GetInvestorState() const
+Nation::InvestorState Nation::GetInvestorState() const
 {
-	return _rondelIndicator.GetRondelInvestorState();
+	return _investorState;
 }
 
 void Nation::SetInvestorState()
 {
-	_rondelIndicator.SetInvestorState();
+	_investorState = static_cast<InvestorState>((static_cast<int>(_investorState) + 1) % 3);
 }
 
 Bond* Nation::GetUnboughtBond(GameBoardObject* gbo)

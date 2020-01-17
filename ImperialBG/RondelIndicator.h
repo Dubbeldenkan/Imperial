@@ -9,8 +9,6 @@ public:
 	enum class RondelPos { StartPos, Taxation, Factory, ProductionRight, ManeuverRight, 
 		Investor, Import, ProductionLeft, ManeuverLeft };
 
-	enum class InvestorState {InterestPayout, Investor, SwissBank};
-
 	static constexpr int _rondelStepCost = 2;
 	static constexpr int _rondelMaxExtraSteps = 3;
 
@@ -18,7 +16,6 @@ private:
 	const std::string _imagePath = "TransparentImage.png";
 	const TupleInt _rondelSize = TupleInt(170, 170);
 	RondelPos _indicatorPos = RondelPos::StartPos;
-	InvestorState _investorState = InvestorState::InterestPayout;
 	RondelPos _proposedIndicatorPos;
 	GraphicsNS::Graphics::Color _color;
 
@@ -39,7 +36,6 @@ public:
 	~RondelIndicator();
 
 	RondelIndicator::RondelPos GetRondelPos() const;
-	RondelIndicator::InvestorState GetRondelInvestorState() const;
 	void SetInvestorState();
 
 	int GetObjectID() const;

@@ -110,11 +110,6 @@ RondelIndicator::RondelPos RondelIndicator::GetRondelPos() const
 	return _indicatorPos;
 }
 
-RondelIndicator::InvestorState RondelIndicator::GetRondelInvestorState() const
-{
-	return _investorState;
-}
-
 int RondelIndicator::GetObjectID() const
 {
 	return _objectId;
@@ -170,9 +165,4 @@ int RondelIndicator::GetNumberOfProposedSteps() const
 void RondelIndicator::RunProposal()
 {
 	_indicatorPos = _proposedIndicatorPos;
-}
-
-void RondelIndicator::SetInvestorState()
-{
-	_investorState = static_cast<RondelIndicator::InvestorState>((static_cast<int>(_investorState) + 1) % 3);
 }

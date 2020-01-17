@@ -209,7 +209,7 @@ void Game::PlayingPassiveAction()
 	{
 		switch (_currentNation->GetInvestorState())
 		{
-		case RondelIndicator::InvestorState::InterestPayout:
+		case Nation::InvestorState::InterestPayout:
 		{
 			constexpr int investorMoney = 2; //TODO kanske flytta den till en member istället
 			InterestPayout();
@@ -217,7 +217,7 @@ void Game::PlayingPassiveAction()
 			_investorPlayer->AddMoney(investorMoney); 
 			break;
 		}
-		case RondelIndicator::InvestorState::Investor:
+		case Nation::InvestorState::Investor:
 		{
 			BuyAsInvestor();
 			SetGovernment();
@@ -254,6 +254,10 @@ void Game::PlayingActiveAction(GameBoardObject* gbo)
 	{
 		_selectedObjects.push_back(gbo);
 		break;
+	}
+	case RondelIndicator::RondelPos::Import:
+	{
+
 	}
 	default:
 		break;
