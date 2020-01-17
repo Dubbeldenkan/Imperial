@@ -6,7 +6,7 @@ bool Game::_saveGame = false;
 bool Game::_loadGame = false;
 
 std::vector<GameBoardObject*> Game::_selectedObjects;
-std::map<Nation*, Player*> Game::_govermentMap;
+std::map<Nation*, Player*> Game::_governmentMap;
 Player* Game::_investorPlayer;
 
 Game::Game()
@@ -141,11 +141,11 @@ void Game::InitGame()
 		nationCounter++;
 	}
 
-	//Define goverments
-	SetGoverment();
+	//Define governments
+	SetGovernment();
 
 	//Set investor start player
-	int firstInvestorPlayer = (_govermentMap[_currentNation]->GetPlayerPos() + 1) % _numberOfPlayers;
+	int firstInvestorPlayer = (_governmentMap[_currentNation]->GetPlayerPos() + 1) % _numberOfPlayers;
 
 	for (int playerCounter = 0; playerCounter < _numberOfPlayers; playerCounter++)
 	{
@@ -160,7 +160,7 @@ void Game::InitGame()
 void Game::MouseClicked(TupleInt mouseClickedPos)
 {
 	// Om spelaren är en AI ska man inte fortsätta i denna funktion
-	if (!_govermentMap[_currentNation]->IsHuman())
+	if (!_governmentMap[_currentNation]->IsHuman())
 	{
 		return;
 	}
@@ -175,9 +175,9 @@ void Game::MouseClicked(TupleInt mouseClickedPos)
 			if (_currentNation->GetRondelIndicatorID() == object->GetObjectID())
 			{
 				object->Action(mouseClickedPos);
-				int maxNumberExtraSteps = _govermentMap[_currentNation]->GetMaxNumberOfRondelSteps();
+				int maxNumberExtraSteps = _governmentMap[_currentNation]->GetMaxNumberOfRondelSteps();
 				const int playerCost = _currentNation->MoveRondelIndicator(maxNumberExtraSteps);
-				_govermentMap[_currentNation]->AddMoney(-playerCost);
+				_governmentMap[_currentNation]->AddMoney(-playerCost);
 				return; //TODO ska man ha en return såhär?
 			}
 			break;
@@ -220,7 +220,7 @@ void Game::PlayingPassiveAction()
 		case RondelIndicator::InvestorState::Investor:
 		{
 			BuyAsInvestor();
-			SetGoverment();
+			SetGovernment();
 			break;
 		}
 		default:
@@ -317,7 +317,7 @@ void Game::InterestPayout()
 {
 	for (int playerIndex = 0; playerIndex < static_cast<int>(_players.size()); playerIndex++)
 	{
-		if (_players[playerIndex] == _govermentMap[_currentNation])
+		if (_players[playerIndex] == _governmentMap[_currentNation])
 		{
 			do
 			{
@@ -332,10 +332,10 @@ void Game::InterestPayout()
 				{
 					const int missingMoney = interest - _currentNation->GetMoney();
 					_currentNation->AddMoney(-_currentNation->GetMoney());
-					_govermentMap[_currentNation]->AddMoney(-missingMoney); //TODO lägg in vad som händer om ägaren inte har råd
+					_governmentMap[_currentNation]->AddMoney(-missingMoney); //TODO lägg in vad som händer om ägaren inte har råd
 					_players[playerIndex]->AddMoney(interest);
 				}
-			} while (_players[playerIndex] != _govermentMap[_currentNation]);
+			} while (_players[playerIndex] != _governmentMap[_currentNation]);
 			break;
 		}
 	}
@@ -366,29 +366,29 @@ void Game::BuyAsInvestor()
 	_selectedObjects.clear();
 }
 
-void Game::SetGoverment()
+void Game::SetGovernment()
 {
 	for (int playerCounter = 0; playerCounter < static_cast<int>(_players.size()); ++playerCounter)
 	{
-		_players[playerCounter]->ClearGoverments();
+		_players[playerCounter]->ClearGovernments();
 	}
 	for (int nationCounter = 0; nationCounter < _numberOfNations; nationCounter++)
 	{
-		_govermentMap[&_nations[nationCounter]] = NULL;
+		_governmentMap[&_nations[nationCounter]] = NULL;
 		int bestPlayerValue = 0;
 		for (int playerCounter = 0; playerCounter < _numberOfPlayers; playerCounter++)
 		{
 			if (bestPlayerValue < _players[playerCounter]->GetBondNationValue(_nations[nationCounter].GetBondNation()))
 			{
-				_govermentMap[&_nations[nationCounter]] = _players[playerCounter];
+				_governmentMap[&_nations[nationCounter]] = _players[playerCounter];
 				bestPlayerValue = _players[playerCounter]->GetBondNationValue(_nations[nationCounter].GetBondNation());
 			}
 		}
 	}
 	std::map<Nation*, Player*>::iterator it;
-	for (it = _govermentMap.begin(); it != _govermentMap.end(); ++it)
+	for (it = _governmentMap.begin(); it != _governmentMap.end(); ++it)
 	{
-		it->second->AddGoverment(it->first->GetBondNation());
+		it->second->AddGovernment(it->first->GetBondNation());
 	}
 }
 

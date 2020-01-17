@@ -57,13 +57,13 @@ void Player::DrawObject() const
 			GraphicsNS::Graphics::Color::WHITE, GraphicsNS::Graphics::FontSize::font15);
 	}
 	
-	//Draw goverment
+	//Draw government
 	TupleInt posRelativeToPlayerPos = TupleInt(150, 0);
-	for (int govermentIndex = 0; govermentIndex < static_cast<int>(_goverment.size()); ++govermentIndex)
+	for (int governmentIndex = 0; governmentIndex < static_cast<int>(_government.size()); ++governmentIndex)
 	{
-		std::map<int, Bond*> map = _bonds.at(_goverment[govermentIndex]);
+		std::map<int, Bond*> map = _bonds.at(_government[governmentIndex]);
 		Bond* bond = &*(map.begin())->second;
-		_g->Draw(bond->GetImage(), _graphicalPos.GetX() + posRelativeToPlayerPos.GetX() + govermentIndex*bond->GetImageSize().GetX(), 
+		_g->Draw(bond->GetImage(), _graphicalPos.GetX() + posRelativeToPlayerPos.GetX() + governmentIndex*bond->GetImageSize().GetX(), 
 			_graphicalPos.GetY(), _scale);
 	}
 
@@ -226,12 +226,12 @@ int Player::GetMoney() const
 	return _money;
 }
 
-void Player::ClearGoverments()
+void Player::ClearGovernments()
 {
-	_goverment.clear();
+	_government.clear();
 }
 
-void Player::AddGoverment(Bond::BondNation nation)
+void Player::AddGovernment(Bond::BondNation nation)
 {
-	_goverment.push_back(nation);
+	_government.push_back(nation);
 }

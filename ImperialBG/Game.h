@@ -29,7 +29,7 @@ private:
 
 	static Player* _investorPlayer;
 	static Nation* _currentNation;
-	static std::map<Nation*, Player*> _govermentMap;
+	static std::map<Nation*, Player*> _governmentMap;
 
 	static bool _initNewGame;
 	static bool _saveGame;
@@ -61,7 +61,7 @@ private:
 	void SetCurrentNation(Nation* nation);
 	void SetNextNation();
 	void SetNextInvestor();
-	void SetGoverment();
+	void SetGovernment();
 
 	void SaveGame();
 	void CreateSaveNode(NodeParserNS::ListNode*);
