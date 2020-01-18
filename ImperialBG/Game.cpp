@@ -239,6 +239,19 @@ void Game::PlayingPassiveAction()
 		}
 		break;
 	}
+	case RondelIndicator::RondelPos::ManeuverLeft:
+	case RondelIndicator::RondelPos::ManeuverRight:
+	{
+		if (_currentNation->GetManeuverState() == Nation::ManeuverState::Start)
+		{
+			for (int nationIndex = 0; nationIndex < static_cast<int>(_nations.size()); ++nationIndex)
+			{
+				_nations[nationIndex].SetDrawFactorySites();
+				_currentNation->StartManeuver();
+			}
+		}
+		break;
+	}
 	default:
 		break;
 	}

@@ -49,3 +49,13 @@ void Unit::DrawObject() const
 {
 	_g->DrawWithColor(_image, _graphicalPos.GetX(), _graphicalPos.GetY(), _color);
 }
+
+void Unit::SetToUnMoved()
+{
+	_hasMoved = false;
+}
+
+int Unit::GetHasMoved() const
+{
+	return _hasMoved;
+}

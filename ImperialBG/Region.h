@@ -17,8 +17,8 @@ private:
 	FactoryType _factoryType;
 	bool _factoryBuilt;
 	bool _drawFactorySite = false;
-	std::vector<Unit> _landUnits;
-	std::vector<Unit> _seaUnits;
+	std::vector<Unit*> _landUnits;
+	std::vector<Unit*> _seaUnits;
 	TupleInt _unitLandPos = TupleInt();
 	TupleInt _unitSeaPos = TupleInt();
 
@@ -38,8 +38,8 @@ public:
 	void CopyRegion(const Region&);
 	~Region();
 
-	void AddLandUnit(Unit &unit);
-	void AddSeaUnit(Unit &unit);
+	void AddLandUnit(Unit* unit);
+	void AddSeaUnit(Unit* unit);
 	bool GetFactoryBuilt() const;
 	FactoryType GetFactoryType() const;
 

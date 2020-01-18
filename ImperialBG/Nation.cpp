@@ -200,12 +200,12 @@ void Nation::ProductionAction()
 		else if (region->GetFactoryType() == Region::FactoryType::Land)
 		{
 			_units.push_back(Unit(TupleInt(), Unit::UnitType::Land, static_cast<Unit::UnitNation>(_bondNation), _color));
-			_regions[vectorIndex].AddLandUnit(_units[_units.size() - 1]);
+			_regions[vectorIndex].AddLandUnit(&_units.back());
 		}
 		else
 		{
 			_units.push_back(Unit(TupleInt(), Unit::UnitType::Sea, static_cast<Unit::UnitNation>(_bondNation), _color));
-			_regions[vectorIndex].AddSeaUnit(_units[_units.size() - 1]);
+			_regions[vectorIndex].AddSeaUnit(&_units.back());
 		}
 	}
 	_nationGameState = Nation::NationGameState::Done;
@@ -232,14 +232,14 @@ void Nation::ProductionAction(GameBoardObject* gbo)
 			{
 				//TODO gör detta till en funktion som ska användas både i här och ovan. Kolla dessutom på max units.
 				_units.push_back(Unit(TupleInt(), Unit::UnitType::Land, static_cast<Unit::UnitNation>(_bondNation), _color));
-				region->AddLandUnit(_units[_units.size() - 1]);
+				region->AddLandUnit(&_units.back());
 				_numberToImport--;
 			}
 			else
 			{
 				//TODO gör så att man kan välja om man ska placera ut sea eller land i de olika länderna. 
 				_units.push_back(Unit(TupleInt(), Unit::UnitType::Sea, static_cast<Unit::UnitNation>(_bondNation), _color));
-				region->AddSeaUnit(_units[_units.size() - 1]);
+				region->AddSeaUnit(&_units.back());
 				_numberToImport--;
 			}
 			_money += -importCost;
@@ -345,4 +345,19 @@ void Nation::SetToImport()
 int Nation::GetNumberToImport() const
 {
 	return _numberToImport;
+}
+
+Nation::ManeuverState Nation::GetManeuverState() const
+{
+	return _maneuverState;
+}
+
+void Nation::StartManeuver()
+{
+	_maneuverState = ManeuverState::MoveSea;
+	std::list<Unit>::iterator unitIt;
+	for (unitIt = _units.begin(); unitIt != _units.end(); ++unitIt) 
+	{
+		unitIt->SetToUnMoved();
+	}
 }

@@ -1,6 +1,8 @@
 #ifndef NATION_H
 #define NATION_H
 
+#include <list>
+
 #include "Bond.h"
 #include "GameBoardObject.h"
 #include "NodeParser.h"
@@ -13,13 +15,14 @@ class Nation : public GameBoardObject
 public:
 	enum class NationGameState { PlacingRondelIndicator, PlayingAction , Done};
 	enum class InvestorState { InterestPayout, Investor, SwissBank };
+	enum class ManeuverState {Start, MoveSea, MoveLand};
 
 private:
 	std::map<int, Bond> _bonds;
 	std::string _name;
 	const int _id;
 	std::vector<Region> _regions;
-	std::vector<Unit> _units;
+	std::list<Unit> _units;
 	std::string _imagePath;
 	int _money = 0;
 	std::string _startBondSmallNationName;
@@ -28,6 +31,7 @@ private:
 	RondelIndicator _rondelIndicator;
 	NationGameState _nationGameState = NationGameState::PlacingRondelIndicator;
 	InvestorState _investorState = InvestorState::InterestPayout;
+	ManeuverState _maneuverState = ManeuverState::Start;
 	int _numberToImport = 0;
 
 	static int _currentNation;
@@ -74,6 +78,8 @@ public:
 	void SetToDone();
 	void SetToImport();
 	int GetNumberToImport() const;
+	Nation::ManeuverState GetManeuverState() const;
+	void StartManeuver();
 
 private:
 	void DrawObject() const;

@@ -14,6 +14,7 @@ private:
 	const UnitNation _unitNation;
 	const TupleInt _imageSize = TupleInt(20, 20);
 	const GraphicsNS::Graphics::Color _color;
+	bool _hasMoved = true;
 
 public:
 	Unit();
@@ -24,6 +25,8 @@ public:
 	~Unit();
 
 	void SetPos(TupleInt);
+	void SetToUnMoved();
+	int GetHasMoved() const;
 
 private:
 	void CopyUnit(Unit const& unit);

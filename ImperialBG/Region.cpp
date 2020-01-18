@@ -104,8 +104,10 @@ void Region::DrawObject() const
 	//Draw Factory
 	if (!_factoryBuilt && _drawFactorySite)
 	{
+		const GraphicsNS::Graphics::Color color = (_factoryType == FactoryType::Land) ? 
+			GraphicsNS::Graphics::Color::BLACK : GraphicsNS::Graphics::Color::BLUE;
 		_g->DrawRectangle(_graphicalPos.GetX(), _graphicalPos.GetY(), 
-			_factorySize.GetX(), _factorySize.GetY(), GraphicsNS::Graphics::Color::BLACK);
+			_factorySize.GetX(), _factorySize.GetY(), color);
 	}
 	else if (_factoryBuilt && (_factoryType == FactoryType::Land))
 	{
@@ -120,22 +122,64 @@ void Region::DrawObject() const
 				GraphicsNS::Graphics::Color::BLACK, GraphicsNS::Graphics::FontSize::font15);
 		}
 	}
+
+	//Rita antalet enheter i regionen
+	constexpr int xPosNumberModifier = 20;
 	if (_landUnits.size() > 0)
 	{
-		_g->PrintText(_landUnits.size(), _unitLandPos.GetX() + 20, _unitLandPos.GetY(),
+		_g->PrintText(_landUnits.size(), _unitLandPos.GetX() + xPosNumberModifier, _unitLandPos.GetY(),
 			GraphicsNS::Graphics::Color::BLACK, GraphicsNS::Graphics::FontSize::font15);
+	}
+	if (_seaUnits.size() > 0)
+	{
+		_g->PrintText(_seaUnits.size(), _unitSeaPos.GetX() + xPosNumberModifier, _unitSeaPos.GetY(),
+			GraphicsNS::Graphics::Color::BLUE, GraphicsNS::Graphics::FontSize::font15);
+	}
+
+	//Rita ut enheter som inte har rört sig än i regionen
+	if (_landUnits.size() > 0)
+	{
+		int numberOfUnMovedUnits = 0;
+		for (int unitIndex = 0; unitIndex < static_cast<int>(_landUnits.size()); ++unitIndex)
+		{
+			if (!_landUnits[unitIndex]->GetHasMoved())
+			{
+				numberOfUnMovedUnits++;
+			}
+		}
+		if (numberOfUnMovedUnits > 0)
+		{
+			_g->PrintText(numberOfUnMovedUnits, _unitLandPos.GetX() - xPosNumberModifier, _unitLandPos.GetY(),
+				GraphicsNS::Graphics::Color::GREEN, GraphicsNS::Graphics::FontSize::font15);
+		}
+	}
+	if (_seaUnits.size() > 0)
+	{
+		int numberOfUnMovedUnits = 0;
+		for (int unitIndex = 0; unitIndex < static_cast<int>(_seaUnits.size()); ++unitIndex)
+		{
+			if (!_seaUnits[unitIndex]->GetHasMoved())
+			{
+				numberOfUnMovedUnits++;
+			}
+		}
+		if (numberOfUnMovedUnits > 0)
+		{
+			_g->PrintText(numberOfUnMovedUnits, _unitSeaPos.GetX() - xPosNumberModifier, _unitSeaPos.GetY(),
+				GraphicsNS::Graphics::Color::GREEN, GraphicsNS::Graphics::FontSize::font15);
+		}
 	}
 }
 
-void Region::AddLandUnit(Unit& unit)
+void Region::AddLandUnit(Unit* unit)
 {
-	unit.SetPos(_unitLandPos);
+	unit->SetPos(_unitLandPos);
 	_landUnits.push_back(unit);
 }
 
-void Region::AddSeaUnit(Unit& unit)
+void Region::AddSeaUnit(Unit* unit)
 {
-	unit.SetPos(_unitSeaPos);
+	unit->SetPos(_unitSeaPos);
 	_seaUnits.push_back(unit);
 }
 
