@@ -211,6 +211,51 @@ void Nation::ProductionAction()
 	_nationGameState = Nation::NationGameState::Done;
 }
 
+void Nation::ProductionAction(GameBoardObject* gbo)
+{
+	constexpr int importCost = 1;
+	for (int regionIndex = 0; regionIndex < static_cast<int>(_regions.size()); ++regionIndex)
+	{
+		if (_regions[regionIndex].GetObjectID() == gbo->GetObjectID())
+		{
+			if (_money <= 0)
+			{
+				_nationGameState = NationGameState::Done;
+				//TODO för en privat funktion av detta
+				for (int regionBuildIndex = 0; regionBuildIndex < static_cast<int>(_regions.size()); regionBuildIndex++)
+				{
+					_regions[regionBuildIndex].SetDrawFactorySite(false);
+				}
+			}
+			Region* region = &_regions[regionIndex];
+			if (region->GetFactoryType() == Region::FactoryType::Land)
+			{
+				//TODO gör detta till en funktion som ska användas både i här och ovan. Kolla dessutom på max units.
+				_units.push_back(Unit(TupleInt(), Unit::UnitType::Land, static_cast<Unit::UnitNation>(_bondNation), _color));
+				region->AddLandUnit(_units[_units.size() - 1]);
+				_numberToImport--;
+			}
+			else
+			{
+				//TODO gör så att man kan välja om man ska placera ut sea eller land i de olika länderna. 
+				_units.push_back(Unit(TupleInt(), Unit::UnitType::Sea, static_cast<Unit::UnitNation>(_bondNation), _color));
+				region->AddSeaUnit(_units[_units.size() - 1]);
+				_numberToImport--;
+			}
+			_money += -importCost;
+		}
+	}
+	if (_numberToImport == 0)
+	{
+		_nationGameState = NationGameState::Done;
+		//TODO för en privat funktion av detta
+		for (int regionBuildIndex = 0; regionBuildIndex < static_cast<int>(_regions.size()); regionBuildIndex++)
+		{
+			_regions[regionBuildIndex].SetDrawFactorySite(false);
+		}
+	}
+}
+
 void Nation::SetDrawFactorySites()
 {
 	for (int vectorIndex = 0; vectorIndex < static_cast<int>(_regions.size()); vectorIndex++)
@@ -289,4 +334,15 @@ Bond* Nation::GetUnboughtBond(GameBoardObject* gbo)
 void Nation::SetToDone()
 {
 	_nationGameState = Nation::NationGameState::Done;
+}
+
+void Nation::SetToImport()
+{
+	constexpr int maximumNumberToImport = 3;
+	_numberToImport = maximumNumberToImport;
+}
+
+int Nation::GetNumberToImport() const
+{
+	return _numberToImport;
 }

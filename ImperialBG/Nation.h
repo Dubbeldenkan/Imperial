@@ -28,6 +28,7 @@ private:
 	RondelIndicator _rondelIndicator;
 	NationGameState _nationGameState = NationGameState::PlacingRondelIndicator;
 	InvestorState _investorState = InvestorState::InterestPayout;
+	int _numberToImport = 0;
 
 	static int _currentNation;
 
@@ -57,6 +58,8 @@ public:
 
 	int MoveRondelIndicator(int maxNumberExtraSteps);
 	void ProductionAction();
+	///Producera i den region man klickat på
+	void ProductionAction(GameBoardObject*);
 	void SetDrawFactorySites();
 
 	int GetNumberOfRegions() const;
@@ -69,6 +72,8 @@ public:
 	void SetInvestorState();
 	Bond* GetUnboughtBond(GameBoardObject* gbo);
 	void SetToDone();
+	void SetToImport();
+	int GetNumberToImport() const;
 
 private:
 	void DrawObject() const;

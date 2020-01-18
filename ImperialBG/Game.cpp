@@ -214,7 +214,7 @@ void Game::PlayingPassiveAction()
 			constexpr int investorMoney = 2; //TODO kanske flytta den till en member istället
 			InterestPayout();
 			_currentNation->SetInvestorState();
-			_investorPlayer->AddMoney(investorMoney); 
+			_investorPlayer->AddMoney(investorMoney);
 			break;
 		}
 		case Nation::InvestorState::Investor:
@@ -228,10 +228,21 @@ void Game::PlayingPassiveAction()
 			break;
 		}
 		}
+		break;
+	}
+	case RondelIndicator::RondelPos::Import:
+	{
+		_currentNation->SetDrawFactorySites();
+		for (int gboIndex = 0; gboIndex < static_cast<int>(_selectedObjects.size()); ++gboIndex)
+		{
+			_currentNation->ProductionAction(_selectedObjects[gboIndex]);
+		}
+		break;
 	}
 	default:
 		break;
 	}
+	_selectedObjects.clear();
 }
 
 void Game::PlayingActiveAction(GameBoardObject* gbo)
@@ -257,7 +268,12 @@ void Game::PlayingActiveAction(GameBoardObject* gbo)
 	}
 	case RondelIndicator::RondelPos::Import:
 	{
-
+		_selectedObjects.push_back(gbo);
+		if (_currentNation->GetNumberToImport() == 0)
+		{
+			_currentNation->SetToImport();
+		}
+		break;
 	}
 	default:
 		break;
@@ -367,7 +383,6 @@ void Game::BuyAsInvestor()
 			}
 		}
 	}
-	_selectedObjects.clear();
 }
 
 void Game::SetGovernment()
