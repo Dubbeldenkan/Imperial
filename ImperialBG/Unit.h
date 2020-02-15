@@ -15,6 +15,7 @@ private:
 	const TupleInt _imageSize = TupleInt(20, 20);
 	const GraphicsNS::Graphics::Color _color;
 	bool _hasMoved = true;
+	bool _unitSelected = false;
 
 public:
 	Unit();
@@ -27,6 +28,8 @@ public:
 	void SetPos(TupleInt);
 	void SetToUnMoved();
 	int GetHasMoved() const;
+	UnitType GetUnitType() const;
+	void SetUnitToSelected();
 
 private:
 	void CopyUnit(Unit const& unit);

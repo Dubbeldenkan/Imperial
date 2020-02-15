@@ -244,11 +244,7 @@ void Game::PlayingPassiveAction()
 	{
 		if (_currentNation->GetManeuverState() == Nation::ManeuverState::Start)
 		{
-			for (int nationIndex = 0; nationIndex < static_cast<int>(_nations.size()); ++nationIndex)
-			{
-				_nations[nationIndex].SetDrawFactorySites();
-				_currentNation->StartManeuver();
-			}
+			_currentNation->StartManeuver();
 		}
 		break;
 	}
@@ -286,6 +282,23 @@ void Game::PlayingActiveAction(GameBoardObject* gbo)
 		{
 			_currentNation->SetToImport();
 		}
+		break;
+	}
+	case RondelIndicator::RondelPos::ManeuverLeft:
+	case RondelIndicator::RondelPos::ManeuverRight:
+	{
+		//TODO fortsätt här gör så att man kan välja vilken gubbe att flytta och markera. 
+		//Gör så att man kan först flyttar båtar sedan fotfolk
+		std::list<Unit>::const_iterator unitIt = _currentNation->GetFirstUnit();
+		do
+		{
+			if (unitIt->GetObjectID() == gbo->GetObjectID())
+			{
+				Unit* unit = static_cast<Unit*>(gbo);
+				unit->SetUnitToSelected();
+				break;
+			}
+		} while (_currentNation->GetNextUnit(unitIt));
 		break;
 	}
 	default:

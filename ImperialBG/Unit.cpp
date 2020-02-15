@@ -47,6 +47,12 @@ void Unit::SetPos(TupleInt tupleInt)
 
 void Unit::DrawObject() const
 {
+	if (_unitSelected)
+	{
+		int frameThickness = 3;
+		_g->DrawUnfilledRectangle(_graphicalPos.GetX(), _graphicalPos.GetY(),
+			_image->GetXSize(), _image->GetYSize(), frameThickness, GraphicsNS::Graphics::Color::BLACK);
+	}
 	_g->DrawWithColor(_image, _graphicalPos.GetX(), _graphicalPos.GetY(), _color);
 }
 
@@ -58,4 +64,14 @@ void Unit::SetToUnMoved()
 int Unit::GetHasMoved() const
 {
 	return _hasMoved;
+}
+
+Unit::UnitType Unit::GetUnitType() const
+{
+	return _unitType;
+}
+
+void Unit::SetUnitToSelected()
+{
+	_unitSelected = true;
 }

@@ -80,6 +80,8 @@ public:
 	int GetNumberToImport() const;
 	Nation::ManeuverState GetManeuverState() const;
 	void StartManeuver();
+	bool GetNextUnit(std::list<Unit>::const_iterator &unitIt) const;
+	std::list<Unit>::const_iterator GetFirstUnit() const;
 
 private:
 	void DrawObject() const;

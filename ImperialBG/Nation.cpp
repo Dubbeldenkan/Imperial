@@ -358,6 +358,27 @@ void Nation::StartManeuver()
 	std::list<Unit>::iterator unitIt;
 	for (unitIt = _units.begin(); unitIt != _units.end(); ++unitIt) 
 	{
-		unitIt->SetToUnMoved();
+		if (unitIt->GetUnitType() == Unit::UnitType::Sea)
+		{
+			unitIt->SetToUnMoved();
+		}
 	}
+}
+
+std::list<Unit>::const_iterator Nation::GetFirstUnit() const
+{
+	return _units.begin();
+}
+
+bool Nation::GetNextUnit(std::list<Unit>::const_iterator &unitIt) const
+{
+	if (unitIt == _units.end())
+	{
+		unitIt = _units.begin();
+	}
+	else
+	{
+		std::advance(unitIt, 1);
+	}
+	return unitIt == _units.end();
 }
